@@ -1,21 +1,54 @@
-<template name=""
-<template name="registerTmp">
+<template name="userManagerTemplate">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">
-                员工注册
-            </h3>
+            <h3 class="panel-title">员工管理</h3>
         </div>
+        <div class="panel-body">
+            <div class="btn-group"  role="group" >
+                <button class="btn btn-default" id="btn_add_user">增加员工</button>
+            </div>
+
+
+            {{#if isShowAddUserPanel}}
+                {{> userAddTemplate}}
+            {{/if}}
+
+            {{#if isPermitedToshowUsers}}
+                <div class="panel">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>工号</th><th>姓名</th><th>用户名</th><th>性别</th><th>公司</th><th>部门</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each users}}
+                                <tr>
+                                    <td>{{code}}</td>
+                                    <td>{{name}}</td>
+                                    <td></td>
+                                    <td>{{realname}}</td>
+                                    <td>{{code}}</td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+
+                    </table>
+                </div><!--end of panel -->
+            {{/if}}
+        </div>
+
+    </div>
+</template>
+
+<template name="userAddTemplate">
+    <div class="panel panel-default">
         <div class="panel-body">
 
         </div>
         <div class="panel-footer">
-            <button class="btn btn-default" id="btn_return">
-                返回
-            </button>
-            <button class="btn btn-primary" id="btn_register">
-                注册
-            </button>
+            <button class="btn btn-default" id="btn_return">返回</button>
+            <button class="btn btn-primary" id="btn_register">增加</button>
         </div>
     </div>
 </template>

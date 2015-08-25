@@ -1,6 +1,5 @@
 Meteor.methods({
-    'addNewUser':function(username, ) {
-
+    'addNewUser':function(username) {
 
     },
     'getLastUserCoder':function(departmentID){
@@ -11,20 +10,11 @@ Meteor.methods({
         var department = gDepartments.findOne({_id:departmentID});
         if(department){
             //查询该部门的用户
-            var user = Meteor.users.findOne({profile.departmentID:department._id},{sort});
+            var user = Meteor.users.findOne();
             return department.code;
         }else{
             return null;
         }
-        //var code_length = 10;
-        //var ob=Meteor.users.findOne({"profile.departmentID": departmentID},{sort:{username:-1}});
-        //if(ob){
-        //    var left = 10-gDepartments.findOne({_id:departmentID}).code.length;
-        //}
-        //    return ob.username|| gDepartments.findOne({_id:departmentID}).code+"00";
-        //else if(gDepartments.findOne({_id:departmentID}))
-        //    return gDepartments.findOne({_id:departmentID}).code+"00";
-        //else
-        //    return -1;
+
     }
 });
