@@ -1,18 +1,19 @@
 <template name="userManagerTemplate">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">员工管理</h3>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">员工管理</a>
+                    </div>
+                    <ul class="nav navbar-nav pull-right">
+                        <li><button class="btn btn-default btn-sm navbar-btn" id="btn_add_user">增加员工</button></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
         <div class="panel-body">
-            <div class="btn-group"  role="group" >
-                <button class="btn btn-default" id="btn_add_user">增加员工</button>
-            </div>
-
-
-            {{#if isShowAddUserPanel}}
-                {{> userAddTemplate}}
-            {{/if}}
-
+            {{>userAddTemplate}}
             {{#if isPermitedToshowUsers}}
                 <div class="panel">
                     <table class="table table-bordered table-hover">
@@ -26,9 +27,21 @@
                                 <tr>
                                     <td>{{code}}</td>
                                     <td>{{name}}</td>
-                                    <td></td>
                                     <td>{{realname}}</td>
-                                    <td>{{code}}</td>
+                                    <td>{{gender}}</td>
+                                    <td>
+                                        <select>
+                                            <option value=""></option>
+                                            {{#each companies}}
+                                                {{#if selected _id ../company}}
+                                                    <option selected="true" value={{_id}}> {{title}} </option>
+                                                {{else}}
+                                                    <option  value={{_id}}> {{title}} </option>
+                                                {{/if}}
+                                            {{/each}}
+                                        </select>
+                                    </td>
+                                    <td>{{department}}</td>
                                 </tr>
                             {{/each}}
                         </tbody>
@@ -42,13 +55,25 @@
 </template>
 
 <template name="userAddTemplate">
-    <div class="panel panel-default">
-        <div class="panel-body">
+    <div class="modal fade" id="addUserModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
 
-        </div>
-        <div class="panel-footer">
-            <button class="btn btn-default" id="btn_return">返回</button>
-            <button class="btn btn-primary" id="btn_register">增加</button>
+                <div class="modal-header">
+                    <h4 class="modal-title">header</h4>
+                </div>
+
+                <div class="modal-body">
+                    <label for="name">Name</label>
+                    <input type="text" id="animalName" />
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn_save">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+
+            </div>
         </div>
     </div>
 </template>
