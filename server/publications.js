@@ -21,3 +21,7 @@ Meteor.publish("jobs",function(){
 Meteor.publish("regions",function(){
     return gRegions.find();
 });
+
+Meteor.publish("employees",function(){
+    return gEmployees.find();
+});

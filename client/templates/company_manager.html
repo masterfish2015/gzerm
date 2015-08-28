@@ -22,5 +22,32 @@
 </template>
 
 <template name="addCompanyTemplate">
-    {{> quickForm collection="gCompanies" id="addCompanyForm" type="insert"}}
+    <div class="modal fade" id="addCompanyModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    {{#autoForm collection="gCompanies" id="addCompanyForm" type="insert"}}
+                        <fieldset>
+                            <legend>增加公司</legend>
+                            {{> afQuickField name='code'}}
+                            {{> afQuickField name='title'}}
+                            {{> afQuickField type="select" name='companyType' options=companyTypeOptions}}
+                            {{> afQuickField type="select" name='boss' options=bossOptions}}
+                            {{> afQuickField type="select" name='supervisor' options=supervisorOptions}}
+                            {{> afQuickField type="select" name='region' options=regionOptions}}
+                            {{> afQuickField name='comments' row="6"}}
+                        </fieldset>
+
+                    {{/autoForm}}
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">增加</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </template>

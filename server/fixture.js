@@ -23,16 +23,16 @@ if (gPermissions.find().count() === 0) {
 }
 
 if (gRegions.find().count() === 0) {
-    gRegions.insert({code: "1", title: "亚洲区", parentID: null});
-    gRegions.insert({code: "2", title: "欧洲区", parentID: null});
-    gRegions.insert({code: "101", title: "中国区", parentID: gRegions.findOne({code: "1"})._id});
-    gRegions.insert({code: "10101", title: "华南大区", parentID: gRegions.findOne({code: "101"})._id});
-    gRegions.insert({code: "1010101", title: "广东", parentID: gRegions.findOne({code: "10101"})._id});
-    gRegions.insert({code: "101010101", title: "广州", parentID: gRegions.findOne({code: "1010101"})._id});
-    gRegions.insert({code: "10101010101", title: "天河", parentID: gRegions.findOne({code: "101010101"})._id});
-    gRegions.insert({code: "10102", title: "华东大区", parentID: gRegions.findOne({code: "101"})._id});
-    gRegions.insert({code: "1010201", title: "江苏", parentID: gRegions.findOne({code: "10102"})._id});
-    gRegions.insert({code: "101020101", title: "苏州", parentID: gRegions.findOne({code: "1010201"})._id});
+    gRegions.insert({code: "1", title: "亚洲区", parentCode: "null"});
+    gRegions.insert({code: "2", title: "欧洲区", parentCode: "null"});
+    gRegions.insert({code: "101", title: "中国区", parentCode: "1"});
+    gRegions.insert({code: "10101", title: "华南大区", parentCode: "101"});
+    gRegions.insert({code: "1010101", title: "广东", parentCode: "10101"});
+    gRegions.insert({code: "101010101", title: "广州", parentCode: "1010101"});
+    gRegions.insert({code: "10101010101", title: "天河", parentCode: "101010101"});
+    gRegions.insert({code: "10102", title: "华东大区", parentCode: "101"});
+    gRegions.insert({code: "1010201", title: "江苏", parentCode: "10102"});
+    gRegions.insert({code: "101020101", title: "苏州", parentCode: "1010201"});
 }
 
 if (gCompanies.find().count() === 0) {
@@ -133,4 +133,15 @@ if (gJobs.find().count() === 0) {
             title: "部门经理"
         }
     );
+}
+
+if(gEmployees.find().count()===0){
+    gEmployees.insert({
+        name:"戴建国",
+        gender:"男"
+    });
+    gEmployees.insert({
+        name:"张英",
+        gender:"女"
+    });
 }
