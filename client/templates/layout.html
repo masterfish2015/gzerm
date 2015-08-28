@@ -2,7 +2,12 @@
 	<div class="container">
 		{{> headerTmp}}
 		<div id="main" class="row-fluid">
-			{{> yield}}
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                {{> sidebarTemplate}}
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-10">
+                {{> yield}}
+            </div>
 		</div>
 	</div>
 </template>

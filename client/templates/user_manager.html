@@ -7,7 +7,9 @@
                         <a class="navbar-brand" href="#">员工管理</a>
                     </div>
                     <ul class="nav navbar-nav pull-right">
-                        <li><button class="btn btn-default btn-sm navbar-btn" id="btn_add_user">增加员工</button></li>
+                        <li>
+                            <button class="btn btn-default btn-sm navbar-btn" id="btn_add_user">增加员工</button>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -18,36 +20,33 @@
                 <div class="panel">
                     <table class="table table-bordered table-hover">
                         <thead>
-                            <tr>
-                                <th>工号</th><th>姓名</th><th>用户名</th><th>性别</th><th>公司</th><th>部门</th>
-                            </tr>
+                        <tr>
+                            <th>工号</th>
+                            <th>姓名</th>
+                            <th>用户名</th>
+                            <th>性别</th>
+                            <th>公司</th>
+                            <th>部门</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {{#each users}}
-                                <tr>
-                                    <td>{{code}}</td>
-                                    <td>{{name}}</td>
-                                    <td>{{realname}}</td>
-                                    <td>{{gender}}</td>
-                                    <td>
-                                        <select>
-                                            <option value=""></option>
-                                            {{#each companies}}
-                                                {{#if selected _id ../company}}
-                                                    <option selected="true" value={{_id}}> {{title}} </option>
-                                                {{else}}
-                                                    <option  value={{_id}}> {{title}} </option>
-                                                {{/if}}
-                                            {{/each}}
-                                        </select>
-                                    </td>
-                                    <td>{{department}}</td>
-                                </tr>
-                            {{/each}}
+                        {{#each users}}
+                            <tr>
+                                <td>{{code}}</td>
+                                <td>{{name}}</td>
+                                <td>{{realname}}</td>
+                                <td>{{gender}}</td>
+                                <td>
+                                    {{companyTitle companyID}}
+                                </td>
+                                <td>{{departmentID}}</td>
+                            </tr>
+                        {{/each}}
                         </tbody>
 
                     </table>
-                </div><!--end of panel -->
+                </div>
+                <!--end of panel -->
             {{/if}}
         </div>
 
@@ -65,7 +64,7 @@
 
                 <div class="modal-body">
                     <label for="name">Name</label>
-                    <input type="text" id="animalName" />
+                    <input type="text" id="animalName"/>
                 </div>
 
                 <div class="modal-footer">
