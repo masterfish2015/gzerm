@@ -11,8 +11,8 @@ Template.userManagerTemplate.helpers({
     companies: function () {
         return gCompanies.find();
     },
-    companyTitle:function(companyid){
-        return gCompanies.findOne({_id:companyid}).title;
+    companyTitle:function(companyCode){
+        return gCompanies.findOne({code:companyCode}).title;
     },
     users: function () {
         var users = [
@@ -20,17 +20,17 @@ Template.userManagerTemplate.helpers({
                 code: "10001",
                 name: "jack",
                 realname: "Jack Smith",
-                companyID: "vGMftXjJuxPpw8wtv",
+                companyCode: "1",
                 gender: "男",
-                departmentID:""
+                departmentCode:""
             },
             {
                 code: "10002",
                 name: "tom",
                 realname: "Tom Lee",
-                companyID: "XRDyADSXDa5DvPfj8",
+                companyCode: "101",
                 gender: "男",
-                departmentID:""
+                departmentCode:""
             }
         ];
         return users;

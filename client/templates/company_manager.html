@@ -15,8 +15,12 @@
             </nav>
         </div>
         <div class="panel-body">
-
+            {{> addCompanyTemplate}}
         </div>
 
     </div>
+</template>
+
+<template name="addCompanyTemplate">
+    {{> quickForm collection="gCompanies" id="addCompanyForm" type="insert"}}
 </template>

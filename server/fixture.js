@@ -41,13 +41,10 @@ if (gCompanies.find().count() === 0) {
             code: "1",
             title: "中国天御集团公司",
             companyType: gCompanyType.findOne({title: "集团"})._id,
-            phones: [],
-            faxes: [],
-            addresses: [],
-            boss: null,
-            supervisor: null,
+            boss: "null",
+            supervisor: "null",
             region: gRegions.findOne({code: "1"})._id,
-            comments: null
+            comments: "null"
         }
     );
     gCompanies.insert(
@@ -55,13 +52,10 @@ if (gCompanies.find().count() === 0) {
             code: "101",
             title: "天御上海分公司",
             companyType: gCompanyType.findOne({title: "子公司"})._id,
-            phones: [],
-            faxes: [],
-            addresses: [],
-            boss: null,
+            boss: "null",
             supervisor: gCompanies.findOne({code: "1"})._id,
             region: gRegions.findOne({code: "10102"})._id,
-            comments: null
+            comments: "null"
         }
     );
 }
