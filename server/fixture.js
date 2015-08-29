@@ -41,10 +41,10 @@ if (gCompanies.find().count() === 0) {
             code: "1",
             title: "中国天御集团公司",
             companyType: gCompanyType.findOne({title: "集团"})._id,
-            boss: "null",
+            boss: "1000000001",
             supervisor: "null",
-            region: gRegions.findOne({code: "1"})._id,
-            comments: "null"
+            region: "1",
+            comments: "abc"
         }
     );
     gCompanies.insert(
@@ -52,10 +52,10 @@ if (gCompanies.find().count() === 0) {
             code: "101",
             title: "天御上海分公司",
             companyType: gCompanyType.findOne({title: "子公司"})._id,
-            boss: "null",
-            supervisor: gCompanies.findOne({code: "1"})._id,
-            region: gRegions.findOne({code: "10102"})._id,
-            comments: "null"
+            boss: "1001000001",
+            supervisor: "1",
+            region: "10102",
+            comments: "efg"
         }
     );
 }
@@ -137,10 +137,12 @@ if (gJobs.find().count() === 0) {
 
 if(gEmployees.find().count()===0){
     gEmployees.insert({
+        code:"1000000001",
         name:"戴建国",
         gender:"男"
     });
     gEmployees.insert({
+        code:"1001000001",
         name:"张英",
         gender:"女"
     });

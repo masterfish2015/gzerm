@@ -1,0 +1,62 @@
+<template name="companyTypeMangagerTemplate">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">公司类型管理</a>
+                    </div>
+                    <ul class="nav navbar-nav pull-right">
+                        <li>
+                            <button class="btn btn-default btn-sm navbar-btn" id="btn_add_companyType">
+                                增加公司类型
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="panel-body">
+            {{> addCompanyTypeTemplate}}
+            {{> companyTypeListTemplate}}
+        </div>
+    </div>
+</template>
+
+<template name="addCompanyTypeTemplate">
+    <div class="modal fade" id="addCompanyTypeModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    {{#autoForm collection="gCompanyType" id="addCompanyTypeForm" type="insert"}}
+                        <fieldset>
+                            <legend>增加公司类型</legend>
+                            {{> afQuickField name='title'}}
+                        </fieldset>
+                    {{/autoForm}}
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">增加</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="companyTypeListTemplate">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>现有公司类型</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each companyTypes}}
+            <tr><td>{{title}}</td></tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>

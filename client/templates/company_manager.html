@@ -8,7 +8,9 @@
                     </div>
                     <ul class="nav navbar-nav pull-right">
                         <li>
-                            <button class="btn btn-default btn-sm navbar-btn" id="btn_add_company">增加公司</button>
+                            <button class="btn btn-default btn-sm navbar-btn" id="btn_add_company">
+                                增加公司
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -16,8 +18,8 @@
         </div>
         <div class="panel-body">
             {{> addCompanyTemplate}}
+            {{> companyListTemplate}}
         </div>
-
     </div>
 </template>
 
@@ -37,7 +39,6 @@
                             {{> afQuickField type="select" name='region' options=regionOptions}}
                             {{> afQuickField name='comments' row="6"}}
                         </fieldset>
-
                     {{/autoForm}}
                 </div>
 
@@ -50,4 +51,35 @@
         </div>
     </div>
 
+</template>
+
+<template name="companyListTemplate">
+    <div class="panel">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>编码</th>
+                    <th>名称</th>
+                    <th>机构性质</th>
+                    <th>负责人</th>
+                    <th>行政上级</th>
+                    <th>区域划分</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each companies}}
+                    <tr>
+                        <td>{{code}}</td>
+                        <td>{{title}}</td>
+                        <td>{{getCompanyType companyType}}</td>
+                        <td>{{getBoss boss}}</td>
+                        <td>{{getSupervisor supervisor}}</td>
+                        <td>{{getRegion region}}</td>
+                        <td>{{comments}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </template>

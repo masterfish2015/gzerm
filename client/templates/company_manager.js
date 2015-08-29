@@ -1,3 +1,7 @@
+Template.addCompanyTypeTemplate.events({
+
+});
+
 Template.addCompanyTemplate.helpers({
     "companyTypeOptions":function(){
         var cps=gCompanyType.find().fetch();
@@ -54,4 +58,37 @@ Template.companyManagerTemplate.events({
     "click #btn_add_company": function(e,v){
         $('#addCompanyModal').modal('show');
     }
-})
+});
+
+
+
+Template.companyListTemplate.helpers({
+    "companies":function(){
+        return gCompanies.find();
+    },
+    "getCompanyType":function(companyTypeID) {
+        return gCompanyType.findOne({_id: companyTypeID}).title;
+    },
+    "getBoss":function(bossCode){
+        if(bossCode==="null"){
+            return "";
+        }else{
+            return gEmployees.findOne({code:bossCode}).name;
+        }
+    },
+    "getSupervisor":function(supervisorCode){
+        if(supervisorCode==="null"){
+            return "";
+        }else{
+            return gCompanies.findOne({code:supervisorCode}).title;
+        }
+    },
+    "getRegion":function(regionCode){
+        if(regionCode==="null"){
+            return "";
+        }else{
+            return gRegions.findOne({code:regionCode}).title;
+        }
+    }
+
+});
