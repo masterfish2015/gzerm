@@ -19,6 +19,9 @@ Template.headerTmp.events({
     },
     "click #btn_simple_chinese": function(){
         Meteor.setDefaultLanguage(SimpleChineseItem);
+    },
+    "click #btn_tradition_chinese": function(){
+        Meteor.setDefaultLanguage(TraditionChineseItem);
     }
 })
 

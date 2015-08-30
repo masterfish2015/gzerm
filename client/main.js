@@ -1,4 +1,5 @@
 Session.setDefault('isShowAddUserPanel', false);
+Session.setDefault("showAddCompanyPanel", false);
 
 for(var k in SimpleChineseItem){
     Session.setDefault(k, SimpleChineseItem[k]);

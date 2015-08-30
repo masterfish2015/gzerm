@@ -4,12 +4,12 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">公司管理</a>
+                        <a class="navbar-brand" href="#">{{langCompanyManagement}}</a>
                     </div>
                     <ul class="nav navbar-nav pull-right">
                         <li>
                             <button class="btn btn-default btn-sm navbar-btn" id="btn_add_company">
-                                增加公司
+                                {{langAddCompany}}
                             </button>
                         </li>
                     </ul>
@@ -17,40 +17,78 @@
             </nav>
         </div>
         <div class="panel-body">
-            {{> addCompanyTemplate}}
+            {{#if showAddCompanyPanel}}
+                {{> addCompanyTemplate}}
+            {{/if}}
             {{> companyListTemplate}}
         </div>
     </div>
 </template>
 
 <template name="addCompanyTemplate">
-    <div class="modal fade" id="addCompanyModal">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-body">
-                    {{#autoForm collection="gCompanies" id="addCompanyForm" type="insert"}}
-                        <fieldset>
-                            <legend>增加公司</legend>
-                            {{> afQuickField name='code'}}
-                            {{> afQuickField name='title'}}
-                            {{> afQuickField type="select" name='companyType' options=companyTypeOptions}}
-                            {{> afQuickField type="select" name='boss' options=bossOptions}}
-                            {{> afQuickField type="select" name='supervisor' options=supervisorOptions}}
-                            {{> afQuickField type="select" name='region' options=regionOptions}}
-                            {{> afQuickField name='comments' row="6"}}
-                        </fieldset>
-                    {{/autoForm}}
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">增加</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                </div>
-
+    <div class="panel  panel-default">
+            <div class="panel-heading">
+                    {{langAddCompany}}
             </div>
-        </div>
+            <div class="panel-body">
+                    <form class="container-fluid">
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-sm-6 col md-6">
+                                <label for="input_company_code">{{langCompanyCode}}：</label>
+                                <input id="input_company_code">
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col md-6">
+                                <label  for="input_company_title">{{langCompanyTitle}}：</label>
+                                <input  id="input_company_title">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-sm-6 col md-6">
+                                <label for="input_company_type">{{langCompanyType}}：</label>
+                                <select id="input_company_type">
+                                    <option value=""></option>
+                                    {{#each companyTypeOptions}}
+                                        <option val={{code}}>{{title}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col md-6">
+                                <label  for="input_company_region">{{langCompanyRegion}}：</label>
+                                <select id="input_company_region">
+                                    <option value=""></option>
+                                    {{#each regionOptions}}
+                                        <option val={{code}}>{{title}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-sm-6 col md-6">
+                                <label for="input_company_charger">{{langCompanyCharger}}：</label>
+                                <select id="input_company_charger">
+                                    <option value=""></option>
+                                    {{#each bossOptions}}
+                                        <option val={{code}}>{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col md-6">
+                                <label  for="input_company_supervisor">{{langCompanySupervisor}}：</label>
+                                <select id="input_company_supervisor">
+                                    <option value=""></option>
+                                    {{#each supervisorOptions}}
+                                        <option val={{code}}>{{title}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+            </div>
+            <div class="panel-footer">
+                <button type="button" class="btn btn-primary">{{langAdd}}</button>
+                <button type="button" class="btn btn-default" id="btn_cancel_add_company">{{langCancel}}</button>
+            </div>
     </div>
-
 </template>
 
 <template name="companyListTemplate">
@@ -58,13 +96,13 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>编码</th>
-                    <th>名称</th>
-                    <th>机构性质</th>
-                    <th>负责人</th>
-                    <th>行政上级</th>
-                    <th>区域划分</th>
-                    <th>备注</th>
+                    <th>{{langCompanyCode}}</th>
+                    <th>{{langCompanyTitle}}</th>
+                    <th>{{langCompanyType}}</th>
+                    <th>{{langCompanyCharger}}</th>
+                    <th>{{langCompanySupervisor}}</th>
+                    <th>{{langCompanyRegion}}</th>
+                    <th>{{langCompanyComment}}</th>
                 </tr>
             </thead>
             <tbody>
