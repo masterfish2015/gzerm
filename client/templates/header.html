@@ -9,12 +9,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">企业营销管理平台</a>
+                <a class="navbar-brand" href="/">{{langWebTitle}}</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/logout">登出</a></li>
-                    <li><a href="/login">登录</a></li>
+                    <li><a href="/logout">{{langLogout}}</a></li>
+                    <li><a href="/login">{{langLogin}}</a></li>
+                    <li><button class="btn navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{langChangeLanguage}} <span class="caret"></span></button>
+
+                        <ul class="dropdown-menu">
+                            <li><a id="btn_simple_chinese">简体中文</a></li>
+                            <li><a  id="btn_english">English</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
