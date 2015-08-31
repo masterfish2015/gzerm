@@ -10,6 +10,11 @@
                         <li>
                             <button class="btn btn-default btn-sm navbar-btn" id="btn_add_companyType">
                                 {{langAddOrganizeType}}
+                                {{#if showAddCompanyTypePanel}}
+                                    <span class="glyphicon glyphicon-arrow-up"></span>
+                                {{else}}
+                                    <span class="glyphicon glyphicon-arrow-down"></span>
+                                {{/if}}
                             </button>
                         </li>
                     </ul>
@@ -17,30 +22,26 @@
             </nav>
         </div>
         <div class="panel-body">
-            {{> addCompanyTypeTemplate}}
+            {{#if showAddCompanyTypePanel}}
+                {{> addCompanyTypeTemplate}}
+            {{/if}}
             {{> companyTypeListTemplate}}
         </div>
     </div>
 </template>
 
 <template name="addCompanyTypeTemplate">
-    <div class="modal fade" id="addCompanyTypeModal">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    {{langAddOrganizeType}}
-                </div>
-                <div class="modal-body">
-                    <p>{{langOrganizeType}}:
-                        <input type="text" id="text_add_organize_type">
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">{{langAdd}}</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{langCancel}}</button>
-                </div>
-
-            </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{langAddOrganizeType}}
+        </div>
+        <div class="panel-body">
+            <p>{{langOrganizeType}}:
+                <input type="text" id="text_add_organize_type">
+            </p>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-primary">{{langAdd}}</button>
         </div>
     </div>
 </template>
@@ -54,7 +55,9 @@
         </thead>
         <tbody>
         {{#each companyTypes}}
-            <tr><td>{{title}}</td></tr>
+            <tr>
+                <td>{{title}}</td>
+            </tr>
         {{/each}}
         </tbody>
     </table>

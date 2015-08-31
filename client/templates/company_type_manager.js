@@ -6,7 +6,8 @@ Template.companyTypeMangagerTemplate.helpers({
     },
     "langAddOrganizeType": function () {
         return Session.get("langAddOrganizeType");
-    }
+    },
+    "showAddCompanyTypePanel":function(){return Session.get("showAddCompanyTypePanel");}
 });
 
 Template.companyTypeListTemplate.helpers({
@@ -36,6 +37,11 @@ Template.addCompanyTypeTemplate.helpers({
 
 Template.companyTypeMangagerTemplate.events({
     "click #btn_add_companyType": function (e, v) {
-        $('#addCompanyTypeModal').modal('show');
+        var v = !Session.get("showAddCompanyTypePanel");
+        Session.set("showAddCompanyTypePanel",v);
     }
+});
+
+Template.addCompanyTypeTemplate.events({
+
 });

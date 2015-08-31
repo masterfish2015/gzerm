@@ -56,9 +56,6 @@ Template.addCompanyTemplate.helpers({
 
 });
 
-
-
-
 Template.companyListTemplate.helpers({
     "companies": function () {
         return gCompanies.find();
@@ -113,12 +110,11 @@ Template.companyListTemplate.helpers({
 
 Template.companyManagerTemplate.events({
     "click #btn_add_company": function (e, v) {
-        Session.set("showAddCompanyPanel", true);
+        var v = !Session.get("showAddCompanyPanel");
+        Session.set("showAddCompanyPanel",v);
     }
 });
 
 Template.addCompanyTemplate.events({
-    "click #btn_cancel_add_company":function(e,v){
-        Session.set("showAddCompanyPanel", false);
-    }
-})
+
+});

@@ -10,6 +10,11 @@
                         <li>
                             <button class="btn btn-default btn-sm navbar-btn" id="btn_add_company">
                                 {{langAddCompany}}
+                                {{#if showAddCompanyPanel}}
+                                    <span class="glyphicon glyphicon-arrow-up"></span>
+                                {{else}}
+                                    <span class="glyphicon glyphicon-arrow-down"></span>
+                                {{/if}}
                             </button>
                         </li>
                     </ul>
@@ -86,7 +91,6 @@
             </div>
             <div class="panel-footer">
                 <button type="button" class="btn btn-primary">{{langAdd}}</button>
-                <button type="button" class="btn btn-default" id="btn_cancel_add_company">{{langCancel}}</button>
             </div>
     </div>
 </template>
