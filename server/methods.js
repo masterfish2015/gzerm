@@ -3,18 +3,41 @@ Meteor.methods({
 
     },
     'getLastUserCoder': function (departmentID) {
-        //获取本部门机构用户的最后一个编码
-        //编码最大的字符数是10个字符，格式： 部门编码+序列号，如果加起来不到10个字符，则在两者之间加入'0'填充
-        var code_length = 10; //最大的字符数
-        //查询部门的代码
-        var department = gDepartments.findOne({_id: departmentID});
-        if (department) {
-            //查询该部门的用户
-            var user = Meteor.users.findOne();
-            return department.code;
-        } else {
-            return null;
-        }
 
+    },
+    'addNewCompanyType':function(companyTypeTitle){
+        var ob = gCompanyType.findOne({title:companyTypeTitle});
+        if(ob){
+            return {error:"langErrorAlreadyExist"};
+        }else{
+            ob = gCompanyType.insert({title:companyTypeTitle});
+            if(!ob){
+                return {error:"langErrorCannotCreate"};
+            }else{
+                return {error:"OK"};
+            }
+        }
+    },
+
+    'removeCompanyType':function(id){
+        var ob = gCompanyType.findOne({_id:id});
+        if(!ob){
+            return {error:"langErrorNotExist"};
+        }else{
+            console.log("删除公司类型："+ob.title);
+            gCompanyType.remove({_id:id});
+            return {error:"OK"};
+        }
+    },
+
+    'updateCompanyType':function(id, newCompanyTypeTitle){
+        var ob = gCompanyType.findOne({_id:id});
+        if(!ob){
+            return {error:"langErrorNotExist"};
+        }else{
+            console.log("更新公司类型:"+ob.title);
+            gCompanyType.update(id, {title:newCompanyTypeTitle});
+            return {error:"OK"};
+        }
     }
 });

@@ -1,5 +1,8 @@
 Template.headerTmp.helpers({
-   "langWebTitle":function(){
+    "errorMessage":function(){
+        return Session.get("errorMessage");
+    },
+    "langWebTitle":function(){
        return Session.get("langWebTitle");
    },
    "langLogin" :function(){

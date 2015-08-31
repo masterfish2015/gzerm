@@ -1,4 +1,5 @@
 //设置缺省的显示参数，这些都是各个页面的缺省添加窗口，缺省下不显示
+Session.setDefault("errorMessage","");
 Session.setDefault('isShowAddUserPanel', false);
 Session.setDefault("showAddCompanyPanel", false);
 Session.setDefault("showAddCompanyTypePanel",false);
