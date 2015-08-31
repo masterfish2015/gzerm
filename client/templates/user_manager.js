@@ -34,7 +34,17 @@ Template.userManagerTemplate.helpers({
             }
         ];
         return users;
-    }
+    },
+    //下面是关于界面上的语言的帮助函数
+    langUserManagement:function(){return Session.get("langUserManagement");},
+    langAddUser:function(){return Session.get("langAddUser");},
+    langUserCode:function(){return Session.get("langUserCode");},
+    langUserName:function(){return Session.get("langUserName");},
+    langUserRealName:function(){return Session.get("langUserRealName");},
+    langUserGender:function(){return Session.get("langUserGender");},
+    langUserCompany:function(){return Session.get("langUserCompany");},
+    langUserDepartment:function(){return Session.get("langUserDepartment");},
+
 });
 
 Template.userManagerTemplate.events({
