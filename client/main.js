@@ -3,6 +3,9 @@ Session.setDefault("errorMessage","");
 Session.setDefault('isShowAddUserPanel', false);
 Session.setDefault("showAddCompanyPanel", false);
 Session.setDefault("showAddCompanyTypePanel",false);
+Session.setDefault("isModifyCompanyType",false);
+Session.setDefault("modifyCompanyType","");
+Session.setDefault("oldCompanyTypeID","");
 
 //设置界面的缺省语言是中文简体
 for(var k in SimpleChineseItem){

@@ -32,17 +32,20 @@
 
 <template name="addCompanyTypeTemplate">
     <div class="panel panel-default">
-        <div class="panel-heading">
-            {{langAddOrganizeType}}
-        </div>
         <div class="panel-body">
             <p>{{langOrganizeType}}:
-                <input type="text" id="text_add_organize_type">
+                <input type="text" id="text_add_organize_type" value={{modifyCompanyType}}>
                 {{verifyCompanyTypeError}}
             </p>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-primary" id="btn_add_company_type">{{langAdd}}</button>
+            <button type="button" class="btn btn-primary" id="btn_add_company_type">
+                {{#if isModifyCompanyType}}
+                    {{langModifyCompanyType}}
+                {{else}}
+                    {{langAddOrganizeType}}
+                {{/if}}
+            </button>
         </div>
     </div>
 </template>

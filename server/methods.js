@@ -36,7 +36,7 @@ Meteor.methods({
             return {error:"langErrorNotExist"};
         }else{
             console.log("更新公司类型:"+ob.title);
-            gCompanyType.update(id, {title:newCompanyTypeTitle});
+            gCompanyType.update(id, {$set:{title:newCompanyTypeTitle}});
             return {error:"OK"};
         }
     }
