@@ -2,6 +2,14 @@ Session.setDefault("showAddCompanyPanel", false);
 Session.setDefault("isModifyCompany", false);
 Session.setDefault("modifyCompanyID", "");
 
+Session.setDefault("modifyCompanySupervisor", " ");
+Session.setDefault("modifyCompanyType", " ");
+Session.setDefault("modifyCompanyBoss", " ");
+Session.setDefault("modifyCompanyRegion", " ");
+Session.setDefault("modifyCompanyCode", "");
+Session.setDefault("modifyCompanyTitle", "");
+Session.setDefault("modifyCompanyComment", "");
+
 Session.setDefault("verifyCompanyTypeError","");
 Session.setDefault("verifyCompanyTitleError","");
 
@@ -22,7 +30,34 @@ Template.companyManagerTemplate.helpers({
 });
 
 Template.addCompanyTemplate.helpers({
-
+    "selected":function(v1,v2){
+        if(v1===v2){
+            return true;
+        }else{
+            return false;
+        }
+    },
+    "modifyCompanyCode":function(){
+        return Session.get('modifyCompanyCode');
+    },
+    "modifyCompanyTitle":function(){
+        return Session.get('modifyCompanyTitle');
+    },
+    "modifyCompanyType":function(){
+        return Session.get('modifyCompanyType');
+    },
+    "modifyCompanyRegion":function(){
+        return Session.get('modifyCompanyRegion');
+    },
+    "modifyCompanyBoss":function(){
+        return Session.get('modifyCompanyBoss');
+    },
+    "modifyCompanySupervisor":function(){
+        return Session.get('modifyCompanySupervisor');
+    },
+    "modifyCompanyComment":function(){
+        return Session.get('modifyCompanyComment');
+    },
     //下面是为了下拉选择栏提供选择项
     "companyTypeOptions": function () {
         return gCompanyType.find();
@@ -32,8 +67,32 @@ Template.addCompanyTemplate.helpers({
     },
     "supervisorOptions": function () {
         //获得机构列表，注意自己和比自己还低的机构都不列入
-        var list = gCompanies.find()
-        return gCompanies.find();
+        var list ;
+        if(Session.get("isModifyCompany")===true){
+            var rt=[];
+            var id = Session.get("modifyCompanyID");
+
+            var companyType = gCompanyType.findOne({_id:gCompanies.findOne({_id:id}).companyType});
+
+            if(!companyType){
+                //如果当前修改的公司没有设置类型，那么直接返回所有公司（除自己外）的集合
+                return gCompanies.find({_id:{$ne:id}});
+            }
+            //否则，查找所有机构，找出其公司类型的级别，判断其级别是否<本级别（小于则是等级高），组成列表
+            list = gCompanies.find({_id:{$ne:id}}).fetch();
+            for(l in list){
+                var o = list[l];
+
+                var ct = o.companyType;
+                if(ct && gCompanyType.findOne({_id:ct}).grade<companyType.grade){
+                    rt.push(o);
+                }
+            }
+            return rt;
+        }
+        else{
+            return gCompanies.find();
+        }
     },
     "regionOptions": function () {
         return gRegions.find();
@@ -175,24 +234,39 @@ Template.companyManagerTemplate.events({
 });
 
 function initInputField(){
-    $("#input_company_code").val('');
-    $("#input_company_title").val('');
-    $("#input_company_comment").val('');
-    $("#input_company_type").val('');
-    $("#input_company_region").val('');
-    $("#input_company_charger").val('');
-    $("#input_company_supervisor").val('');
+    //$("#input_company_code").val('');
+    //$("#input_company_title").val('');
+    //$("#input_company_comment").val('');
+    //$("#input_company_type").val('');
+    //$("#input_company_region").val('');
+    //$("#input_company_charger").val('');
+    //$("#input_company_supervisor").val('');
     Session.set("modifyCompanyID","");
+    Session.set('modifyCompanySupervisor'," ");
+    Session.set('modifyCompanyBoss'," ");
+    Session.set('modifyCompanyRegion'," ");
+    Session.set('modifyCompanyType'," ");
+    Session.set('modifyCompanyTitle',"");
+    Session.set('modifyCompanyCode',"");
+    Session.set('modifyCompanyComment',"");
 }
 
 function setInputField(company){
-    $("#input_company_code").val(company.code);
-    $("#input_company_title").val(company.title);
-    $("#input_company_comment").val(company.comments);
-    $("#input_company_type").val(company.companyType);
-    $("#input_company_region").val(company.region);
-    $("#input_company_charger").val(company.boss);
-    $("#input_company_supervisor").val(company.supervisor);
+    //$("#input_company_code").val(company.code);
+    //$("#input_company_title").val(company.title);
+    //$("#input_company_comment").val(company.comments);
+    //$("#input_company_type").val(company.companyType);
+    //$("#input_company_region").val(company.region);
+    //$("#input_company_charger").val(company.boss);
+    //$("#input_company_supervisor").val(company.supervisor);
+    Session.set('modifyCompanyCode',company.code);
+    Session.set('modifyCompanyTitle',company.title);
+    Session.set('modifyCompanyComment',company.comments);
+    Session.set('modifyCompanyType',company.companyType);
+    Session.set('modifyCompanyRegion',company.region);
+    Session.set('modifyCompanyBoss',company.boss);
+    Session.set('modifyCompanySupervisor',company.supervisor);
+
 }
 
 Template.addCompanyTemplate.events({
@@ -229,62 +303,35 @@ Template.addCompanyTemplate.events({
         cp.comments = $('#input_company_comment').val();
 
         //console.log(cp);
-        Meteor.call("addNewCompany",cp,function(error, result){
-            if(result.error!=="OK"){
-                //console.log("无法增加新的公司"+result.error);
-                alert(Session.get(result.error));
-            }else{
-                initInputField();
-
-            }
-
-
-        });
-    },
-    "click #btn_modify_company":function(e){
-        //获取相关数据
-        var cp={};
-
-        cp.code = $('#input_company_code').val();
-        if(cp.code===""){
-            //编码不能为空
-            Session.set("verifyCompanyCodeError",Session.get("langErrorCannotEmpty"));
-            return ;
-        }else{
-            Session.set("verifyCompanyCodeError","");
-        }
-
-        cp.title = $('#input_company_title').val();
-        if(cp.title===""){
-            //名称不能为空
-            Session.set("verifyCompanyTitleError",Session.get("langErrorCannotEmpty"));
-            return;
-        }else{
-            Session.set("verifyCompanyTitleError","");
-        }
-
-        cp.companyType = $('#input_company_type').val();
-
-        cp.region = $('#input_company_region').val();
-
-        cp.boss = $('#input_company_charger').val();
-
-        cp.supervisor = $('#input_company_supervisor').val();
-
-        cp.comments = $('#input_company_comment').val();
-
-        //console.log(cp);
-        Meteor.call("updateCompany",Session.get("modifyCompanyID"),cp,function(error, result){
-            if(!error){
-                if(result.error && result.error!=="OK"){
-                    //console.log("无法修改该公司数据"+result.error);
+        if(Session.get('isModifyCompany')===false){
+            //create
+            Meteor.call("addNewCompany",cp,function(error, result){
+                if(result.error!=="OK"){
+                    //console.log("无法增加新的公司"+result.error);
                     alert(Session.get(result.error));
                 }else{
-                    //initInputField();
+                    initInputField();
+
                 }
-            }
-        });
+
+
+            });
+        }else{
+            //modify
+            Meteor.call("updateCompany",Session.get("modifyCompanyID"),cp,function(error, result){
+                if(!error){
+                    if(result.error && result.error!=="OK"){
+                        //console.log("无法修改该公司数据"+result.error);
+                        alert(Session.get(result.error));
+                    }else{
+                        //initInputField();
+                    }
+                }
+            });
+        }
+
     }
+
 });
 
 Template.companyListTemplate.events({
@@ -305,11 +352,11 @@ Template.companyListTemplate.events({
     },
     "click .companyEdit": function (e) {
         var id = e.currentTarget.value;
+        Session.set("modifyCompanyID",id);
         Session.set("isModifyCompany",true);
         Session.set("showAddCompanyPanel", true);
         var company = gCompanies.findOne({_id:id});
         //console.log(company);
         setInputField(company);
-        Session.set("modifyCompanyID",id);
     }
 });

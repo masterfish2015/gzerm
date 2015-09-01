@@ -37,12 +37,12 @@
                         <div class="row">
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label for="input_company_code">{{langCompanyCode}}：</label>
-                                <input id="input_company_code" type="text" >
+                                <input id="input_company_code" type="text"  value={{modifyCompanyCode}}>
                                 <span class="errorMsg">{{verifyCompanyCodeError}}</span>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label  for="input_company_title">{{langCompanyTitle}}：</label>
-                                <input  id="input_company_title" type="text" >
+                                <input  id="input_company_title" type="text" value="{{modifyCompanyTitle}}">
                                 <span class="errorMsg">{{verifyCompanyTitleError}}</span>
                             </div>
                         </div>
@@ -52,8 +52,11 @@
                                 <select id="input_company_type" >
                                     <option value=" "></option>
                                     {{#each companyTypeOptions}}
-                                        <option value={{_id}}>{{title}}
-                                        </option>
+                                        {{#if selected _id modifyCompanyType}}
+                                            <option value={{_id}} selected="true" >{{title}}</option>
+                                        {{else}}
+                                            <option value={{_id}} >{{title}}</option>
+                                        {{/if}}
                                     {{/each}}
                                 </select>
                             </div>
@@ -62,8 +65,11 @@
                                 <select id="input_company_region" >
                                     <option value=" "></option>
                                     {{#each regionOptions}}
-                                        <option value={{_id}}>{{title}}
-                                        </option>
+                                        {{#if selected _id modifyCompanyRegion}}
+                                            <option value={{_id}} selected="true" >{{title}}</option>
+                                        {{else}}
+                                            <option value={{_id}} >{{title}}</option>
+                                        {{/if}}
                                     {{/each}}
                                 </select>
                             </div>
@@ -74,8 +80,11 @@
                                 <select id="input_company_charger">
                                     <option value=" "></option>
                                     {{#each bossOptions}}
-                                        <option value={{_id}}>{{name}}
-                                        </option>
+                                        {{#if selected _id modifyCompanyBoss}}
+                                            <option value={{_id}} selected="true" >{{name}}</option>
+                                        {{else}}
+                                            <option value={{_id}} >{{name}}</option>
+                                        {{/if}}
                                     {{/each}}
                                 </select>
                             </div>
@@ -84,24 +93,29 @@
                                 <select id="input_company_supervisor" >
                                     <option value=" "></option>
                                     {{#each supervisorOptions}}
-                                        <option value={{_id}}>{{title}}
-                                        </option>
+                                        {{#if selected _id modifyCompanySupervisor}}
+                                            <option value={{_id}} selected="true" >{{title}}</option>
+                                        {{else}}
+                                            <option value={{_id}} >{{title}}</option>
+                                        {{/if}}
                                     {{/each}}
                                 </select>
                             </div>
                         </div>
                         <p>
                             {{langCompanyComment}}:
-                            <textarea id="input_company_comment" row="3" ></textarea>
+                            <textarea id="input_company_comment" row="3" >{{modifyCompanyComment}}</textarea>
                         </p>
                     </form>
             </div>
             <div class="panel-footer">
+                <button type="button" class="btn btn-primary" id="btn_add_company">
                 {{#if isModifyCompany}}
-                    <button type="button" class="btn btn-primary" id="btn_modify_company">{{langModify}}</button>
+                    {{langModify}}
                 {{else}}
-                    <button type="button" class="btn btn-primary" id="btn_add_company">{{langAdd}}</button>
+                    {{langAdd}}
                 {{/if}}
+                </button>
             </div>
     </div>
 </template>
