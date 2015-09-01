@@ -5,18 +5,18 @@ Meteor.methods({
     'getLastUserCoder': function (departmentID) {
 
     },
-    'addNewCompanyType':function(companyTypeTitle){
-        var ob = gCompanyType.findOne({title:companyTypeTitle});
+    'addNewCompanyType':function(companyType){
+        var ob = gCompanyType.findOne({title:companyType.title});
         if(ob){
-            console.log("增加公司类型错误，公司名称不能重复:"+companyTypeTitle);
+            console.log("增加公司类型错误，公司名称不能重复:"+companyType.title);
             return {error:"langErrorAlreadyExist"};
         }else{
-            ob = gCompanyType.insert({title:companyTypeTitle});
+            ob = gCompanyType.insert(companyType);
             if(!ob){
-                console.log("增加公司类型错误，无法创建新的数据库项目:"+companyTypeTitle);
+                console.log("增加公司类型错误，无法创建新的数据库项目:"+companyType);
                 return {error:"langErrorCannotCreate"};
             }else{
-                console.log("增加公司类型:"+companyTypeTitle);
+                console.log("增加公司类型:"+companyType);
                 return {error:"OK"};
             }
         }
@@ -39,14 +39,14 @@ Meteor.methods({
         }
     },
 
-    'updateCompanyType':function(id, newCompanyTypeTitle){
+    'updateCompanyType':function(id, newCompanyType){
         var ob = gCompanyType.findOne({_id:id});
         if(!ob){
-            console.log("更新公司类型错误:"+ob.title);
+            console.log("更新公司类型错误:"+newCompanyType);
             return {error:"langErrorNotExist"};
         }else{
             console.log("更新公司类型:"+ob.title);
-            gCompanyType.update(id, {$set:{title:newCompanyTypeTitle}});
+            gCompanyType.update(id, {$set:newCompanyType});
             return {error:"OK"};
         }
     },
@@ -76,6 +76,19 @@ Meteor.methods({
         }else{
             console.log("删除公司："+ob.title);
             gCompanies.remove({_id:id});
+            return {error:"OK"};
+        }
+    },
+
+    'updateCompany':function(id, newCompany){
+        var ob = gCompanies.findOne({_id:id});
+        if(!ob){
+            console.log("更新公司错误:"+newCompany.title);
+            return {error:"langErrorNotExist"};
+        }else{
+
+            console.log("更新公司类型:"+ob.title);
+            gCompanies.update(id, {$set:newCompany});
             return {error:"OK"};
         }
     }

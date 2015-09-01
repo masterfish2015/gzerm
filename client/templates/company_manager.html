@@ -37,31 +37,33 @@
                         <div class="row">
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label for="input_company_code">{{langCompanyCode}}：</label>
-                                <input id="input_company_code" type="text">
+                                <input id="input_company_code" type="text" >
                                 <span class="errorMsg">{{verifyCompanyCodeError}}</span>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label  for="input_company_title">{{langCompanyTitle}}：</label>
-                                <input  id="input_company_title" type="text">
+                                <input  id="input_company_title" type="text" >
                                 <span class="errorMsg">{{verifyCompanyTitleError}}</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label for="input_company_type">{{langCompanyType}}：</label>
-                                <select id="input_company_type">
+                                <select id="input_company_type" >
                                     <option value=" "></option>
                                     {{#each companyTypeOptions}}
-                                        <option value={{_id}}>{{title}}</option>
+                                        <option value={{_id}}>{{title}}
+                                        </option>
                                     {{/each}}
                                 </select>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label  for="input_company_region">{{langCompanyRegion}}：</label>
-                                <select id="input_company_region">
+                                <select id="input_company_region" >
                                     <option value=" "></option>
                                     {{#each regionOptions}}
-                                        <option value={{_id}}>{{title}}</option>
+                                        <option value={{_id}}>{{title}}
+                                        </option>
                                     {{/each}}
                                 </select>
                             </div>
@@ -72,29 +74,31 @@
                                 <select id="input_company_charger">
                                     <option value=" "></option>
                                     {{#each bossOptions}}
-                                        <option value={{_id}}>{{name}}</option>
+                                        <option value={{_id}}>{{name}}
+                                        </option>
                                     {{/each}}
                                 </select>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label  for="input_company_supervisor">{{langCompanySupervisor}}：</label>
-                                <select id="input_company_supervisor">
+                                <select id="input_company_supervisor" >
                                     <option value=" "></option>
                                     {{#each supervisorOptions}}
-                                        <option value={{_id}}>{{title}}</option>
+                                        <option value={{_id}}>{{title}}
+                                        </option>
                                     {{/each}}
                                 </select>
                             </div>
                         </div>
                         <p>
                             {{langCompanyComment}}:
-                            <textarea id="input_company_comment" row="3"></textarea>
+                            <textarea id="input_company_comment" row="3" ></textarea>
                         </p>
                     </form>
             </div>
             <div class="panel-footer">
                 {{#if isModifyCompany}}
-                    <button type="button" class="btn btn-primary">{{langModify}}</button>
+                    <button type="button" class="btn btn-primary" id="btn_modify_company">{{langModify}}</button>
                 {{else}}
                     <button type="button" class="btn btn-primary" id="btn_add_company">{{langAdd}}</button>
                 {{/if}}

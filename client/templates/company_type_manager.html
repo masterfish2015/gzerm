@@ -34,8 +34,12 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <p>{{langOrganizeType}}:
-                <input type="text" id="text_add_organize_type" value={{modifyCompanyType}}>
-                <span class="errorMsg">{{verifyCompanyTypeError}}</span>
+                <input type="text" id="text_add_organize_type_title" value={{modifyCompanyTypeTitle}}>
+                <span class="errorMsg">{{verifyCompanyTypeTitleError}}</span>
+            </p>
+            <p>{{langOganizeGrade}}:
+                <input type="text" id="text_add_organize_type_grade" value={{modifyCompanyTypeGrade}}>
+                <span class="errorMsg">{{verifyCompanyTypeGradeError}}</span>
             </p>
         </div>
         <div class="panel-footer">
@@ -55,6 +59,7 @@
         <thead>
         <tr>
             <th>{{langCurrentOrganizeTypes}}</th>
+            <th>{{langOganizeGrade}}</th>
             <th></th>
         </tr>
         </thead>
@@ -63,6 +68,9 @@
             <tr>
                 <td>
                     {{title}}
+                </td>
+                <td>
+                    {{grade}}
                 </td>
                 <td>
                     <button class="btn btn-xs btn-danger companyTypeRemove" value={{_id}}>

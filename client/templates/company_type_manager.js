@@ -1,6 +1,7 @@
 Session.setDefault("showAddCompanyTypePanel",false);
 Session.setDefault("isModifyCompanyType",false);
-Session.setDefault("modifyCompanyType","");
+Session.setDefault("modifyCompanyTypeTitle","");
+Session.setDefault("modifyCompanyTypeGrade","");
 Session.setDefault("oldCompanyTypeID","");
 
 Template.companyTypeMangagerTemplate.helpers({
@@ -24,19 +25,28 @@ Template.companyTypeListTemplate.helpers({
     //下面的辅助函数是为了界面多语言
     "langCurrentOrganizeTypes": function () {
         return Session.get("langCurrentOrganizeTypes");
+    },
+    "langOganizeGrade": function () {
+        return Session.get("langOganizeGrade");
     }
 });
 
 Template.addCompanyTypeTemplate.helpers({
     //下面的辅助函数是为了输入验证
-    "verifyCompanyTypeError": function () {
-        return Session.get("verifyCompanyTypeError");
+    "verifyCompanyTypeTitleError": function () {
+        return Session.get("verifyCompanyTypeTitleError");
+    },
+    "verifyCompanyTypeGradeError": function () {
+        return Session.get("verifyCompanyTypeGradeError");
     },
     "isModifyCompanyType": function () {
         return Session.get("isModifyCompanyType");
     },
-    "modifyCompanyType": function () {
-        return Session.get("modifyCompanyType");
+    "modifyCompanyTypeTitle": function () {
+        return Session.get("modifyCompanyTypeTitle");
+    },
+    "modifyCompanyTypeGrade": function () {
+        return Session.get("modifyCompanyTypeGrade");
     },
     //下面的辅助函数是为了界面多语言
     "langAddOrganizeType": function () {
@@ -44,6 +54,9 @@ Template.addCompanyTypeTemplate.helpers({
     },
     "langOrganizeType": function () {
         return Session.get("langOrganizeType");
+    },
+    "langOganizeGrade": function () {
+        return Session.get("langOganizeGrade");
     },
     "langAdd": function () {
         return Session.get("langAdd");
@@ -67,7 +80,8 @@ Template.companyTypeMangagerTemplate.events({
         if (v1 === true && v2 === true) {
             //情况1：v1=true表示面板已经打开，v2=true表示现在是修改状态，所以这时候按这个按钮，应该切换为添加状态，保持面板打开
             Session.set("isModifyCompanyType", false);
-            Session.set("modifyCompanyType", "");
+            Session.set("modifyCompanyTypeTitle", "");
+            Session.set("modifyCompanyTypeGrade", "");
         }
         if (v1 === true && v2 === false) {
             //情况2： v1=true表示面板已经打开，v2=true表示现在是添加状态，所以这时候按这个按钮，就应该把面板收起来
@@ -77,41 +91,53 @@ Template.companyTypeMangagerTemplate.events({
             //情况3： v1=false表示面板未打开，v2=true表示现在是添加状态，所以这时候按这个按钮，就应该切换为添加状态，且把面板打开
             Session.set("showAddCompanyTypePanel", true);
             Session.set("isModifyCompanyType", false);
-            Session.set("modifyCompanyType", "");
+            Session.set("modifyCompanyTypeTitle", "");
+            Session.set("modifyCompanyTypeGrade", "");
         }
         if (v1 === false && v2 === false) {
             //情况4： v1=false表示面板未打开，v2=false表示现在是新建状态，所以这时候按这个按钮，就应该把面板打开
             Session.set("showAddCompanyTypePanel", true);
-            Session.set("modifyCompanyType", "");
+            Session.set("modifyCompanyTypeTitle", "");
+            Session.set("modifyCompanyTypeGrade", "");
         }
     }
 });
 
 Template.addCompanyTypeTemplate.events({
     "click #btn_add_company_type": function (e, v) {
-        var title = $('#text_add_organize_type').val();
-        if (title === "") {
-            Session.set("verifyCompanyTypeError", Session.get("langErrorCompanyTypeEmpty"));
+        var ct={};
+        ct.title = $('#text_add_organize_type_title').val();
+        if (ct.title === "") {
+            Session.set("verifyCompanyTypeTitleError", Session.get("langErrorCannotEmpty"));
             return;
         } else {
-            Session.set("verifyCompanyTypeError", "");
+            Session.set("verifyCompanyTypeTitleError", "");
+        }
+        ct.grade = $('#text_add_organize_type_grade').val();
+        if (ct.grade === "") {
+            Session.set("verifyCompanyTypeGradeError", Session.get("langErrorCannotEmpty"));
+            return;
+        } else {
+            Session.set("verifyCompanyTypeGradeError", "");
         }
         //检查是创建新的还是修改旧的
         if (Session.get("isModifyCompanyType") === true) {
             //修改
             var id = Session.get("oldCompanyTypeID");
-            Meteor.call("updateCompanyType", id, title, function (e, r) {
+            Meteor.call("updateCompanyType", id, ct, function (e, r) {
                 if (r.error !== "OK") {
-                    Session.set("verifyCompanyTypeError", result.error);
+                    //Session.set("verifyCompanyTypeError", result.error);
+                    alert(Session.get(result.error));
                 }
             });
             return;
         } else {
             //创建
-            Meteor.call("addNewCompanyType", title, function (error, result) {
+            Meteor.call("addNewCompanyType", ct, function (error, result) {
                 if (result.error !== "OK") {
-                    Session.set("verifyCompanyTypeError", result.error);
+                    //Session.set("verifyCompanyTypeError", result.error);
                     //Session.set("errorMessage",Session.get(result.error));
+                    alert(Session.get(result.error));
                 } else {
                     // Session.set("errorMessage","");
                 }
@@ -142,6 +168,8 @@ Template.companyTypeListTemplate.events({
         Session.set("isModifyCompanyType", true);
         var id = e.currentTarget.value;
         Session.set("oldCompanyTypeID", id);
-        Session.set("modifyCompanyType", gCompanyType.findOne({_id: id}).title);
+        var o = gCompanyType.findOne({_id: id});
+        Session.set("modifyCompanyTypeTitle",o.title);
+        Session.set("modifyCompanyTypeGrade", o.grade);
     }
 });

@@ -1,7 +1,8 @@
 //本文件主要是给数据库加入一些初始化数据
 if (gCompanyType.find().count() === 0) {
-    gCompanyType.insert({title: "集团"});
-    gCompanyType.insert({title: "子公司"});
+    gCompanyType.insert({title: "集团", grade:0});
+    gCompanyType.insert({title: "子公司",grade:1});
+    gCompanyType.insert({title: "部门",grade:2});
 }
 
 if (gPermissions.find().count() === 0) {

@@ -1,5 +1,7 @@
 Session.setDefault("showAddCompanyPanel", false);
 Session.setDefault("isModifyCompany", false);
+Session.setDefault("modifyCompanyID", "");
+
 Session.setDefault("verifyCompanyTypeError","");
 Session.setDefault("verifyCompanyTitleError","");
 
@@ -20,6 +22,8 @@ Template.companyManagerTemplate.helpers({
 });
 
 Template.addCompanyTemplate.helpers({
+
+    //下面是为了下拉选择栏提供选择项
     "companyTypeOptions": function () {
         return gCompanyType.find();
     },
@@ -27,6 +31,8 @@ Template.addCompanyTemplate.helpers({
         return gEmployees.find();
     },
     "supervisorOptions": function () {
+        //获得机构列表，注意自己和比自己还低的机构都不列入
+        var list = gCompanies.find()
         return gCompanies.find();
     },
     "regionOptions": function () {
@@ -40,6 +46,9 @@ Template.addCompanyTemplate.helpers({
         return Session.get("verifyCompanyTitleError");
     },
     //下面的辅助函数是为了界面多语言
+    "isModifyCompany": function () {
+        return Session.get("isModifyCompany");
+    },
     "langAddCompany": function () {
         return Session.get('langAddCompany');
     },
@@ -85,7 +94,7 @@ Template.companyListTemplate.helpers({
         if(!o){
             return "";
         }else{
-            return o.title | "";
+            return o.title || "";
         }
     },
     "getBoss": function (bossID) {
@@ -93,15 +102,16 @@ Template.companyListTemplate.helpers({
         if(!o){
             return "";
         }else{
-            return o.name | "";
+            return o.name || "";
         }
     },
     "getSupervisor": function (supervisorID) {
+
         var o =gCompanies.findOne({_id: supervisorID});
         if(!o){
             return "";
         }else{
-            return o.title | "";
+            return o.title || "";
         }
     },
     "getRegion": function (regionID) {
@@ -109,7 +119,7 @@ Template.companyListTemplate.helpers({
         if(!o){
             return "";
         }else{
-            return o.title | "";
+            return o.title || "";
         }
     },
     //下面的辅助函数是为了界面多语言
@@ -139,10 +149,51 @@ Template.companyListTemplate.helpers({
 
 Template.companyManagerTemplate.events({
     "click #btn_show_add_company_panel": function (e, v) {
-        var v = !Session.get("showAddCompanyPanel");
-        Session.set("showAddCompanyPanel", v);
+        var v1 = Session.get("showAddCompanyPanel");
+        var v2 = Session.get("isModifyCompany");
+        if (v1 === true && v2 === true) {
+            //情况1：v1=true表示面板已经打开，v2=true表示现在是修改状态，所以这时候按这个按钮，应该切换为添加状态，保持面板打开
+            Session.set("isModifyCompany", false);
+            initInputField();
+        }
+        if (v1 === true && v2 === false) {
+            //情况2： v1=true表示面板已经打开，v2=true表示现在是添加状态，所以这时候按这个按钮，就应该把面板收起来
+            Session.set("showAddCompanyPanel", false);
+        }
+        if (v1 === false && v2 === true) {
+            //情况3： v1=false表示面板未打开，v2=true表示现在是添加状态，所以这时候按这个按钮，就应该切换为添加状态，且把面板打开
+            Session.set("showAddCompanyPanel", true);
+            Session.set("isModifyCompany", false);
+            initInputField();
+        }
+        if (v1 === false && v2 === false) {
+            //情况4： v1=false表示面板未打开，v2=false表示现在是新建状态，所以这时候按这个按钮，就应该把面板打开
+            Session.set("showAddCompanyPanel", true);
+            initInputField();
+        }
     }
 });
+
+function initInputField(){
+    $("#input_company_code").val('');
+    $("#input_company_title").val('');
+    $("#input_company_comment").val('');
+    $("#input_company_type").val('');
+    $("#input_company_region").val('');
+    $("#input_company_charger").val('');
+    $("#input_company_supervisor").val('');
+    Session.set("modifyCompanyID","");
+}
+
+function setInputField(company){
+    $("#input_company_code").val(company.code);
+    $("#input_company_title").val(company.title);
+    $("#input_company_comment").val(company.comments);
+    $("#input_company_type").val(company.companyType);
+    $("#input_company_region").val(company.region);
+    $("#input_company_charger").val(company.boss);
+    $("#input_company_supervisor").val(company.supervisor);
+}
 
 Template.addCompanyTemplate.events({
     "click #btn_add_company":function(e){
@@ -151,6 +202,7 @@ Template.addCompanyTemplate.events({
 
         cp.code = $('#input_company_code').val();
         if(cp.code===""){
+            //编码不能为空
             Session.set("verifyCompanyCodeError",Session.get("langErrorCannotEmpty"));
             return ;
         }else{
@@ -159,6 +211,7 @@ Template.addCompanyTemplate.events({
 
         cp.title = $('#input_company_title').val();
         if(cp.title===""){
+            //名称不能为空
             Session.set("verifyCompanyTitleError",Session.get("langErrorCannotEmpty"));
             return;
         }else{
@@ -175,11 +228,60 @@ Template.addCompanyTemplate.events({
 
         cp.comments = $('#input_company_comment').val();
 
-        console.log(cp);
+        //console.log(cp);
         Meteor.call("addNewCompany",cp,function(error, result){
             if(result.error!=="OK"){
-                console.log("无法增加新的公司"+result.error);
+                //console.log("无法增加新的公司"+result.error);
                 alert(Session.get(result.error));
+            }else{
+                initInputField();
+
+            }
+
+
+        });
+    },
+    "click #btn_modify_company":function(e){
+        //获取相关数据
+        var cp={};
+
+        cp.code = $('#input_company_code').val();
+        if(cp.code===""){
+            //编码不能为空
+            Session.set("verifyCompanyCodeError",Session.get("langErrorCannotEmpty"));
+            return ;
+        }else{
+            Session.set("verifyCompanyCodeError","");
+        }
+
+        cp.title = $('#input_company_title').val();
+        if(cp.title===""){
+            //名称不能为空
+            Session.set("verifyCompanyTitleError",Session.get("langErrorCannotEmpty"));
+            return;
+        }else{
+            Session.set("verifyCompanyTitleError","");
+        }
+
+        cp.companyType = $('#input_company_type').val();
+
+        cp.region = $('#input_company_region').val();
+
+        cp.boss = $('#input_company_charger').val();
+
+        cp.supervisor = $('#input_company_supervisor').val();
+
+        cp.comments = $('#input_company_comment').val();
+
+        //console.log(cp);
+        Meteor.call("updateCompany",Session.get("modifyCompanyID"),cp,function(error, result){
+            if(!error){
+                if(result.error && result.error!=="OK"){
+                    //console.log("无法修改该公司数据"+result.error);
+                    alert(Session.get(result.error));
+                }else{
+                    //initInputField();
+                }
             }
         });
     }
@@ -196,8 +298,18 @@ Template.companyListTemplate.events({
                     alert(Session.get(r.error));
                 } else {
                     //Session.set("errorMessage", "");
+                    initInputField();
                 }
             });
         }
+    },
+    "click .companyEdit": function (e) {
+        var id = e.currentTarget.value;
+        Session.set("isModifyCompany",true);
+        Session.set("showAddCompanyPanel", true);
+        var company = gCompanies.findOne({_id:id});
+        //console.log(company);
+        setInputField(company);
+        Session.set("modifyCompanyID",id);
     }
 });
