@@ -4,10 +4,10 @@ Template.headerTmp.helpers({
     },
     "langWebTitle":function(){
        return Session.get("langWebTitle");
-   },
-   "langLogin" :function(){
+    },
+    "langLogin" :function(){
        return Session.get("langLogin");
-   },
+    },
     "langLogout" :function(){
         return Session.get("langLogout");
     },

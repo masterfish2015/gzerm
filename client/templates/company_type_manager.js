@@ -119,9 +119,11 @@ Template.companyTypeListTemplate.events({
             //console.log(p);
             Meteor.call("removeCompanyType", companyTypeID, function (e, r) {
                 if (r.error !== "OK") {
-                    Session.set("errorMessage", Session.get(result.error));
+                    console.log("无法删除，因为在companies数据库中用到这个类型");
+                    //Session.set("errorMessage", Session.get(r.error));
+                    alert(Session.get(r.error));
                 } else {
-                    Session.set("errorMessage", "");
+                    //Session.set("errorMessage", "");
                 }
             });
         }

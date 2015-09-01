@@ -24,6 +24,11 @@ Meteor.methods({
         if(!ob){
             return {error:"langErrorNotExist"};
         }else{
+            ob = gCompanies.find({companyType:id}).count();
+            if(ob>0){
+                console.log("无法删除，因为在companies数据库中用到这个类型");
+                return {error:"langErrorUsedInOtherCollection"};
+            }
             console.log("删除公司类型："+ob.title);
             gCompanyType.remove({_id:id});
             return {error:"OK"};
