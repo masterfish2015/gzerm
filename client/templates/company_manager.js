@@ -81,27 +81,35 @@ Template.companyListTemplate.helpers({
         return gCompanies.find();
     },
     "getCompanyType": function (companyTypeID) {
-        return gCompanyType.findOne({_id: companyTypeID}).title;
+        var o =gCompanyType.findOne({_id: companyTypeID});
+        if(!o){
+            return "";
+        }else{
+            return o.title | "";
+        }
     },
     "getBoss": function (bossID) {
-        if (bossID === "null") {
+        var o =gEmployees.findOne({_id: bossID});
+        if(!o){
             return "";
-        } else {
-            return gEmployees.findOne({_id: bossID}).name;
+        }else{
+            return o.name | "";
         }
     },
     "getSupervisor": function (supervisorID) {
-        if (supervisorID === "null") {
+        var o =gCompanies.findOne({_id: supervisorID});
+        if(!o){
             return "";
-        } else {
-            return gCompanies.findOne({_id: supervisorID}).title;
+        }else{
+            return o.title | "";
         }
     },
     "getRegion": function (regionID) {
-        if (regionID === "null") {
+        var o =gRegions.findOne({_id: regionID});
+        if(!o){
             return "";
-        } else {
-            return gRegions.findOne({_id: regionID}).title;
+        }else{
+            return o.title | "";
         }
     },
     //下面的辅助函数是为了界面多语言
@@ -123,8 +131,8 @@ Template.companyListTemplate.helpers({
     "langCompanyRegion": function () {
         return Session.get('langCompanyRegion');
     },
-    "langCompanyComent": function () {
-        return Session.get('langCompanyComent');
+    "langCompanyComment": function () {
+        return Session.get('langCompanyComment');
     }
 
 });
@@ -144,6 +152,7 @@ Template.addCompanyTemplate.events({
         cp.code = $('#input_company_code').val();
         if(cp.code===""){
             Session.set("verifyCompanyCodeError",Session.get("langErrorCannotEmpty"));
+            return ;
         }else{
             Session.set("verifyCompanyCodeError","");
         }
@@ -151,6 +160,7 @@ Template.addCompanyTemplate.events({
         cp.title = $('#input_company_title').val();
         if(cp.title===""){
             Session.set("verifyCompanyTitleError",Session.get("langErrorCannotEmpty"));
+            return;
         }else{
             Session.set("verifyCompanyTitleError","");
         }
@@ -172,5 +182,22 @@ Template.addCompanyTemplate.events({
                 alert(Session.get(result.error));
             }
         });
+    }
+});
+
+Template.companyListTemplate.events({
+    "click .companyRemove": function (e) {
+        var id = e.currentTarget.value;
+        var rt = confirm(Session.get("langAreYouSure"));//询问是否确认删除
+        if (rt === true) {
+            //console.log(p);
+            Meteor.call("removeCompany", id, function (e, r) {
+                if (r.error !== "OK") {
+                    alert(Session.get(r.error));
+                } else {
+                    //Session.set("errorMessage", "");
+                }
+            });
+        }
     }
 });

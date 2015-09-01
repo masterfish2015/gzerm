@@ -66,5 +66,17 @@ Meteor.methods({
             console.log("增加公司:"+company.title);
             return {error:"OK"};
         }
+    },
+
+    'removeCompany':function(id){
+        var ob = gCompanies.findOne({_id:id});
+        if(!ob){
+            console.log("删除公司错误，不存在");
+            return {error:"langErrorNotExist"};
+        }else{
+            console.log("删除公司："+ob.title);
+            gCompanies.remove({_id:id});
+            return {error:"OK"};
+        }
     }
 });

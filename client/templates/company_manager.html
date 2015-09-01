@@ -50,7 +50,7 @@
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label for="input_company_type">{{langCompanyType}}：</label>
                                 <select id="input_company_type">
-                                    <option value=""></option>
+                                    <option value=" "></option>
                                     {{#each companyTypeOptions}}
                                         <option value={{_id}}>{{title}}</option>
                                     {{/each}}
@@ -59,7 +59,7 @@
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label  for="input_company_region">{{langCompanyRegion}}：</label>
                                 <select id="input_company_region">
-                                    <option value=""></option>
+                                    <option value=" "></option>
                                     {{#each regionOptions}}
                                         <option value={{_id}}>{{title}}</option>
                                     {{/each}}
@@ -70,7 +70,7 @@
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label for="input_company_charger">{{langCompanyCharger}}：</label>
                                 <select id="input_company_charger">
-                                    <option value=""></option>
+                                    <option value=" "></option>
                                     {{#each bossOptions}}
                                         <option value={{_id}}>{{name}}</option>
                                     {{/each}}
@@ -79,7 +79,7 @@
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label  for="input_company_supervisor">{{langCompanySupervisor}}：</label>
                                 <select id="input_company_supervisor">
-                                    <option value=""></option>
+                                    <option value=" "></option>
                                     {{#each supervisorOptions}}
                                         <option value={{_id}}>{{title}}</option>
                                     {{/each}}
@@ -128,10 +128,10 @@
                         <td>{{getRegion region}}</td>
                         <td>{{comments}}</td>
                         <td>
-                            <button class="btn btn-xs btn-danger companyTypeRemove" value={{_id}}>
+                            <button class="btn btn-xs btn-danger companyRemove" value={{_id}}>
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
-                            <button class="btn btn-xs btn-info companyTypeEdit" value={{_id}}>
+                            <button class="btn btn-xs btn-info companyEdit" value={{_id}}>
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
                         </td>
