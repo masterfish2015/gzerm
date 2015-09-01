@@ -36,103 +36,103 @@ if (gRegions.find().count() === 0) {
 }
 
 if (gCompanies.find().count() === 0) {
-    gCompanies.insert(
-        {
-            code: "1",
-            title: "中国天御集团公司",
-            companyType: gCompanyType.findOne({title: "集团"})._id,
-            boss: "1000000001",
-            supervisor: "null",
-            region: "1",
-            comments: "abc"
-        }
-    );
-    gCompanies.insert(
-        {
-            code: "101",
-            title: "天御上海分公司",
-            companyType: gCompanyType.findOne({title: "子公司"})._id,
-            boss: "1001000001",
-            supervisor: "1",
-            region: "10102",
-            comments: "efg"
-        }
-    );
+    //gCompanies.insert(
+    //    {
+    //        code: "1",
+    //        title: "中国天御集团公司",
+    //        companyType: gCompanyType.findOne({title: "集团"})._id,
+    //        boss: "1000000001",
+    //        supervisor: "null",
+    //        region: "1",
+    //        comments: "abc"
+    //    }
+    //);
+    //gCompanies.insert(
+    //    {
+    //        code: "101",
+    //        title: "天御上海分公司",
+    //        companyType: gCompanyType.findOne({title: "子公司"})._id,
+    //        boss: "1001000001",
+    //        supervisor: "1",
+    //        region: "10102",
+    //        comments: "efg"
+    //    }
+    //);
 }
 
 if (gDepartments.find().count() === 0) {
-    gDepartments.insert(
-        {
-            code: "10001",
-            companyID: gCompanies.findOne({code: "1"})._id,
-            title: "董事长办公室",
-            region: gRegions.findOne({code: "1"})._id,
-            supervisior: null //行政上级部门
-        }
-    );
-    gDepartments.insert(
-        {
-            code: "10002",
-            companyID: gCompanies.findOne({code: "1"})._id,
-            title: "内贸部",
-            region: gRegions.findOne({code: "101"})._id,
-            supervisior: gDepartments.findOne({code: "10001"})
-        }
-    );
-    gDepartments.insert(
-        {
-            code: "10003",
-            companyID: gCompanies.findOne({code: "1"})._id,
-            title: "外贸部",
-            region: gRegions.findOne({code: "2"})._id,
-            supervisior: gDepartments.findOne({code: "10001"})
-        }
-    );
-    gDepartments.insert(
-        {
-            code: "10101",
-            companyID: gCompanies.findOne({code: "101"})._id,
-            title: "总经理办公室",
-            region: gRegions.findOne({code: "10102"})._id,
-            supervisior: gDepartments.findOne({code: "10001"})
-        }
-    );
-    gDepartments.insert(
-        {
-            code: "10102",
-            companyID: gCompanies.findOne({code: "101"})._id,
-            title: "销售部",
-            region: gRegions.findOne({code: "10102"})._id,
-            supervisior: gDepartments.findOne({code: "10101"})
-        }
-    );
+    //gDepartments.insert(
+    //    {
+    //        code: "10001",
+    //        companyID: gCompanies.findOne({code: "1"})._id,
+    //        title: "董事长办公室",
+    //        region: gRegions.findOne({code: "1"})._id,
+    //        supervisior: null //行政上级部门
+    //    }
+    //);
+    //gDepartments.insert(
+    //    {
+    //        code: "10002",
+    //        companyID: gCompanies.findOne({code: "1"})._id,
+    //        title: "内贸部",
+    //        region: gRegions.findOne({code: "101"})._id,
+    //        supervisior: gDepartments.findOne({code: "10001"})
+    //    }
+    //);
+    //gDepartments.insert(
+    //    {
+    //        code: "10003",
+    //        companyID: gCompanies.findOne({code: "1"})._id,
+    //        title: "外贸部",
+    //        region: gRegions.findOne({code: "2"})._id,
+    //        supervisior: gDepartments.findOne({code: "10001"})
+    //    }
+    //);
+    //gDepartments.insert(
+    //    {
+    //        code: "10101",
+    //        companyID: gCompanies.findOne({code: "101"})._id,
+    //        title: "总经理办公室",
+    //        region: gRegions.findOne({code: "10102"})._id,
+    //        supervisior: gDepartments.findOne({code: "10001"})
+    //    }
+    //);
+    //gDepartments.insert(
+    //    {
+    //        code: "10102",
+    //        companyID: gCompanies.findOne({code: "101"})._id,
+    //        title: "销售部",
+    //        region: gRegions.findOne({code: "10102"})._id,
+    //        supervisior: gDepartments.findOne({code: "10101"})
+    //    }
+    //);
 }
 
 if (gJobs.find().count() === 0) {
-    gJobs.insert(
-        {
-            departmentID: gDepartments.findOne({code: "10001"})._id,
-            title: "董事长"
-        }
-    );
-    gJobs.insert(
-        {
-            departmentID: gDepartments.findOne({code: "10101"})._id,
-            title: "总经理"
-        }
-    );
-    gJobs.insert(
-        {
-            departmentID: gDepartments.findOne({code: "10101"})._id,
-            title: "销售总监"
-        }
-    );
-    gJobs.insert(
-        {
-            departmentID: gDepartments.findOne({code: "10102"})._id,
-            title: "部门经理"
-        }
-    );
+    //gJobs.insert(
+    //    {
+    //        departmentID: gDepartments.findOne({code: "10001"})._id,
+    //        title: "董事长"
+    //    }
+    //);
+    //gJobs.insert(
+    //    {
+    //        departmentID: gDepartments.findOne({code: "10101"})._id,
+    //        title: "总经理"
+    //    }
+    //);
+    //gJobs.insert(
+    //    {
+    //        departmentID: gDepartments.findOne({code: "10101"})._id,
+    //        title: "销售总监"
+    //    }
+    //);
+    //gJobs.insert(
+    //    {
+    //        departmentID: gDepartments.findOne({code: "10102"})._id,
+    //        title: "部门经理"
+    //    }
+    //);
 }
 
 if(gEmployees.find().count()===0){

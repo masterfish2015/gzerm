@@ -35,15 +35,15 @@
         <div class="panel-body">
             <p>{{langOrganizeType}}:
                 <input type="text" id="text_add_organize_type" value={{modifyCompanyType}}>
-                {{verifyCompanyTypeError}}
+                <span class="errorMsg">{{verifyCompanyTypeError}}</span>
             </p>
         </div>
         <div class="panel-footer">
             <button type="button" class="btn btn-primary" id="btn_add_company_type">
                 {{#if isModifyCompanyType}}
-                    {{langModifyCompanyType}}
+                    {{langModify}}
                 {{else}}
-                    {{langAddOrganizeType}}
+                    {{langAdd}}
                 {{/if}}
             </button>
         </div>
@@ -55,15 +55,22 @@
         <thead>
         <tr>
             <th>{{langCurrentOrganizeTypes}}</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         {{#each companyTypes}}
             <tr>
                 <td>
-                    <button class="btn btn-xs btn-danger companyTypeRemove" value={{_id}}><span class="glyphicon glyphicon-remove"></span></button>
-                    <button class="btn btn-xs btn-info companyTypeEdit" value={{_id}}><span class="glyphicon glyphicon-pencil"></span></button>
                     {{title}}
+                </td>
+                <td>
+                    <button class="btn btn-xs btn-danger companyTypeRemove" value={{_id}}>
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <button class="btn btn-xs btn-info companyTypeEdit" value={{_id}}>
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
                 </td>
             </tr>
         {{/each}}

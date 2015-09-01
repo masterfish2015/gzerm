@@ -8,7 +8,7 @@
                     </div>
                     <ul class="nav navbar-nav pull-right">
                         <li>
-                            <button class="btn btn-default btn-sm navbar-btn" id="btn_add_company">
+                            <button class="btn btn-default btn-sm navbar-btn" id="btn_show_add_company_panel">
                                 {{langAddCompany}}
                                 {{#if showAddCompanyPanel}}
                                     <span class="glyphicon glyphicon-arrow-up"></span>
@@ -32,19 +32,18 @@
 
 <template name="addCompanyTemplate">
     <div class="panel  panel-default">
-            <div class="panel-heading">
-                    {{langAddCompany}}
-            </div>
             <div class="panel-body">
                     <form class="container-fluid">
                         <div class="row">
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label for="input_company_code">{{langCompanyCode}}：</label>
-                                <input id="input_company_code">
+                                <input id="input_company_code" type="text">
+                                <span class="errorMsg">{{verifyCompanyCodeError}}</span>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col md-6">
                                 <label  for="input_company_title">{{langCompanyTitle}}：</label>
-                                <input  id="input_company_title">
+                                <input  id="input_company_title" type="text">
+                                <span class="errorMsg">{{verifyCompanyTitleError}}</span>
                             </div>
                         </div>
                         <div class="row">
@@ -53,7 +52,7 @@
                                 <select id="input_company_type">
                                     <option value=""></option>
                                     {{#each companyTypeOptions}}
-                                        <option val={{code}}>{{title}}</option>
+                                        <option value={{_id}}>{{title}}</option>
                                     {{/each}}
                                 </select>
                             </div>
@@ -62,7 +61,7 @@
                                 <select id="input_company_region">
                                     <option value=""></option>
                                     {{#each regionOptions}}
-                                        <option val={{code}}>{{title}}</option>
+                                        <option value={{_id}}>{{title}}</option>
                                     {{/each}}
                                 </select>
                             </div>
@@ -73,7 +72,7 @@
                                 <select id="input_company_charger">
                                     <option value=""></option>
                                     {{#each bossOptions}}
-                                        <option val={{code}}>{{name}}</option>
+                                        <option value={{_id}}>{{name}}</option>
                                     {{/each}}
                                 </select>
                             </div>
@@ -82,15 +81,23 @@
                                 <select id="input_company_supervisor">
                                     <option value=""></option>
                                     {{#each supervisorOptions}}
-                                        <option val={{code}}>{{title}}</option>
+                                        <option value={{_id}}>{{title}}</option>
                                     {{/each}}
                                 </select>
                             </div>
                         </div>
+                        <p>
+                            {{langCompanyComment}}:
+                            <textarea id="input_company_comment" row="3"></textarea>
+                        </p>
                     </form>
             </div>
             <div class="panel-footer">
-                <button type="button" class="btn btn-primary">{{langAdd}}</button>
+                {{#if isModifyCompany}}
+                    <button type="button" class="btn btn-primary">{{langModify}}</button>
+                {{else}}
+                    <button type="button" class="btn btn-primary" id="btn_add_company">{{langAdd}}</button>
+                {{/if}}
             </div>
     </div>
 </template>
@@ -107,6 +114,7 @@
                     <th>{{langCompanySupervisor}}</th>
                     <th>{{langCompanyRegion}}</th>
                     <th>{{langCompanyComment}}</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -119,6 +127,14 @@
                         <td>{{getSupervisor supervisor}}</td>
                         <td>{{getRegion region}}</td>
                         <td>{{comments}}</td>
+                        <td>
+                            <button class="btn btn-xs btn-danger companyTypeRemove" value={{_id}}>
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                            <button class="btn btn-xs btn-info companyTypeEdit" value={{_id}}>
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                        </td>
                     </tr>
                 {{/each}}
             </tbody>

@@ -1,21 +1,27 @@
+Session.setDefault("showAddCompanyTypePanel",false);
+Session.setDefault("isModifyCompanyType",false);
+Session.setDefault("modifyCompanyType","");
+Session.setDefault("oldCompanyTypeID","");
+
 Template.companyTypeMangagerTemplate.helpers({
+    "showAddCompanyTypePanel": function () {
+        var ob = Session.get("showAddCompanyTypePanel");
+        return ob;
+    },
+    //下面的辅助函数是为了界面多语言
     "langOrganizeTypeManagement": function () {
         return Session.get("langOrganizeTypeManagement");
     },
     "langAddOrganizeType": function () {
         return Session.get("langAddOrganizeType");
-    },
-    "showAddCompanyTypePanel": function () {
-        var ob = Session.get("showAddCompanyTypePanel");
-        return ob;
     }
-
 });
 
 Template.companyTypeListTemplate.helpers({
     "companyTypes": function () {
         return gCompanyType.find();
     },
+    //下面的辅助函数是为了界面多语言
     "langCurrentOrganizeTypes": function () {
         return Session.get("langCurrentOrganizeTypes");
     }
@@ -44,6 +50,9 @@ Template.addCompanyTypeTemplate.helpers({
     },
     "langCancel": function () {
         return Session.get("langCancel");
+    },
+    "langModify": function () {
+        return Session.get("langModify");
     },
     "langModifyCompanyType": function () {
         return Session.get("langModifyCompanyType");

@@ -1,7 +1,13 @@
+Session.setDefault("activePage","");
+
 Template.sidebarTemplate.helpers({
     "realTime":function(){
         return Session.get("currentTime");
     },
+    "isMyPageActive":function(page){
+        return page===Session.get("activePage");
+    },
+    //下面的辅助函数是为了界面多语言
     "langSystemManagement":function(){
         return Session.get("langSystemManagement");
     },
