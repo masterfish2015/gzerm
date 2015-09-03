@@ -31,5 +31,8 @@ Template.sidebarTemplate.helpers({
     },
     "langBusinessReportManagement":function(){
         return Session.get("langBusinessReportManagement");
+    },
+    "langRegionManagement":function(){
+        return Session.get("langRegionManagement");
     }
-})
+});

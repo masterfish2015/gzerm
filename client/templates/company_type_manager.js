@@ -15,6 +15,9 @@ Template.companyTypeMangagerTemplate.helpers({
     },
     "langAddOrganizeType": function () {
         return Session.get("langAddOrganizeType");
+    },
+    "langAdd": function () {
+        return Session.get("langAdd");
     }
 });
 

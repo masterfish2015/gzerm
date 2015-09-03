@@ -22,10 +22,13 @@ Template.companyManagerTemplate.helpers({
     },
     //下面的辅助函数是为了界面多语言
     "langCompanyManagement": function () {
-        return Session.get('langCompanyManagement')
+        return Session.get('langCompanyManagement');
     },
     "langAddCompany": function () {
-        return Session.get('langAddCompany')
+        return Session.get('langAddCompany');
+    },
+    "langAdd": function () {
+        return Session.get('langAdd');
     }
 });
 
@@ -234,13 +237,6 @@ Template.companyManagerTemplate.events({
 });
 
 function initInputField(){
-    //$("#input_company_code").val('');
-    //$("#input_company_title").val('');
-    //$("#input_company_comment").val('');
-    //$("#input_company_type").val('');
-    //$("#input_company_region").val('');
-    //$("#input_company_charger").val('');
-    //$("#input_company_supervisor").val('');
     Session.set("modifyCompanyID","");
     Session.set('modifyCompanySupervisor'," ");
     Session.set('modifyCompanyBoss'," ");
@@ -252,13 +248,6 @@ function initInputField(){
 }
 
 function setInputField(company){
-    //$("#input_company_code").val(company.code);
-    //$("#input_company_title").val(company.title);
-    //$("#input_company_comment").val(company.comments);
-    //$("#input_company_type").val(company.companyType);
-    //$("#input_company_region").val(company.region);
-    //$("#input_company_charger").val(company.boss);
-    //$("#input_company_supervisor").val(company.supervisor);
     Session.set('modifyCompanyCode',company.code);
     Session.set('modifyCompanyTitle',company.title);
     Session.set('modifyCompanyComment',company.comments);

@@ -1,0 +1,101 @@
+<template name="regionManagerTemplate">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">{{langRegionManagement}}</a>
+                    </div>
+                    <ul class="nav navbar-nav pull-right">
+                        <li>
+                            <button class="btn btn-default btn-sm navbar-btn"
+                                    id="btn_show_or_hide_addRegion_panel">
+                                {{langAdd}}
+                                {{#if showAddRegionPanel}}
+                                    <span class="glyphicon glyphicon-arrow-up"></span>
+                                {{else}}
+                                    <span class="glyphicon glyphicon-arrow-down"></span>
+                                {{/if}}
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="panel-body">
+            {{#if showAddRegionPanel}}
+                {{> addRegionTemplate}}
+            {{/if}}
+            {{> regionListTemplate}}
+        </div>
+    </div>
+</template>
+
+<template name="addRegionTemplate">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <p>
+                {{langRegionCode}}:
+                <input type="text" id="input_region_code" value={{modifyRegionCode}}>
+                <span class="errorMsg">{{verifyRegionCodeError}}</span>
+            </p>
+            <p>
+                {{langRegionTitle}}:
+                <input type="text"  id="input_region_title" value={{modifyRegionTitle}}>
+                <span class="errorMsg">{{verifyRegionTitleError}}</span>
+            </p>
+            <p>
+                {{langRegionParent}}:
+                <select id="input_region_parent">
+                    <option value=" " ></option>
+                    {{#each regions}}
+                        {{#if selected code modifyRegionParent}}
+                            <option selected='true' value={{code}}>{{title}}</option>
+                        {{else}}
+                            <option value={{code}}>{{title}}</option>
+                        {{/if}}
+                    {{/each}}
+                </select>
+            </p>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-primary" id="btn_add_region">
+                {{#if modifyRegionPanel}}
+                    {{langModify}}
+                {{else}}
+                    {{langAdd}}
+                {{/if}}
+            </button>
+        </div>
+    </div>
+</template>
+
+<template name="regionListTemplate">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>{{langRegionCode}}</th>
+            <th>{{langRegionTitle}}</th>
+            <th>{{langRegionParent}}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            {{#each regions}}
+            <tr>
+                <td>{{code}}</td>
+                <td>{{title}}</td>
+                <td>{{getRegionParent parentCode}}</td>
+                <td>
+                    <button class="btn btn-xs btn-danger regionRemove" value={{_id}}>
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <button class="btn btn-xs btn-info regionEdit" value={{_id}}>
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</template>
