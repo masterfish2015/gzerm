@@ -1,51 +1,48 @@
 <template name="companyTypeMangagerTemplate">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">{{langOrganizeTypeManagement}}</a>
-                    </div>
-                    <ul class="nav navbar-nav pull-right">
-                        <li>
-                            <button class="btn btn-default btn-sm navbar-btn"
-                                    id="btn_show_or_hide_addCompanyType_panel">
-                                {{langAdd}}
-                                {{#if showAddCompanyTypePanel}}
-                                    <span class="glyphicon glyphicon-arrow-up"></span>
-                                {{else}}
-                                    <span class="glyphicon glyphicon-arrow-down"></span>
-                                {{/if}}
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+    <div class="ui segments">
+        <div class="ui clearing segment">
+            {{langOrganizeTypeManagement}}
+            <div class="ui right floated button" id="btn_show_or_hide_addCompanyType_panel">
+                {{langAdd}}
+                {{#if showAddCompanyTypePanel}}
+                    <i class="arrow up icon"></i>
+                {{else}}
+                    <i class="arrow down icon"></i>
+                {{/if}}
+            </div>
         </div>
-        <div class="panel-body">
+
             {{#if showAddCompanyTypePanel}}
                 {{> addCompanyTypeTemplate}}
             {{/if}}
             {{> companyTypeListTemplate}}
-        </div>
+
+
     </div>
 </template>
 
 <template name="addCompanyTypeTemplate">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <p>{{langOrganizeType}}:
+    <div class="ui segments">
+        <div class="ui segment">
+            <div class="ui labeled input">
+                <div class="ui label">
+                    {{langOrganizeType}}:
+                </div>
                 <input type="text" id="text_add_organize_type_title" value={{modifyCompanyTypeTitle}}>
                 <span class="errorMsg">{{verifyCompanyTypeTitleError}}</span>
-            </p>
+            </div>
 
-            <p>{{langOganizeGrade}}:
+            <div class="ui labeled input">
+                <div class="ui label">
+                    {{langOganizeGrade}}:
+                </div>
                 <input type="text" id="text_add_organize_type_grade" value={{modifyCompanyTypeGrade}}>
                 <span class="errorMsg">{{verifyCompanyTypeGradeError}}</span>
-            </p>
+            </div>
+
         </div>
-        <div class="panel-footer">
-            <button type="button" class="btn btn-primary" id="btn_add_company_type">
+        <div class="ui segment">
+            <button class="ui button" id="btn_add_company_type">
                 {{#if isModifyCompanyType}}
                     {{langModify}}
                 {{else}}
@@ -57,13 +54,14 @@
 </template>
 
 <template name="companyTypeListTemplate">
-    <table class="table table-bordered">
+    <div class="ui segment">
+    <table class="ui celled table">
         <thead>
-            <tr class="info">
-                <th>{{langCurrentOrganizeTypes}}</th>
-                <th>{{langOganizeGrade}}</th>
-                <th></th>
-            </tr>
+        <tr class="info">
+            <th>{{langCurrentOrganizeTypes}}</th>
+            <th>{{langOganizeGrade}}</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
         {{#each companyTypes}}
@@ -75,15 +73,16 @@
                     {{grade}}
                 </td>
                 <td>
-                    <button class="btn btn-xs btn-danger companyTypeRemove" value={{_id}}>
-                        <span class="glyphicon glyphicon-remove"></span>
+                    <button class="negative compact ui icon button companyTypeRemove" value={{_id}}>
+                        <i class="remove  icon"></i>
                     </button>
-                    <button class="btn btn-xs btn-info companyTypeEdit" value={{_id}}>
-                        <span class="glyphicon glyphicon-pencil"></span>
+                    <button class="positive compact ui icon button companyTypeEdit" value={{_id}}>
+                        <i class="write icon"></i>
                     </button>
                 </td>
             </tr>
         {{/each}}
         </tbody>
     </table>
+        </div>
 </template>

@@ -1,11 +1,11 @@
 <template name="layoutTmp">
 	<div class="container">
-		{{> headerTmp}}
-		<div id="main" class="row-fluid">
-            <div class="col-lg-2 col-md-2 col-sm-2">
+		{{> headerTemplate}}
+		<div id="main" class="ui grid">
+            <div class="three wide column">
                 {{> sidebarTemplate}}
             </div>
-            <div class="col-lg-10 col-md-10 col-sm-10">
+            <div class="thirteen wide column">
                 {{> yield}}
             </div>
 		</div>

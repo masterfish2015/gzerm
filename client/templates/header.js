@@ -1,4 +1,4 @@
-Template.headerTmp.helpers({
+Template.headerTemplate.helpers({
     "errorMessage":function(){
         return Session.get("errorMessage");
     },
@@ -16,7 +16,7 @@ Template.headerTmp.helpers({
     }
 });
 
-Template.headerTmp.events({
+Template.headerTemplate.events({
     "click #btn_english": function(){
         Meteor.setDefaultLanguage(EnglishItem);
     },
@@ -29,5 +29,8 @@ Template.headerTmp.events({
     "click #btn_japan": function(){
         Meteor.setDefaultLanguage(JapanItem);
     }
-})
+});
 
+Template.headerTemplate.onRendered(function(){
+    this.$(".dropdown").dropdown();
+});

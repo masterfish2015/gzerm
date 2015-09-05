@@ -36,3 +36,8 @@ Template.sidebarTemplate.helpers({
         return Session.get("langRegionManagement");
     }
 });
+Template.sidebarTemplate.onRendered(function(){
+    $('.ui.accordion')
+        .accordion()
+    ;
+});

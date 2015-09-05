@@ -170,8 +170,10 @@ Template.companyTypeListTemplate.events({
         Session.set("showAddCompanyTypePanel", true);
         Session.set("isModifyCompanyType", true);
         var id = e.currentTarget.value;
+        //console.log(id);
         Session.set("oldCompanyTypeID", id);
         var o = gCompanyType.findOne({_id: id});
+        //console.log(o);
         Session.set("modifyCompanyTypeTitle",o.title);
         Session.set("modifyCompanyTypeGrade", o.grade);
     }

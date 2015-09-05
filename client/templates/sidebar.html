@@ -1,93 +1,68 @@
 <template name="sidebarTemplate">
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default">
-            <p class="text-center"><small class="text-center">{{realTime}}</small></p>
+    <div class="ui styled accordion" id="accordion">
+        <h4 class="ui center aligned header">
+            {{realTime}}
+        </h4>
+        <div class="title">
+            <i class="dropdown icon"></i>
+            {{langSystemManagement}}
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1"
-                       aria-expanded="false" aria-controls="collapseOne">
-                        {{langSystemManagement}}
+        <div class="content">
+            <div class="ui list">
+                <div class="item">
+                    <a href="/usermanager">
+                        {{langUserManagement}}
                     </a>
-                </h4>
-            </div>
-            <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                    <ul class="nav  nav-pills nav-stacked">
-                        <li role="presentation"><a href="/usermanager"><small>{{langUserManagement}}</small></a></li>
-                    </ul>
                 </div>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2"
-                       aria-expanded="true" aria-controls="collapseOne">
-                        {{langBaseDataManagement}}
+
+        <div class="title">
+            <i class="dropdown icon"></i>
+            {{langBaseDataManagement}}
+        </div>
+        <div class="content">
+            <div class="ui list">
+                <div class="item">
+                    <a href="/companytypemanager">
+                        {{langOrganizeTypeManagement}}
                     </a>
-                </h4>
-            </div>
-            <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                    <ul class="nav  nav-pills nav-stacked">
-                        <li role="presentation">
-                            <a href="/companytypemanager">
-                                <small>{{langOrganizeTypeManagement}}</small>
-                            </a>
-                            <a href="/regionmanager">
-                                <small>{{langRegionManagement}}</small>
-                            </a>
-                        </li>
-                    </ul>
+                </div>
+                <div class="item">
+                    <a href="/regionmanager">
+                        {{langRegionManagement}}
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3"
-                       aria-expanded="true" aria-controls="collapseOne">
-                        {{langOrganizeManagement}}
+
+        <div class="title">
+            <i class="dropdown icon"></i>
+            {{langOrganizeManagement}}
+        </div>
+        <div class="content">
+            <div class="ui list">
+                <div class="item">
+                    <a href="/companymanager">
+                        {{langCompanyManagement}}
                     </a>
-                </h4>
-            </div>
-            <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                    <ul class="nav  nav-pills nav-stacked">
-                        <li role="presentation"><a href="/companymanager"><small>{{langCompanyManagement}}</small></a></li>
-                    </ul>
                 </div>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4"
-                       aria-expanded="false" aria-controls="collapseOne">
-                        {{langBusinessProcessManagement}}
-                    </a>
-                </h4>
-            </div>
-            <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                </div>
-            </div>
+
+        <div class="title">
+            <i class="dropdown icon"></i>
+            {{langBusinessProcessManagement}}
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse5"
-                       aria-expanded="false" aria-controls="collapseOne">
-                        {{langBusinessReportManagement}}
-                    </a>
-                </h4>
-            </div>
-            <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                </div>
-            </div>
+        <div class="content">
+
+        </div>
+        <div class="title">
+            <i class="dropdown icon"></i>
+            {{langBusinessReportManagement}}
+        </div>
+        <div class="content">
+
         </div>
     </div>
 </template>

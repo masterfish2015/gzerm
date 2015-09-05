@@ -5,10 +5,10 @@
 # but you can also edit it by hand.
 
 meteor-platform
-twbs:bootstrap
 underscore
 iron:router
-ian:accounts-ui-bootstrap-3
 accounts-password
 aldeed:autoform
 aldeed:collection2
+semantic:ui
+flemay:less-autoprefixer

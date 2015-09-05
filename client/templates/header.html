@@ -1,34 +1,21 @@
-<template name="headerTmp">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">{{langWebTitle}}</a>
+<template name="headerTemplate">
+    <div class="ui borderless main menu">
+        <div class="ui text container">
+            <div href="/" class="header item">
+                {{langWebTitle}}
             </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/logout">{{langLogout}}</a></li>
-                    <li><a href="/login">{{langLogin}}</a></li>
-                    <li><button class="btn navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{langChangeLanguage}} <span class="caret"></span></button>
+            <a href="/logout" class="item">{{langLogout}}</a>
+            <a href="/login" class="item">{{langLogin}}</a>
+            <a href="#" class="ui right floated dropdown item">
+                {{langChangeLanguage}} <i class="dropdown icon"></i>
 
-                        <ul class="dropdown-menu">
-                            <li><a href="#" id="btn_simple_chinese">简体中文</a></li>
-                            <li><a href="#" id="btn_tradition_chinese">繁體中文</a></li>
-                            <li><a href="#" id="btn_english">English</a></li>
-                            <li><a href="#" id="btn_japan">日本語</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                <div class="menu">
+                    <div class="item"  id="btn_simple_chinese">简体中文</div>
+                    <div class="item"  id="btn_tradition_chinese">繁體中文</div>
+                    <div class="item"  id="btn_english">English</div>
+                    <div class="item"  id="btn_japan">日本語</div>
+                </div>
+            </a>
         </div>
-        <!-- /.container-fluid -->
-    </nav>
-    {{errorMessage}}
+    </div>
 </template>
