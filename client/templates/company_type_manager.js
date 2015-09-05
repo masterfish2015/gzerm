@@ -176,5 +176,7 @@ Template.companyTypeListTemplate.events({
         //console.log(o);
         Session.set("modifyCompanyTypeTitle",o.title);
         Session.set("modifyCompanyTypeGrade", o.grade);
+        Session.set("verifyCompanyTypeTitleError", "");
+        Session.set("verifyCompanyTypeGradeError", "");
     }
 });
