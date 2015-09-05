@@ -8,8 +8,13 @@
                     </div>
                     <ul class="nav navbar-nav pull-right">
                         <li>
-                            <button class="btn btn-default btn-sm navbar-btn" id="btn_add_user">
-                                {{langAddUser}}
+                            <button class="btn btn-default btn-sm navbar-btn" id="btn_show_add_user_panel">
+                                {{langAdd}}
+                                {{#if isShowAddUserPanel}}
+                                    <span class="glyphicon glyphicon-arrow-up"></span>
+                                {{else}}
+                                    <span class="glyphicon glyphicon-arrow-down"></span>
+                                {{/if}}
                             </button>
                         </li>
                     </ul>
@@ -17,38 +22,11 @@
             </nav>
         </div>
         <div class="panel-body">
-            {{>userAddTemplate}}
+            {{#if isShowAddUserPanel}}
+                {{>userAddTemplate}}
+            {{/if}}
             {{#if isPermitedToshowUsers}}
-                <div class="panel">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                        <tr>
-                            <th>{{langUserCode}}</th>
-                            <th>{{langUserName}}</th>
-                            <th>{{langUserRealName}}</th>
-                            <th>{{langUserGender}}</th>
-                            <th>{{langUserCompany}}</th>
-                            <th>{{langUserDepartment}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {{#each users}}
-                            <tr>
-                                <td>{{code}}</td>
-                                <td>{{name}}</td>
-                                <td>{{realname}}</td>
-                                <td>{{gender}}</td>
-                                <td>
-                                    {{companyTitle companyCode}}
-                                </td>
-                                <td>{{departmentID}}</td>
-                            </tr>
-                        {{/each}}
-                        </tbody>
-
-                    </table>
-                </div>
-                <!--end of panel -->
+                {{> userListTemplate}}
             {{/if}}
         </div>
 
@@ -56,27 +34,110 @@
 </template>
 
 <template name="userAddTemplate">
-    <div class="modal fade" id="addUserModal">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 class="modal-title">header</h4>
+    <form class="panel panel-default container-fluid">
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-6 col md-6">
+                    <label for="input_user_name" class="control-label">{{langUserName}}</label>
+                    <input type="text"  class="form-control" id="input_user_name">
+                    <span class="errorMsg">{{verifyInputNameError}}</span>
                 </div>
-
-                <div class="modal-body">
-                    <label for="name">Name</label>
-                    <input type="text" id="animalName"/>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btn_save">Save</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <div class="form-group col-xs-12 col-sm-6 col md-6">
+                    <label for="input_user_password" class="control-label">{{langUserPassword}}</label>
+                    <input type="password" class="form-control"  id="input_user_password">
+                    <span class="errorMsg">{{verifyInputPasswordError}}</span>
                 </div>
 
             </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-6 col md-6">
+                    <label for="input_user_realname" class="control-label">{{langUserRealName}}</label>
+                    <input type="text"  class="form-control" id="input_user_realname">
+                    <span class="errorMsg">{{verifyInputRealnameError}}</span>
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col md-6">
+                    <label for="input_user_gender" class="control-label">{{langUserGender}}</label>
+                    <select class="form-control" id="input_user_gender">
+                        <option value={{langMan}}>{{langMan}}</option>
+                        <option value={{langWomen}}>{{langWomen}}</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-6 col md-6">
+                    <label for="input_user_company" class="control-label">{{langUserCompany}}</label>
+                    <select id="input_user_company" class="form-control">
+                        <option value="">{{langSelect}}</option>
+                        {{#each companies}}
+                            <option value={{_id}}>{{title}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col md-6">
+                    <label for="input_user_department" class="control-label">{{langUserDepartment}}</label>
+                    <select class="form-control" id="input_user_department">
+                        <option value="">{{langSelect}}</option>
+                        {{#each departments}}
+                            <option value={{_id}}>{{title}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-6 col md-6">
+                    <label for="input_user_job" class="control-label">{{langUserJob}}</label>
+                    <select id="input_user_job" class="form-control">
+                        <option value="">{{langSelect}}</option>
+                        {{#each jobs}}
+                            <option value={{_id}}>{{title}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col md-6">
+                    <label for="input_user_permission" class="control-label">{{langUserPermission}}</label>
+                    <select class="form-control" id="input_user_permission">
+                        <option value="">{{langSelect}}</option>
+                        {{#each permissions}}
+                            <option value={{_id}}>{{title}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
         </div>
-    </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-primary" id="btn_save">Save</button>
+        </div>
+    </form>
 </template>
 
-
+<template name="userListTemplate">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr class="info">
+                <th>{{langUserCode}}</th>
+                <th>{{langUserName}}</th>
+                <th>{{langUserRealName}}</th>
+                <th>{{langUserGender}}</th>
+                <th>{{langUserCompany}}</th>
+                <th>{{langUserDepartment}}</th>
+                <th>{{langUserJob}}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#each users}}
+            <tr>
+                <td>{{code}}</td>
+                <td>{{name}}</td>
+                <td>{{realname}}</td>
+                <td>{{gender}}</td>
+                <td>
+                    {{companyTitle companyCode}}
+                </td>
+                <td>{{departmentCode}}</td>
+                <td>{{job}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>

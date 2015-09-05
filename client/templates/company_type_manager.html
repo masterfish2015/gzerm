@@ -8,7 +8,8 @@
                     </div>
                     <ul class="nav navbar-nav pull-right">
                         <li>
-                            <button class="btn btn-default btn-sm navbar-btn" id="btn_show_or_hide_addCompanyType_panel">
+                            <button class="btn btn-default btn-sm navbar-btn"
+                                    id="btn_show_or_hide_addCompanyType_panel">
                                 {{langAdd}}
                                 {{#if showAddCompanyTypePanel}}
                                     <span class="glyphicon glyphicon-arrow-up"></span>
@@ -37,6 +38,7 @@
                 <input type="text" id="text_add_organize_type_title" value={{modifyCompanyTypeTitle}}>
                 <span class="errorMsg">{{verifyCompanyTypeTitleError}}</span>
             </p>
+
             <p>{{langOganizeGrade}}:
                 <input type="text" id="text_add_organize_type_grade" value={{modifyCompanyTypeGrade}}>
                 <span class="errorMsg">{{verifyCompanyTypeGradeError}}</span>
@@ -57,11 +59,11 @@
 <template name="companyTypeListTemplate">
     <table class="table table-bordered">
         <thead>
-        <tr>
-            <th>{{langCurrentOrganizeTypes}}</th>
-            <th>{{langOganizeGrade}}</th>
-            <th></th>
-        </tr>
+            <tr class="info">
+                <th>{{langCurrentOrganizeTypes}}</th>
+                <th>{{langOganizeGrade}}</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
         {{#each companyTypes}}
