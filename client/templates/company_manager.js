@@ -124,25 +124,28 @@ Template.addCompanyTemplate.helpers({
         return Session.get("langModify");
     },
     "langCompanyCode": function () {
-        return Session.get('langCompanyCode')
+        return Session.get('langCompanyCode');
     },
     "langCompanyTitle": function () {
-        return Session.get('langCompanyTitle')
+        return Session.get('langCompanyTitle');
     },
     "langCompanyType": function () {
-        return Session.get('langCompanyType')
+        return Session.get('langCompanyType');
     },
     "langCompanyCharger": function () {
-        return Session.get('langCompanyCharger')
+        return Session.get('langCompanyCharger');
     },
     "langCompanySupervisor": function () {
-        return Session.get('langCompanySupervisor')
+        return Session.get('langCompanySupervisor');
     },
     "langCompanyRegion": function () {
-        return Session.get('langCompanyRegion')
+        return Session.get('langCompanyRegion');
     },
     "langCompanyComment": function () {
-        return Session.get('langCompanyComment')
+        return Session.get('langCompanyComment');
+    },
+    "langSelect": function () {
+        return Session.get('langSelect');
     }
 
 });

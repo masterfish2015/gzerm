@@ -1,14 +1,11 @@
 <template name="headerTemplate">
-    <div class="ui borderless main menu">
-        <div class="ui text container">
-            <div href="/" class="header item">
-                {{langWebTitle}}
-            </div>
-            <a href="/logout" class="item">{{langLogout}}</a>
-            <a href="/login" class="item">{{langLogin}}</a>
-            <a href="#" class="ui right floated dropdown item">
+    <nav class="ui menu navbar">
+        <a class="brand item" href="/">{{langWebTitle}}</a>
+        <div class="ui item right floated">
+            <a href="/logout" class="ui item">{{langLogout}}</a>
+            <a href="/login" class="ui item">{{langLogin}}</a>
+            <a href="#" class="ui dropdown item">
                 {{langChangeLanguage}} <i class="dropdown icon"></i>
-
                 <div class="menu">
                     <div class="item"  id="btn_simple_chinese">简体中文</div>
                     <div class="item"  id="btn_tradition_chinese">繁體中文</div>
@@ -17,5 +14,5 @@
                 </div>
             </a>
         </div>
-    </div>
+    </nav>
 </template>
