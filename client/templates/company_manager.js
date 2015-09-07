@@ -167,7 +167,7 @@ Template.companyListTemplate.helpers({
         if(!o){
             return "";
         }else{
-            return o.name || "";
+            return o.realname || "";
         }
     },
     "getSupervisor": function (supervisorID) {

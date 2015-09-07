@@ -11,78 +11,70 @@
                 {{/if}}
             </div>
         </div>
-
         {{#if showAddCompanyTypePanel}}
             {{> addCompanyTypeTemplate}}
         {{/if}}
         {{> companyTypeListTemplate}}
-
-
     </div>
 </template>
 
 <template name="addCompanyTypeTemplate">
-    <div class="ui segments">
-        <div class="ui segment">
-            <div class="ui labeled input">
-                <div class="ui label">
-                    {{langOrganizeType}}:
-                </div>
+
+    <div class="ui segment">
+        <form class="ui form">
+            <div class="field">
+                <label>{{langOrganizeType}}</label>
                 <input type="text" id="text_add_organize_type_title" value={{modifyCompanyTypeTitle}}>
                 <span class="errorMsg">{{verifyCompanyTypeTitleError}}</span>
             </div>
-
-            <div class="ui labeled input">
-                <div class="ui label">
-                    {{langOganizeGrade}}:
-                </div>
+            <div class="field">
+                <label>{{langOganizeGrade}}</label>
                 <input type="text" id="text_add_organize_type_grade" value={{modifyCompanyTypeGrade}}>
                 <span class="errorMsg">{{verifyCompanyTypeGradeError}}</span>
             </div>
-
-        </div>
-        <div class="ui segment">
-            <button class="positive ui compact button" id="btn_add_company_type">
-                {{#if isModifyCompanyType}}
-                    {{langModify}}
-                {{else}}
-                    {{langAdd}}
-                {{/if}}
-            </button>
-        </div>
+            <div class="field">
+                <button class="positive ui compact button" id="btn_add_company_type">
+                    {{#if isModifyCompanyType}}
+                        {{langModify}}
+                    {{else}}
+                        {{langAdd}}
+                    {{/if}}
+                </button>
+            </div>
+        </form>
     </div>
 </template>
 
 <template name="companyTypeListTemplate">
     <div class="ui segment">
-    <table class="ui celled table">
-        <thead>
-        <tr class="info">
-            <th>{{langCurrentOrganizeTypes}}</th>
-            <th>{{langOganizeGrade}}</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each companyTypes}}
-            <tr>
-                <td>
-                    {{title}}
-                </td>
-                <td>
-                    {{grade}}
-                </td>
-                <td>
-                    <button class="negative compact ui icon button companyTypeRemove" value={{_id}}>
-                        <i class="remove  icon"></i>
-                    </button>
-                    <button class="positive compact ui icon button companyTypeEdit" value={{_id}}>
-                        <i class="write icon"></i>
-                    </button>
-                </td>
+        <table class="ui celled table">
+            <thead>
+            <tr class="info">
+                <th>{{langCurrentOrganizeTypes}}</th>
+                <th>{{langOganizeGrade}}</th>
+                <th></th>
             </tr>
-        {{/each}}
-        </tbody>
-    </table>
-        </div>
+            </thead>
+            <tbody>
+            {{#each companyTypes}}
+                <tr>
+                    <td>
+                        {{title}}
+                    </td>
+                    <td>
+                        {{grade}}
+                    </td>
+                    <td>
+                        <button class="negative compact ui icon button companyTypeRemove" value={{_id}}>
+                            <i class="remove  icon"></i>
+                        </button>
+                        <button class="positive compact ui icon button companyTypeEdit" value={{_id}}>
+                            <i class="write icon"></i>
+                        </button>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
 </template>

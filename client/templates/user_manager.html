@@ -1,82 +1,73 @@
 <template name="userManagerTemplate">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">{{langUserManagement}}</a>
-                    </div>
-                    <ul class="nav navbar-nav pull-right">
-                        <li>
-                            <button class="btn btn-default btn-sm navbar-btn" id="btn_show_add_user_panel">
-                                {{langAdd}}
-                                {{#if isShowAddUserPanel}}
-                                    <span class="glyphicon glyphicon-arrow-up"></span>
-                                {{else}}
-                                    <span class="glyphicon glyphicon-arrow-down"></span>
-                                {{/if}}
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+    <div class="ui segments">
+        <div class="ui clearing segment">
+            {{langUserManagement}}
+            <div class="ui right floated compact primary button" id="btn_show_add_user_panel">
+                {{langAdd}}
+                {{#if isShowAddUserPanel}}
+                    <i class="arrow up icon"></i>
+                {{else}}
+                    <i class="arrow down icon"></i>
+                {{/if}}
+            </div>
         </div>
-        <div class="panel-body">
-            {{#if isShowAddUserPanel}}
-                {{>userAddTemplate}}
-            {{/if}}
-            {{#if isPermitedToshowUsers}}
-                {{> userListTemplate}}
-            {{/if}}
-        </div>
-
+        {{#if isShowAddUserPanel}}
+            {{>userAddTemplate}}
+        {{/if}}
+        {{#if isPermitedToshowUsers}}
+            {{> userListTemplate}}
+        {{/if}}
     </div>
+
 </template>
 
 <template name="userAddTemplate">
-    <form class="panel panel-default container-fluid">
-        <div class="panel-body">
-            <div class="row">
-                <div class="form-group col-xs-12 col-sm-6 col md-6">
-                    <label for="input_user_name" class="control-label">{{langUserName}}</label>
-                    <input type="text"  class="form-control" id="input_user_name">
+    <div class="ui segment">
+        <form class="ui form">
+            <div class="two fields">
+                <div class="field">
+                    <label>{{langUserName}}</label>
+                    <input type="text" class="form-control" id="input_user_name">
                     <span class="errorMsg">{{verifyInputNameError}}</span>
                 </div>
-                <div class="form-group col-xs-12 col-sm-6 col md-6">
-                    <label for="input_user_password" class="control-label">{{langUserPassword}}</label>
-                    <input type="password" class="form-control"  id="input_user_password">
+
+                <div class="field">
+                    <label>{{langUserPassword}}</label>
+                    <input type="password" class="form-control" id="input_user_password">
                     <span class="errorMsg">{{verifyInputPasswordError}}</span>
                 </div>
-
             </div>
-            <div class="row">
-                <div class="form-group col-xs-12 col-sm-6 col md-6">
-                    <label for="input_user_realname" class="control-label">{{langUserRealName}}</label>
-                    <input type="text"  class="form-control" id="input_user_realname">
+
+            <div class="two fields">
+                <div class="field">
+                    <label>{{langUserRealName}}</label>
+                    <input type="text" class="form-control" id="input_user_realname">
                     <span class="errorMsg">{{verifyInputRealnameError}}</span>
                 </div>
-                <div class="form-group col-xs-12 col-sm-6 col md-6">
-                    <label for="input_user_gender" class="control-label">{{langUserGender}}</label>
+
+                <div class="field">
+                    <label>{{langUserGender}}</label>
                     <select class="form-control" id="input_user_gender">
                         <option value={{langMan}}>{{langMan}}</option>
                         <option value={{langWomen}}>{{langWomen}}</option>
                     </select>
                 </div>
-
             </div>
-            <div class="row">
-                <div class="form-group col-xs-12 col-sm-6 col md-6">
-                    <label for="input_user_company" class="control-label">{{langUserCompany}}</label>
-                    <select id="input_user_company" class="form-control">
+
+            <div class="two fields">
+                <div class="field">
+                    <label>{{langUserCompany}}</label>
+                    <select id="input_user_company" class="ui selection dropdown">
                         <option value="">{{langSelect}}</option>
                         {{#each companies}}
                             <option value={{_id}}>{{title}}</option>
                         {{/each}}
                     </select>
                 </div>
-                <div class="form-group col-xs-12 col-sm-6 col md-6">
-                    <label for="input_user_department" class="control-label">{{langUserDepartment}}</label>
-                    <select class="form-control" id="input_user_department">
+
+                <div class="field">
+                    <label>{{langUserDepartment}}</label>
+                    <select class="ui selection dropdown" id="input_user_department">
                         <option value="">{{langSelect}}</option>
                         {{#each departments}}
                             <option value={{_id}}>{{title}}</option>
@@ -84,19 +75,21 @@
                     </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-xs-12 col-sm-6 col md-6">
-                    <label for="input_user_job" class="control-label">{{langUserJob}}</label>
-                    <select id="input_user_job" class="form-control">
+
+            <div class="two fields">
+                <div class="field">
+                    <label>{{langUserJob}}</label>
+                    <select id="input_user_job" class="ui selection dropdown">
                         <option value="">{{langSelect}}</option>
                         {{#each jobs}}
                             <option value={{_id}}>{{title}}</option>
                         {{/each}}
                     </select>
                 </div>
-                <div class="form-group col-xs-12 col-sm-6 col md-6">
-                    <label for="input_user_permission" class="control-label">{{langUserPermission}}</label>
-                    <select class="form-control" id="input_user_permission">
+
+                <div class="field">
+                    <label>{{langUserPermission}}</label>
+                    <select class="ui selection dropdown" id="input_user_permission">
                         <option value="">{{langSelect}}</option>
                         {{#each permissions}}
                             <option value={{_id}}>{{title}}</option>
@@ -104,17 +97,25 @@
                     </select>
                 </div>
             </div>
-        </div>
-        <div class="panel-footer">
-            <button type="button" class="btn btn-primary" id="btn_save">Save</button>
-        </div>
-    </form>
+
+            <div class="field">
+                <button class="positive ui compact button" id="btn_save">
+                    {{#if isModifyCompany}}
+                        {{langModify}}
+                    {{else}}
+                        {{langAdd}}
+                    {{/if}}
+                </button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <template name="userListTemplate">
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr class="info">
+    <div class="ui segment">
+        <table class="ui celled table">
+            <thead>
+            <tr>
                 <th>{{langUserCode}}</th>
                 <th>{{langUserName}}</th>
                 <th>{{langUserRealName}}</th>
@@ -123,21 +124,22 @@
                 <th>{{langUserDepartment}}</th>
                 <th>{{langUserJob}}</th>
             </tr>
-        </thead>
-        <tbody>
-        {{#each users}}
-            <tr>
-                <td>{{code}}</td>
-                <td>{{name}}</td>
-                <td>{{realname}}</td>
-                <td>{{gender}}</td>
-                <td>
-                    {{companyTitle companyCode}}
-                </td>
-                <td>{{departmentCode}}</td>
-                <td>{{job}}</td>
-            </tr>
-        {{/each}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {{#each users}}
+                <tr>
+                    <td>{{code}}</td>
+                    <td>{{name}}</td>
+                    <td>{{realname}}</td>
+                    <td>{{gender}}</td>
+                    <td>
+                        {{companyTitle companyCode}}
+                    </td>
+                    <td>{{departmentCode}}</td>
+                    <td>{{job}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
 </template>

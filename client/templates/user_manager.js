@@ -48,8 +48,14 @@ Template.userAddTemplate.helpers({
         return gPermissions.find();
     },
     //下面是关于界面上的语言的帮助函数
-    langSelect: function () {
+    "langAdd": function () {
+        return Session.get("langAdd");
+    },
+    "langSelect": function () {
         return Session.get("langSelect");
+    },
+    "langModify": function () {
+        return Session.get("langModify");
     },
     langUserName: function () {
         return Session.get("langUserName");

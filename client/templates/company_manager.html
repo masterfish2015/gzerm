@@ -73,9 +73,9 @@
                         <option value=" ">{{langSelect}}</option>
                         {{#each bossOptions}}
                             {{#if selected _id modifyCompanyBoss}}
-                                <option value={{_id}} selected="true" >{{name}}</option>
+                                <option value={{_id}} selected="true" >{{realname}}</option>
                             {{else}}
-                                <option value={{_id}} >{{name}}</option>
+                                <option value={{_id}} >{{realname}}</option>
                             {{/if}}
                         {{/each}}
                     </select>

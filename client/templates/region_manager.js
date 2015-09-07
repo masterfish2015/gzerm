@@ -87,6 +87,9 @@ Template.addRegionTemplate.helpers({
     "langAdd": function () {
         return Session.get("langAdd");
     },
+    "langSelect": function () {
+        return Session.get("langSelect");
+    },
     "langModify": function () {
         return Session.get("langModify");
     },
