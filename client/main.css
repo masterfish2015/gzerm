@@ -1,7 +1,13 @@
 .errorMsg{
     color:red
 }
-body{
-    font-family: 'Open Sans', sans-serif;
-    margin-bottom: 60px;
+html{
+    height: 100%;
+    font-size: 12px;
+}
+html, body{
+    font-family: Georgia, "Times New Roman",
+    "Microsoft YaHei", "微软雅黑",
+    STXihei, "华文细黑",
+    serif;
 }

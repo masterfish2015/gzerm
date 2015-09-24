@@ -34,6 +34,9 @@ Template.sidebarTemplate.helpers({
     },
     "langRegionManagement":function(){
         return Session.get("langRegionManagement");
+    },
+    "langDepartmentManagement":function(){
+        return Session.get("langDepartmentManagement");
     }
 });
 Template.sidebarTemplate.onRendered(function(){

@@ -1,0 +1,158 @@
+<template name="departmentManagerTemplate">
+    <div class="ui segments">
+        <div class="ui clearing segment">
+            {{langDepartmentManagement}}
+            <div class="ui right floated compact primary button" id="btn_show_add_department_panel">
+                {{langAdd}}
+                {{#if showAddDepartmentPanel}}
+                    <i class="arrow up icon"></i>
+                {{else}}
+                    <i class="arrow down icon"></i>
+                {{/if}}
+            </div>
+        </div>
+        {{#if showAddDepartmentPanel}}
+            {{> addDepartmentTemplate}}
+        {{/if}}
+        {{> departmentListTemplate}}
+    </div>
+
+</template>
+
+<template name="addDepartmentTemplate">
+    <div class="ui segment">
+        <form class="ui form">
+            <div class="two fields">
+                <div class="field">
+                    <label>{{langCompanyCode}}</label>
+                    <input type="text" id="input_company_code" placeholder={{langCompanyCode}} value={{modifyCompanyCode}} >
+                    <span class="errorMsg">{{verifyCompanyCodeError}}</span>
+                </div>
+
+                <div class="field">
+                    <label>{{langCompanyTitle}}</label>
+                    <input type="text" id="input_company_title" placeholder={{langCompanyTitle}} value={{modifyCompanyTitle}}>
+                    <span class="errorMsg">{{verifyCompanyTitleError}}</span>
+                </div>
+            </div>
+
+            <div class="two fields">
+                <div class="field">
+                    <label>{{langCompanyType}}</label>
+                    <select class="ui selection dropdown" id="input_company_type" >
+                        <option value=" ">{{langSelect}}</option>
+                        {{#each companyTypeOptions}}
+                            {{#if selected _id modifyCompanyType}}
+                                <option value={{_id}} selected="true" >{{title}}</option>
+                            {{else}}
+                                <option value={{_id}} >{{title}}</option>
+                            {{/if}}
+                        {{/each}}
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>{{langCompanyRegion}}</label>
+                    <select  class="ui selection dropdown" id="input_company_region" >
+                        <option value=" ">{{langSelect}}</option>
+                        {{#each regionOptions}}
+                            {{#if selected _id modifyCompanyRegion}}
+                                <option value={{_id}} selected="true" >{{title}}</option>
+                            {{else}}
+                                <option value={{_id}} >{{title}}</option>
+                            {{/if}}
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="two fields">
+                <div class="field">
+                    <label>{{langCompanyCharger}}</label>
+                    <select  class="ui selection dropdown" id="input_company_charger">
+                        <option value=" ">{{langSelect}}</option>
+                        {{#each bossOptions}}
+                            {{#if selected _id modifyCompanyBoss}}
+                                <option value={{_id}} selected="true" >{{realname}}</option>
+                            {{else}}
+                                <option value={{_id}} >{{realname}}</option>
+                            {{/if}}
+                        {{/each}}
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>{{langCompanySupervisor}}</label>
+                    <select  class="ui selection dropdown" id="input_company_supervisor" >
+                        <option value=" ">{{langSelect}}</option>
+                        {{#each supervisorOptions}}
+                            {{#if selected _id modifyCompanySupervisor}}
+                                <option value={{_id}} selected="true" >{{title}}</option>
+                            {{else}}
+                                <option value={{_id}} >{{title}}</option>
+                            {{/if}}
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>{{langCompanyComment}}</label>
+                <textarea id="input_company_comment" row="3" >{{modifyCompanyComment}}</textarea>
+            </div>
+
+            <div class="field">
+                <button class="positive ui compact button" id="btn_add_company">
+                    {{#if isModifyCompany}}
+                        {{langModify}}
+                    {{else}}
+                        {{langAdd}}
+                    {{/if}}
+                </button>
+            </div>
+        </form>
+    </div>
+</template>
+
+<template name="departmentListTemplate">
+    <div class="ui segment">
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>{{langDepartmentCode}}</th>
+                    <th>{{langDepartmentTitle}}</th>
+                    <th>{{langDepartmentType}}</th>
+                    <th>{{langDepartmentCompanyOwner}}</th>
+                    <th>{{langDepartmentCharger}}</th>
+                    <th>{{langDepartmentSupervisor}}</th>
+                    <th>{{langDepartmentRegion}}</th>
+                    <th>{{langDepartmentComment}}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#each departments}}
+                <tr>
+                    <td>{{code}}</td>
+                    <td>{{title}}</td>
+                    <td>{{getDepartmentType departmentType}}</td>
+                    <td>{{getCompanyOwner companyID}}</td>
+                    <td>{{getBoss boss}}</td>
+                    <td>{{getSupervisor supervisor}}</td>
+                    <td>{{getRegion region}}</td>
+                    <td>{{comments}}</td>
+                    <td>
+                        <button class="negative compact ui icon button  companyRemove" value={{_id}}>
+                            <i class="remove  icon"></i>
+                        </button>
+                        <button class="positive compact ui icon button companyEdit" value={{_id}}>
+                            <i class="write icon"></i>
+                        </button>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+</template>
