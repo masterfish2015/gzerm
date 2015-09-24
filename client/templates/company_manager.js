@@ -214,8 +214,12 @@ Template.companyListTemplate.helpers({
 
 Template.companyManagerTemplate.events({
     "click #btn_show_add_company_panel": function (e, v) {
+        //alert("hi");
+
         var v1 = Session.get("showAddCompanyPanel");
         var v2 = Session.get("isModifyCompany");
+        //console.log([v1,v2]);
+
         if (v1 === true && v2 === true) {
             //情况1：v1=true表示面板已经打开，v2=true表示现在是修改状态，所以这时候按这个按钮，应该切换为添加状态，保持面板打开
             Session.set("isModifyCompany", false);

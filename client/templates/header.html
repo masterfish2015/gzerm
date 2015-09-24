@@ -1,18 +1,33 @@
 <template name="headerTemplate">
-    <nav class="ui menu borderless navbar">
-        <a class="brand item" href="/"><h1>{{langWebTitle}}</h1></a>
-        <div class="ui item right floated">
-            <a href="/logout" class="ui item">{{langLogout}}</a>
-            <a href="/login" class="ui item">{{langLogin}}</a>
-            <a href="#" class="ui dropdown item">
-                {{langChangeLanguage}} <i class="dropdown icon"></i>
-                <div class="menu">
-                    <div class="item"  id="btn_simple_chinese">简体中文</div>
-                    <div class="item"  id="btn_tradition_chinese">繁體中文</div>
-                    <div class="item"  id="btn_english">English</div>
-                    <div class="item"  id="btn_japan">日本語</div>
-                </div>
-            </a>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">{{langWebTitle}}</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout">{{langLogout}}</a></li>
+                    <li><a href="/login">{{langLogin}}</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">{{langChangeLanguage}}  <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#" id="btn_simple_chinese">简体中文</a></li>
+                            <li><a href="#" id="btn_tradition_chinese">繁體中文</a></li>
+                            <li><a href="#" id="btn_english">English</a></li>
+                            <li><a href="#" id="btn_japan">日本語</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 </template>

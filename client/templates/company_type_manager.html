@@ -1,53 +1,78 @@
 <template name="companyTypeMangagerTemplate">
-    <div class="ui segments">
-        <div class="ui clearing segment">
-            {{langOrganizeTypeManagement}}
-            <div class="ui right floated compact primary button" id="btn_show_or_hide_addCompanyType_panel">
-                {{langAdd}}
-                {{#if showAddCompanyTypePanel}}
-                    <i class="arrow up icon"></i>
-                {{else}}
-                    <i class="arrow down icon"></i>
-                {{/if}}
-            </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed"
+                                data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">{{langOrganizeTypeManagement}}</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#" id="btn_show_or_hide_addCompanyType_panel" >
+                                {{langAdd}}
+                                <span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span>
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
-        {{#if showAddCompanyTypePanel}}
-            {{> addCompanyTypeTemplate}}
-        {{/if}}
+
+        <div class="panel-body">
+            {{#if showAddCompanyTypePanel}}
+                {{> addCompanyTypeTemplate}}
+            {{/if}}
+        </div>
+
+        <!-- Table -->
         {{> companyTypeListTemplate}}
     </div>
 </template>
 
 <template name="addCompanyTypeTemplate">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>{{langOrganizeType}}</label>
+                        <input type="text" class="form-control" id="text_add_organize_type_title" value={{modifyCompanyTypeTitle}}>
+                        <span class="errorMsg">{{verifyCompanyTypeTitleError}}</span>
+                    </div>
 
-    <div class="ui segment">
-        <form class="ui form">
-            <div class="field">
-                <label>{{langOrganizeType}}</label>
-                <input type="text" id="text_add_organize_type_title" value={{modifyCompanyTypeTitle}}>
-                <span class="errorMsg">{{verifyCompanyTypeTitleError}}</span>
-            </div>
-            <div class="field">
-                <label>{{langOganizeGrade}}</label>
-                <input type="text" id="text_add_organize_type_grade" value={{modifyCompanyTypeGrade}}>
-                <span class="errorMsg">{{verifyCompanyTypeGradeError}}</span>
-            </div>
-            <div class="field">
-                <button class="positive ui compact button" id="btn_add_company_type">
-                    {{#if isModifyCompanyType}}
-                        {{langModify}}
-                    {{else}}
-                        {{langAdd}}
-                    {{/if}}
-                </button>
-            </div>
-        </form>
+                    <div class="col-sm-6">
+                        <label>{{langOganizeGrade}}</label>
+                        <input type="text" class="form-control" id="text_add_organize_type_grade" value={{modifyCompanyTypeGrade}}>
+                        <span class="errorMsg">{{verifyCompanyTypeGradeError}}</span>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-primary " id="btn_add_company_type">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                {{#if isModifyCompanyType}}
+                    {{langModify}}
+                {{else}}
+                    {{langAdd}}
+                {{/if}}
+            </button>
+        </div>
     </div>
+
 </template>
 
 <template name="companyTypeListTemplate">
-    <div class="ui segment">
-        <table class="ui celled table">
+        <table class="table table-striped table-bordered">
             <thead>
             <tr class="info">
                 <th>{{langCurrentOrganizeTypes}}</th>
@@ -65,16 +90,16 @@
                         {{grade}}
                     </td>
                     <td>
-                        <button class="negative compact ui icon button companyTypeRemove" value={{_id}}>
-                            <i class="remove  icon"></i>
+                        <button class="btn btn-danger companyTypeRemove" value={{_id}}>
+                            <span class="glyphicon glyphicon-remove"></span>
                         </button>
-                        <button class="positive compact ui icon button companyTypeEdit" value={{_id}}>
-                            <i class="write icon"></i>
+                        <button class="btn btn-info companyTypeEdit" value={{_id}}>
+                            <span class="glyphicon glyphicon-pencil"></span>
                         </button>
                     </td>
                 </tr>
             {{/each}}
             </tbody>
         </table>
-    </div>
+
 </template>

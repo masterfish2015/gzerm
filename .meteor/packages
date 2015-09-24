@@ -9,7 +9,6 @@ iron:router
 accounts-password
 aldeed:autoform
 aldeed:collection2
-semantic:ui
 flemay:less-autoprefixer
 grigio:babel
 standard-minifiers
@@ -26,3 +25,4 @@ random
 ejson
 spacebars
 check
+twbs:bootstrap

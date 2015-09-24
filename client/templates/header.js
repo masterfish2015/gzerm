@@ -31,6 +31,3 @@ Template.headerTemplate.events({
     }
 });
 
-Template.headerTemplate.onRendered(function(){
-    this.$(".dropdown").dropdown();
-});

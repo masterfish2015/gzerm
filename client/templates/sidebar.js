@@ -39,8 +39,4 @@ Template.sidebarTemplate.helpers({
         return Session.get("langDepartmentManagement");
     }
 });
-Template.sidebarTemplate.onRendered(function(){
-    $('.ui.accordion')
-        .accordion()
-    ;
-});
+

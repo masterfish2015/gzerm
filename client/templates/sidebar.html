@@ -1,94 +1,74 @@
 <template name="sidebarTemplate">
-    <div class="ui styled fluid accordion" id="accordion">
-        <h4 class="ui center aligned header">
-            {{realTime}}
-        </h4>
-
-        <div class="title">
-            <i class="dropdown icon"></i>
-            <i class="options icon"></i>
-            {{langSystemManagement}}
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    {{realTime}}
+                </h4>
+            </div>
         </div>
-        <div class="content">
-            <div class="ui relaxed divided selection list">
-                <div class="item">
-                    <i class="users icon"></i>
-                    <div class="content">
-                        <a href="/usermanager">
-                            {{langUserManagement}}
-                        </a>
-                    </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                        {{langSystemManagement}}
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <a href="/usermanager">{{langUserManagement}}</a>
                 </div>
             </div>
         </div>
-
-        <div class="title">
-            <i class="dropdown icon"></i>
-            <i class="grid layout icon"></i>
-            {{langBaseDataManagement}}
-        </div>
-        <div class="content">
-            <div class="ui relaxed divided selection list">
-                <div class="item">
-                    <i class="student icon"></i>
-                    <div class="content">
-                        <a href="/companytypemanager">
-                            {{langOrganizeTypeManagement}}
-                        </a>
-                    </div>
-                </div>
-                <div class="item">
-                    <i class="world icon"></i>
-                    <div class="content">
-                        <a href="/regionmanager">
-                            {{langRegionManagement}}
-                        </a>
-                    </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                        {{langBaseDataManagement}}
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <a href="/companytypemanager">{{langOrganizeTypeManagement}}</a><hr/>
+                    <a href="/regionmanager">{{langRegionManagement}}</a>
                 </div>
             </div>
         </div>
-
-        <div class="title">
-            <i class="dropdown icon"></i>
-            <i class="sitemap icon"></i>
-            {{langOrganizeManagement}}
-        </div>
-        <div class="content">
-            <div class="ui relaxed divided selection list">
-                <div class="item">
-                    <i class="suitcase icon"></i>
-                    <div class="content">
-                        <a href="/companymanager">
-                            {{langCompanyManagement}}
-                        </a>
-                    </div>
-                </div>
-                <div class="item">
-                    <i class="newspaper icon"></i>
-                    <div class="content">
-                        <a href="/departmentmanager">
-                            {{langDepartmentManagement}}
-                        </a>
-                    </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                        {{langOrganizeManagement}}
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <a href="/companymanager">{{langCompanyManagement}}</a><hr/>
+                    <a href="/departmentmanager">{{langDepartmentManagement}}</a>
                 </div>
             </div>
         </div>
-
-        <div class="title">
-            <i class="dropdown icon"></i>
-            <i class="cubes icon"></i>
-            {{langBusinessProcessManagement}}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                        {{langBusinessProcessManagement}}
+                    </a>
+                </h4>
+            </div>
         </div>
-        <div class="content">
-
-        </div>
-        <div class="title">
-            <i class="dropdown icon"></i>
-            <i class="bar chart icon"></i>
-            {{langBusinessReportManagement}}
-        </div>
-        <div class="content">
-
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+                        {{langBusinessReportManagement}}
+                    </a>
+                </h4>
+            </div>
         </div>
     </div>
+
 </template>

@@ -1,122 +1,149 @@
 <template name="companyManagerTemplate">
-    <div class="ui segments">
-        <div class="ui clearing segment">
-            {{langCompanyManagement}}
-            <div class="ui right floated compact primary button" id="btn_show_add_company_panel">
-                {{langAdd}}
-                {{#if showAddCompanyPanel}}
-                    <i class="arrow up icon"></i>
-                {{else}}
-                    <i class="arrow down icon"></i>
-                {{/if}}
-            </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed"
+                                data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">{{langCompanyManagement}}</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#" id="btn_show_add_company_panel" >
+                                {{langAdd}}
+                                <span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span>
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
-        {{#if showAddCompanyPanel}}
-            {{> addCompanyTemplate}}
-        {{/if}}
+
+        <div class="panel-body">
+            {{#if showAddCompanyPanel}}
+                {{> addCompanyTemplate}}
+            {{/if}}
+        </div>
+
+        <!-- Table -->
         {{> companyListTemplate}}
     </div>
 
 </template>
 
 <template name="addCompanyTemplate">
-    <div class="ui segment">
-        <form class="ui form">
-            <div class="two fields">
-                <div class="field">
-                    <label>{{langCompanyCode}}</label>
-                    <input type="text" id="input_company_code" placeholder={{langCompanyCode}} value={{modifyCompanyCode}} >
-                    <span class="errorMsg">{{verifyCompanyCodeError}}</span>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>{{langCompanyCode}}</label>
+                        <input type="text" class="form-control" id="input_company_code"
+                               placeholder={{langCompanyCode}} value={{modifyCompanyCode}} >
+                        <span class="errorMsg">{{verifyCompanyCodeError}}</span>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label>{{langCompanyTitle}}</label>
+                        <input type="text" class="form-control" id="input_company_title"
+                               placeholder={{langCompanyTitle}} value={{modifyCompanyTitle}}>
+                        <span class="errorMsg">{{verifyCompanyTitleError}}</span>
+                    </div>
                 </div>
 
-                <div class="field">
-                    <label>{{langCompanyTitle}}</label>
-                    <input type="text" id="input_company_title" placeholder={{langCompanyTitle}} value={{modifyCompanyTitle}}>
-                    <span class="errorMsg">{{verifyCompanyTitleError}}</span>
-                </div>
-            </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>{{langCompanyType}}</label>
+                        <select class="form-control" id="input_company_type" >
+                            <option value=" ">{{langSelect}}</option>
+                            {{#each companyTypeOptions}}
+                                {{#if selected _id modifyCompanyType}}
+                                    <option value={{_id}} selected="true" >{{title}}</option>
+                                {{else}}
+                                    <option value={{_id}} >{{title}}</option>
+                                {{/if}}
+                            {{/each}}
+                        </select>
+                    </div>
 
-            <div class="two fields">
-                <div class="field">
-                    <label>{{langCompanyType}}</label>
-                    <select class="ui selection dropdown" id="input_company_type" >
-                        <option value=" ">{{langSelect}}</option>
-                        {{#each companyTypeOptions}}
-                            {{#if selected _id modifyCompanyType}}
-                                <option value={{_id}} selected="true" >{{title}}</option>
-                            {{else}}
-                                <option value={{_id}} >{{title}}</option>
-                            {{/if}}
-                        {{/each}}
-                    </select>
-                </div>
-
-                <div class="field">
-                    <label>{{langCompanyRegion}}</label>
-                    <select  class="ui selection dropdown" id="input_company_region" >
-                        <option value=" ">{{langSelect}}</option>
-                        {{#each regionOptions}}
-                            {{#if selected _id modifyCompanyRegion}}
-                                <option value={{_id}} selected="true" >{{title}}</option>
-                            {{else}}
-                                <option value={{_id}} >{{title}}</option>
-                            {{/if}}
-                        {{/each}}
-                    </select>
-                </div>
-            </div>
-
-            <div class="two fields">
-                <div class="field">
-                    <label>{{langCompanyCharger}}</label>
-                    <select  class="ui selection dropdown" id="input_company_charger">
-                        <option value=" ">{{langSelect}}</option>
-                        {{#each bossOptions}}
-                            {{#if selected _id modifyCompanyBoss}}
-                                <option value={{_id}} selected="true" >{{realname}}</option>
-                            {{else}}
-                                <option value={{_id}} >{{realname}}</option>
-                            {{/if}}
-                        {{/each}}
-                    </select>
+                    <div class="col-sm-6">
+                        <label>{{langCompanyRegion}}</label>
+                        <select  class="form-control" id="input_company_region" >
+                            <option value=" ">{{langSelect}}</option>
+                            {{#each regionOptions}}
+                                {{#if selected _id modifyCompanyRegion}}
+                                    <option value={{_id}} selected="true" >{{title}}</option>
+                                {{else}}
+                                    <option value={{_id}} >{{title}}</option>
+                                {{/if}}
+                            {{/each}}
+                        </select>
+                    </div>
                 </div>
 
-                <div class="field">
-                    <label>{{langCompanySupervisor}}</label>
-                    <select  class="ui selection dropdown" id="input_company_supervisor" >
-                        <option value=" ">{{langSelect}}</option>
-                        {{#each supervisorOptions}}
-                            {{#if selected _id modifyCompanySupervisor}}
-                                <option value={{_id}} selected="true" >{{title}}</option>
-                            {{else}}
-                                <option value={{_id}} >{{title}}</option>
-                            {{/if}}
-                        {{/each}}
-                    </select>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>{{langCompanyCharger}}</label>
+                        <select  class="form-control" id="input_company_charger">
+                            <option value=" ">{{langSelect}}</option>
+                            {{#each bossOptions}}
+                                {{#if selected _id modifyCompanyBoss}}
+                                    <option value={{_id}} selected="true" >{{realname}}</option>
+                                {{else}}
+                                    <option value={{_id}} >{{realname}}</option>
+                                {{/if}}
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label>{{langCompanySupervisor}}</label>
+                        <select  class="form-control" id="input_company_supervisor" >
+                            <option value=" ">{{langSelect}}</option>
+                            {{#each supervisorOptions}}
+                                {{#if selected _id modifyCompanySupervisor}}
+                                    <option value={{_id}} selected="true" >{{title}}</option>
+                                {{else}}
+                                    <option value={{_id}} >{{title}}</option>
+                                {{/if}}
+                            {{/each}}
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <label>{{langCompanyComment}}</label>
-                <textarea id="input_company_comment" row="3" >{{modifyCompanyComment}}</textarea>
-            </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>{{langCompanyComment}}</label>
+                        <textarea id="input_company_comment" class="form-control" row="3" >{{modifyCompanyComment}}</textarea>
+                    </div>
+                </div>
 
-            <div class="field">
-                <button class="positive ui compact button" id="btn_add_company">
-                    {{#if isModifyCompany}}
-                        {{langModify}}
-                    {{else}}
-                        {{langAdd}}
-                    {{/if}}
-                </button>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-primary " id="btn_add_company">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                {{#if isModifyCompany}}
+                    {{langModify}}
+                {{else}}
+                    {{langAdd}}
+                {{/if}}
+            </button>
+        </div>
     </div>
+
 </template>
 
 <template name="companyListTemplate">
-    <div class="ui segment">
-        <table class="ui celled table">
+
+        <table class="table table-striped table-bordered">
             <thead>
             <tr class="info">
                 <th>{{langCompanyCode}}</th>
@@ -140,17 +167,18 @@
                     <td>{{getRegion region}}</td>
                     <td>{{comments}}</td>
                     <td>
-                        <button class="negative compact ui icon button  companyRemove" value={{_id}}>
-                            <i class="remove  icon"></i>
+                        <button class="btn btn-danger companyRemove" value={{_id}}>
+                            <span class="glyphicon glyphicon-remove"></span>
                         </button>
-                        <button class="positive compact ui icon button companyEdit" value={{_id}}>
-                            <i class="write icon"></i>
+                        <button class="btn btn-info companyEdit" value={{_id}}>
+                            <span class="glyphicon glyphicon-pencil"></span>
                         </button>
+
                     </td>
                 </tr>
             {{/each}}
             </tbody>
         </table>
-    </div>
+
 
 </template>

@@ -15,11 +15,11 @@ Session.setDefault("verifyDepartmentCodeError","");
 Session.setDefault("verifyDepartmentTitleError","");
 
 Template.departmentManagerTemplate.helpers({
-    "showAddCompanyPanel": function () {
-        return Session.get("showAddCompanyPanel");
+    "showAddDepartmentPanel": function () {
+        return Session.get("showAddDepartmentPanel");
     },
-    "isModifyCompany": function () {
-        return Session.get("isModifyCompany");
+    "isModifyDepartment": function () {
+        return Session.get("isModifyDepartment");
     },
     //下面的辅助函数是为了界面多语言
     "langDepartmentManagement": function () {
@@ -39,26 +39,29 @@ Template.addDepartmentTemplate.helpers({
             return false;
         }
     },
-    "modifyCompanyCode":function(){
-        return Session.get('modifyCompanyCode');
+    "modifyDepartmentCode":function(){
+        return Session.get('modifyDepartmentCode');
     },
-    "modifyCompanyTitle":function(){
-        return Session.get('modifyCompanyTitle');
+    "modifyCompanyOwner":function(){
+        return Session.get('modifyCompanyOwner');
     },
-    "modifyCompanyType":function(){
-        return Session.get('modifyCompanyType');
+    "modifyDepartmentTitle":function(){
+        return Session.get('modifyDepartmentTitle');
     },
-    "modifyCompanyRegion":function(){
-        return Session.get('modifyCompanyRegion');
+    "modifyDepartmentType":function(){
+        return Session.get('modifyDepartmentType');
     },
-    "modifyCompanyBoss":function(){
-        return Session.get('modifyCompanyBoss');
+    "modifyDepartmentRegion":function(){
+        return Session.get('modifyDepartmentRegion');
     },
-    "modifyCompanySupervisor":function(){
+    "modifyDepartmentBoss":function(){
+        return Session.get('modifyDepartmentBoss');
+    },
+    "modifyDepartmentSupervisor":function(){
         return Session.get('modifyCompanySupervisor');
     },
-    "modifyCompanyComment":function(){
-        return Session.get('modifyCompanyComment');
+    "modifyDepartmentComment":function(){
+        return Session.get('modifyDepartmentComment');
     },
     //下面是为了下拉选择栏提供选择项
     "companyTypeOptions": function () {
@@ -100,18 +103,15 @@ Template.addDepartmentTemplate.helpers({
         return gRegions.find();
     },
     //错误处理
-    "verifyCompanyCodeError":function(){
-        return Session.get("verifyCompanyCodeError");
+    "verifyDepartmentCodeError":function(){
+        return Session.get("verifyDepartmentCodeError");
     },
-    "verifyCompanyTitleError":function(){
-        return Session.get("verifyCompanyTitleError");
+    "verifyDepartmentTitleError":function(){
+        return Session.get("verifyDepartmentTitleError");
     },
     //下面的辅助函数是为了界面多语言
-    "isModifyCompany": function () {
-        return Session.get("isModifyCompany");
-    },
-    "langAddCompany": function () {
-        return Session.get('langAddCompany');
+    "isModifyDepartment": function () {
+        return Session.get("isModifyDepartment");
     },
     "langAdd": function () {
         return Session.get('langAdd');
@@ -122,26 +122,29 @@ Template.addDepartmentTemplate.helpers({
     "langModify": function () {
         return Session.get("langModify");
     },
-    "langCompanyCode": function () {
-        return Session.get('langCompanyCode');
+    "langDepartmentCode": function () {
+        return Session.get('langDepartmentCode');
     },
-    "langCompanyTitle": function () {
-        return Session.get('langCompanyTitle');
+    "langDepartmentTitle": function () {
+        return Session.get('langDepartmentTitle');
     },
-    "langCompanyType": function () {
-        return Session.get('langCompanyType');
+    "langDepartmentType": function () {
+        return Session.get('langDepartmentType');
     },
-    "langCompanyCharger": function () {
-        return Session.get('langCompanyCharger');
+    "langDepartmentCompanyOwner": function () {
+        return Session.get('langDepartmentCompanyOwner');
     },
-    "langCompanySupervisor": function () {
-        return Session.get('langCompanySupervisor');
+    "langDepartmentCharger": function () {
+        return Session.get('langDepartmentCharger');
     },
-    "langCompanyRegion": function () {
-        return Session.get('langCompanyRegion');
+    "langDepartmentSupervisor": function () {
+        return Session.get('langDepartmentSupervisor');
     },
-    "langCompanyComment": function () {
-        return Session.get('langCompanyComment');
+    "langDepartmentRegion": function () {
+        return Session.get('langDepartmentRegion');
+    },
+    "langDepartmentComment": function () {
+        return Session.get('langDepartmentComment');
     },
     "langSelect": function () {
         return Session.get('langSelect');
@@ -217,28 +220,30 @@ Template.departmentListTemplate.helpers({
 
 });
 
-Template.companyManagerTemplate.events({
-    "click #btn_show_add_company_panel": function (e, v) {
-        var v1 = Session.get("showAddCompanyPanel");
-        var v2 = Session.get("isModifyCompany");
+Template.departmentManagerTemplate.events({
+    "click #btn_show_add_department_panel": function (e, v) {
+        var v1 = Session.get("showAddDepartmentPanel");
+        var v2 = Session.get("isModifyDepartment");
+        console.log([v1,v2]);
+
         if (v1 === true && v2 === true) {
             //情况1：v1=true表示面板已经打开，v2=true表示现在是修改状态，所以这时候按这个按钮，应该切换为添加状态，保持面板打开
-            Session.set("isModifyCompany", false);
+            Session.set("isModifyDepartment", false);
             initInputField();
         }
         if (v1 === true && v2 === false) {
             //情况2： v1=true表示面板已经打开，v2=true表示现在是添加状态，所以这时候按这个按钮，就应该把面板收起来
-            Session.set("showAddCompanyPanel", false);
+            Session.set("showAddDepartmentPanel", false);
         }
         if (v1 === false && v2 === true) {
             //情况3： v1=false表示面板未打开，v2=true表示现在是添加状态，所以这时候按这个按钮，就应该切换为添加状态，且把面板打开
-            Session.set("showAddCompanyPanel", true);
-            Session.set("isModifyCompany", false);
+            Session.set("showAddDepartmentPanel", true);
+            Session.set("isModifyDepartment", false);
             initInputField();
         }
         if (v1 === false && v2 === false) {
             //情况4： v1=false表示面板未打开，v2=false表示现在是新建状态，所以这时候按这个按钮，就应该把面板打开
-            Session.set("showAddCompanyPanel", true);
+            Session.set("showAddDepartmentPanel", true);
             initInputField();
         }
     }
@@ -266,7 +271,7 @@ function setInputField(company){
 
 }
 
-Template.addCompanyTemplate.events({
+Template.addDepartmentTemplate.events({
     "click #btn_add_company":function(e){
         //获取相关数据
         var cp={};
@@ -331,7 +336,7 @@ Template.addCompanyTemplate.events({
 
 });
 
-Template.companyListTemplate.events({
+Template.departmentListTemplate.events({
     "click .companyRemove": function (e) {
         var id = e.currentTarget.value;
         var rt = confirm(Session.get("langAreYouSure"));//询问是否确认删除
