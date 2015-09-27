@@ -1,33 +1,42 @@
 Template.headerTemplate.helpers({
-    "errorMessage":function(){
+    errorMessage:function(){
         return Session.get("errorMessage");
     },
-    "langWebTitle":function(){
+    //下面的辅助函数是为了界面多语言
+    langWebTitle:function(){
        return Session.get("langWebTitle");
     },
-    "langLogin" :function(){
+    langLogin :function(){
        return Session.get("langLogin");
     },
-    "langLogout" :function(){
+    langLogout :function(){
         return Session.get("langLogout");
     },
-    "langChangeLanguage" :function(){
+    langRegistration :function(){
+        return Session.get("langRegistration");
+    },
+    langChangeLanguage :function(){
         return Session.get("langChangeLanguage");
     }
 });
 
+var lang={
+    "简体中文": SimpleChineseItem,
+    "繁體中文": TraditionChineseItem,
+    "English": EnglishItem,
+    "日本語": JapanItem
+};
+
 Template.headerTemplate.events({
-    "click #btn_english": function(){
-        Meteor.setDefaultLanguage(EnglishItem);
+    "change #theme_chooser":function(e){
+        var css=e.currentTarget.value;
+        //console.log(css);
+        $('#bootstrap_theme').attr("href",css);
     },
-    "click #btn_simple_chinese": function(){
-        Meteor.setDefaultLanguage(SimpleChineseItem);
-    },
-    "click #btn_tradition_chinese": function(){
-        Meteor.setDefaultLanguage(TraditionChineseItem);
-    },
-    "click #btn_japan": function(){
-        Meteor.setDefaultLanguage(JapanItem);
+    "change #language_chooser":function(e){
+        var langIndex=e.currentTarget.value;
+        //console.log(css);
+        Meteor.setDefaultLanguage(lang[langIndex]);
     }
 });
 

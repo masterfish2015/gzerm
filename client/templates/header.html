@@ -1,5 +1,5 @@
 <template name="headerTemplate">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-default " role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed"
@@ -13,18 +13,37 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/register">{{langRegistration}}</a></li>
                     <li><a href="/logout">{{langLogout}}</a></li>
                     <li><a href="/login">{{langLogin}}</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">{{langChangeLanguage}}  <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#" id="btn_simple_chinese">简体中文</a></li>
-                            <li><a href="#" id="btn_tradition_chinese">繁體中文</a></li>
-                            <li><a href="#" id="btn_english">English</a></li>
-                            <li><a href="#" id="btn_japan">日本語</a></li>
-                        </ul>
+                    <li>
+                        <form class="navbar-form navbar-right" >
+                            <select  name="change-language" id="language_chooser" class="form-control">
+                                <option value="简体中文">简体中文</option>
+                                <option value="繁體中文">繁體中文</option>
+                                <option value="English">English</option>
+                                <option value="日本語">日本語</option>
+                            </select>
+                            <select  name="bootstrap-theme" id="theme_chooser" class="form-control">
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/cerulean/bootstrap.min.css">Cerulean</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/paper/bootstrap.min.css">Paper</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/amelia/bootstrap.min.css">Amelia</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/cosmo/bootstrap.min.css">Cosmo</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/cyborg/bootstrap.min.css">Cyborg</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css">Flatly</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/journal/bootstrap.min.css">Journal</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/lumen/bootstrap.min.css">Lumen</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/readable/bootstrap.min.css">Readable</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/simplex/bootstrap.min.css">Simplex</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/slate/bootstrap.min.css">Slate</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/spacelab/bootstrap.min.css">Spacelab</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/superhero/bootstrap.min.css">Superhero</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/united/bootstrap.min.css">United</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/yeti/bootstrap.min.css">Yeti</option>
+                                <option value="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/darkly/bootstrap.min.css">Darkly</option>
+                            </select>
+                        </form>
+
                     </li>
                 </ul>
             </div>

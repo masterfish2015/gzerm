@@ -224,7 +224,7 @@ Template.departmentManagerTemplate.events({
     "click #btn_show_add_department_panel": function (e, v) {
         var v1 = Session.get("showAddDepartmentPanel");
         var v2 = Session.get("isModifyDepartment");
-        console.log([v1,v2]);
+        //console.log([v1,v2]);
 
         if (v1 === true && v2 === true) {
             //情况1：v1=true表示面板已经打开，v2=true表示现在是修改状态，所以这时候按这个按钮，应该切换为添加状态，保持面板打开

@@ -2,28 +2,12 @@
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">
-            <nav class="navbar">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed"
-                                data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">{{langRegionManagement}}</a>
-                    </div>
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#" id="btn_show_or_hide_addRegion_panel" >
-                                {{langAdd}}
-                                <span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span>
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <h4 class="panel-title pull-left">{{langRegionManagement}}</h4>
+            <button id="btn_show_or_hide_addRegion_panel" class="btn btn-default pull-right">
+                {{langAdd}}
+                <span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span>
+            </button>
+            <div class="clearfix"></div>
         </div>
 
         <div class="panel-body">
@@ -42,7 +26,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <form class="form container-fluid">
-                <div class="row">
+                <div class="form-group">
                     <div class="col-sm-6">
                         <label>{{langRegionCode}}</label>
                         <input type="text" class="form-control" id="input_region_code" value={{modifyRegionCode}}>
@@ -57,7 +41,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="form-group">
                     <div class="col-sm-12">
                         <label>{{langRegionParent}}</label>
                         <select class="form-control" id="input_region_parent">
@@ -106,10 +90,10 @@
                     <td>{{title}}</td>
                     <td>{{getRegionParent parentCode}}</td>
                     <td>
-                        <button class="btn btn-danger regionRemove" value={{_id}}>
+                        <button class="btn btn-danger btn-xs regionRemove" value={{_id}}>
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
-                        <button class="btn btn-info regionEdit" value={{_id}}>
+                        <button class="btn btn-info btn-xs regionEdit" value={{_id}}>
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
                     </td>

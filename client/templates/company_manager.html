@@ -2,28 +2,12 @@
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">
-            <nav class="navbar">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed"
-                                data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">{{langCompanyManagement}}</a>
-                    </div>
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#" id="btn_show_add_company_panel" >
-                                {{langAdd}}
-                                <span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span>
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <h4 class="panel-title pull-left">{{langCompanyManagement}}</h4>
+            <button id="btn_show_add_company_panel" class="btn btn-default pull-right">
+                {{langAdd}}
+                <span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span>
+            </button>
+            <div class="clearfix"></div>
         </div>
 
         <div class="panel-body">
@@ -42,7 +26,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <form class="form container-fluid">
-                <div class="row">
+                <div class="form-group">
                     <div class="col-sm-6">
                         <label>{{langCompanyCode}}</label>
                         <input type="text" class="form-control" id="input_company_code"
@@ -58,7 +42,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="form-group">
                     <div class="col-sm-6">
                         <label>{{langCompanyType}}</label>
                         <select class="form-control" id="input_company_type" >
@@ -88,7 +72,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="form-group">
                     <div class="col-sm-6">
                         <label>{{langCompanyCharger}}</label>
                         <select  class="form-control" id="input_company_charger">
@@ -118,7 +102,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="form-group">
                     <div class="col-sm-12">
                         <label>{{langCompanyComment}}</label>
                         <textarea id="input_company_comment" class="form-control" row="3" >{{modifyCompanyComment}}</textarea>
@@ -167,10 +151,10 @@
                     <td>{{getRegion region}}</td>
                     <td>{{comments}}</td>
                     <td>
-                        <button class="btn btn-danger companyRemove" value={{_id}}>
+                        <button class="btn btn-danger btn-xs companyRemove" value={{_id}}>
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
-                        <button class="btn btn-info companyEdit" value={{_id}}>
+                        <button class="btn btn-info btn-xs companyEdit" value={{_id}}>
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
 

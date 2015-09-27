@@ -1,0 +1,65 @@
+<template name="registerTemplate">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                {{langRegistration}}
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <form id="form_registration" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="input_invite_code">{{langInviteCode}}</label>
+                    <div class="col-md-6">
+                        <input type="text" id="input_invite_code" name="input_invite_code" class="form-control" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="input_registration_user_name">{{langRegistrationUserName}}</label>
+                    <div class="col-md-6">
+                        <input type="text" id="input_registration_user_name"
+                               name="input_registration_user_name" class="form-control" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="input_registration_group_name">{{langRegistrationGroupName}}</label>
+                    <div class="col-md-6">
+                        <input type="text" id="input_registration_group_name"
+                               name="input_registration_group_name" class="form-control" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="input_registration_password">{{langRegistrationPassword}}</label>
+                    <div class="col-md-6">
+                        <input type="password" id="input_registration_password"
+                               name="input_registration_password" class="form-control" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="input_registration_confirm_password">
+                        {{langRegistrationConfirmPassword}}
+                    </label>
+                    <div class="col-md-6">
+                        <input type="password" id="input_registration_confirm_password"
+                               name="input_registration_confirm_password" class="form-control" >
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-12 col-md-offset-2">
+                        <button type="submit" class="btn btn-info" id="btn_register">
+                            {{langRegistration}}
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</template>

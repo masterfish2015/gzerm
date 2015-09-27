@@ -25,4 +25,6 @@ random
 ejson
 spacebars
 check
-twbs:bootstrap
+less
+mizzao:bootstrap-3
+rgoomar:bootstrap-validator
