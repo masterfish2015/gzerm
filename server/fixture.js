@@ -52,8 +52,8 @@ if (gPermissions.find().count() === 0) {
 }
 
 if (gRegions.find().count() === 0) {
-    gRegions.insert({groupID:group_ID,code: "1", title: "亚洲区", parentCode: "null"});
-    gRegions.insert({groupID:group_ID,code: "2", title: "欧洲区", parentCode: "null"});
+    gRegions.insert({groupID:group_ID,code: "1", title: "亚洲区"});
+    gRegions.insert({groupID:group_ID,code: "2", title: "欧洲区"});
     gRegions.insert({groupID:group_ID,code: "101", title: "中国区", parentCode: "1"});
     gRegions.insert({groupID:group_ID,code: "10101", title: "华南大区", parentCode: "101"});
     gRegions.insert({groupID:group_ID,code: "1010101", title: "广东", parentCode: "10101"});

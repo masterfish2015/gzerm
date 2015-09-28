@@ -1,4 +1,18 @@
 Template.headerTemplate.helpers({
+    groupTitle:function(){
+        var o = Meteor.user();
+        //console.log(o);
+        if(o && o.profile && o.profile.grade === 0){
+            return Session.get('langSuperAdmin')+":";
+        }else{
+            var o = gGroups.findOne({});
+            if(o && o.title)
+                return o.title+":";
+            else
+                return "";
+        }
+    },
+    //错误处理
     errorMessage:function(){
         return Session.get("errorMessage");
     },

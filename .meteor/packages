@@ -7,7 +7,6 @@
 underscore
 iron:router
 accounts-password
-aldeed:collection2
 flemay:less-autoprefixer
 grigio:babel
 standard-minifiers

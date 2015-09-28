@@ -49,5 +49,10 @@
                 </div>
             </form>
         </div>
+        {{#if is_error validateLoginError}}
+            <div class="panel-footer">
+                <p class="error-msg" >{{validateLoginError}}</p>
+            </div>
+        {{/if}}
     </div>
 </template>

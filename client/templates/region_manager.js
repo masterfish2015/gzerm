@@ -8,15 +8,15 @@ Session.setDefault("modifyRegionID", '');
 Template.regionManagerTemplate.helpers({
 
     //下面的辅助函数是为了控制界面显示
-    "showAddRegionPanel": function () {
+    showAddRegionPanel: function () {
         return Session.get("showAddRegionPanel");
     },
 
     //下面的辅助函数是为了界面多语言
-    "langRegionManagement": function () {
+    langRegionManagement: function () {
         return Session.get("langRegionManagement");
     },
-    "langAdd": function () {
+    langAdd: function () {
         return Session.get("langAdd");
     }
 });
@@ -24,10 +24,10 @@ Template.regionManagerTemplate.helpers({
 Template.regionListTemplate.helpers({
 
     //下面的辅助函数是为了控制界面显示
-    "regions": function () {
+    regions: function () {
         return gRegions.find();
     },
-    "getRegionParent": function (p) {
+    getRegionParent: function (p) {
         var o = gRegions.findOne({code: p});
         if(o && o.title){
             return o.title;
@@ -35,21 +35,26 @@ Template.regionListTemplate.helpers({
             return "";
         }
     },
-
+    getGroupName:function(groupID){
+        return gGroups.findOne({_id:groupID}).title;
+    },
     //下面的辅助函数是为了界面多语言
-    "langRegionCode": function () {
+    langRegionCode: function () {
         return Session.get("langRegionCode");
     },
-    "langRegionTitle": function () {
+    langRegionTitle: function () {
         return Session.get("langRegionTitle");
     },
-    "langRegionParent": function () {
+    langRegionParent: function () {
         return Session.get("langRegionParent");
+    },
+    langGroup:function(){
+        return Session.get('langGroup');
     }
 });
 
 Template.addRegionTemplate.helpers({
-    "selected":function(v1,v2){
+    selected:function(v1,v2){
         if(v1===v2){
             return true;
         }else{
@@ -57,49 +62,49 @@ Template.addRegionTemplate.helpers({
         }
     },
     //下面的辅助函数是为了控制界面显示
-    "modifyRegionPanel": function () {
+    modifyRegionPanel: function () {
         return Session.get("modifyRegionPanel");
     },
-    "regions": function () {
+    regions: function () {
         return gRegions.find();
     },
-    "modifyRegionCode": function () {
+    modifyRegionCode: function () {
         return Session.get("modifyRegionCode");
     },
-    "modifyRegionTitle": function () {
+    modifyRegionTitle: function () {
         return Session.get("modifyRegionTitle");
     },
-    "modifyRegionParent": function () {
+    modifyRegionParent: function () {
         return Session.get("modifyRegionParent");
     },
-    "modifyRegionID": function () {
+    modifyRegionID: function () {
         return Session.get("modifyRegionID");
     },
     //错误处理
-    "verifyRegionCodeError": function () {
+    verifyRegionCodeError: function () {
         return Session.get("verifyRegionCodeError");
     },
-    "verifyRegionTitleError": function () {
+    verifyRegionTitleError: function () {
         return Session.get("verifyRegionTitleError");
     },
 
     //下面的辅助函数是为了界面多语言
-    "langAdd": function () {
+    langAdd: function () {
         return Session.get("langAdd");
     },
-    "langSelect": function () {
+    langSelect: function () {
         return Session.get("langSelect");
     },
-    "langModify": function () {
+    langModify: function () {
         return Session.get("langModify");
     },
-    "langRegionCode": function () {
+    langRegionCode: function () {
         return Session.get("langRegionCode");
     },
-    "langRegionTitle": function () {
+    langRegionTitle: function () {
         return Session.get("langRegionTitle");
     },
-    "langRegionParent": function () {
+    langRegionParent: function () {
         return Session.get("langRegionParent");
     }
 });
@@ -180,7 +185,7 @@ Template.addRegionTemplate.events({
         if (Session.get('modifyRegionPanel') === false) {
             //create
             Meteor.call("addNewRegion", region, function (error, result) {
-                if (result.error !== "OK") {
+                if (result && result.error && result.error !== "OK") {
                     alert(Session.get(result.error));
                 } else {
                     initInputField();

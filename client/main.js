@@ -23,6 +23,23 @@ Meteor.setDefaultLanguage=function(lang){
     }
 };
 
+Meteor.get_group_id = function(){
+    var user = Meteor.user();
+    if(user && user.profile && user.profile.group){
+        return user.profile.group;
+    }
+    return null;
+};
+
+
+Meteor.get_user_grade = function(){
+    var user = Meteor.user();
+    if(user && user.profile && user.profile.grade!==null){
+        return user.profile.grade;
+    }
+    return -1;
+};
+
 Meteor.validate_no_empty=function (id, validkey){
     var node=$("#"+id);
     if(node.val()===""){

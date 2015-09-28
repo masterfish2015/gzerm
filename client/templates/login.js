@@ -12,6 +12,9 @@ Template.loginTemplate.helpers({
     validateLoginPassword: function(){
         return Session.get('validateLoginPassword');
     },
+    validateLoginError:function(){
+        return Session.get('validateLoginError')  ;
+    },
     //下面的辅助函数是为了界面多语言
     langLogin: function () {
         return Session.get('langLogin');
@@ -30,7 +33,7 @@ Template.loginTemplate.helpers({
 
 Template.loginTemplate.events({
    "click #btn_login":function(e){
-       //注册前先进行数据的检测
+       //登录前先进行数据的检测
        var is_ok = true;
        is_ok = Meteor.validate_no_empty("input_login_name", "validateLoginName");
        is_ok = Meteor.validate_no_empty("input_login_password", "validateLoginPassword");
@@ -43,12 +46,13 @@ Template.loginTemplate.events({
 
        Meteor.loginWithPassword(login.userName, login.password, function(e){
            if(!e){
+               Session.set('validateLoginError',"");
                Router.go('/');
            }else{
-               console.log(e);
-               //Session.set('validateLoginError')
+               //console.log(e);
+               Session.set('validateLoginError',Session.get('langErrorNotExist'));
            }
-       })
+       });
    }
 
 });

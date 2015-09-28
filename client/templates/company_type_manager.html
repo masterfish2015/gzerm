@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">
-            <h4 class="panel-title pull-left">{{langOrganizeTypeManagement}}</h4>
+            <h4 class="panel-title pull-left">{{langCompanyTypeManagement}}</h4>
             <button id="btn_show_or_hide_addCompanyType_panel" class="btn btn-default pull-right">
                 {{langAdd}}
                 <span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span>
@@ -24,33 +24,91 @@
 <template name="addCompanyTypeTemplate">
     <div class="panel panel-default">
         <div class="panel-body">
-            <form class="form container-fluid">
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label>{{langOrganizeType}}</label>
-                        <input type="text" class="form-control" id="text_add_organize_type_title" value={{modifyCompanyTypeTitle}}>
-                        <span class="errorMsg">{{verifyCompanyTypeTitleError}}</span>
+            <form class="form-horizontal">
+                {{#if is_super_admin}}
+                    <div class="form-group  has-feedback">
+                        <label class="col-md-2 control-label" for="input_company_type_group">
+                            {{langGroup}}
+                        </label>
+                        <div class="col-md-6">
+                            <select id="input_company_type_group" name="input_company_type_group"  class="form-control">
+                                <option value="">{{langSelect}}</option>
+                                {{#each groups}}
+                                    {{#if is_same _id modifyCompanyTypeGroup}}
+                                        <option selected="true" value={{_id}} >{{title}}</option>
+                                    {{else}}
+                                        <option value={{_id}} >{{title}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                            {{#if is_error validateCompanyTypeGroup}}
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            {{/if}}
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="control-label error-msg">{{validateCompanyTypeGroup}}</label>
+                        </div>
+
+                    </div>
+                {{/if}}
+
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_company_type_title">
+                        {{langCompanyType}}
+                    </label>
+                    <div class="col-md-6">
+                        <input type="text" id="input_company_type_title"
+                               name="input_company_type_title" class="form-control" value={{modifyCompanyTypeTitle}}>
+                        {{#if is_error verifyCompanyTypeTitleError}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        {{/if}}
                     </div>
 
-                    <div class="col-sm-6">
-                        <label>{{langOganizeGrade}}</label>
-                        <input type="text" class="form-control" id="text_add_organize_type_grade" value={{modifyCompanyTypeGrade}}>
-                        <span class="errorMsg">{{verifyCompanyTypeGradeError}}</span>
+                    <div class="col-md-2">
+                        <label class="control-label error-msg">{{verifyCompanyTypeTitleError}}</label>
+                    </div>
 
+                </div>
+
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_company_type_grade">
+                        {{langCompanyGrade}}
+                    </label>
+                    <div class="col-md-6">
+                        <input type="text" id="input_company_type_grade"
+                               name="input_company_type_grade" class="form-control" value={{modifyCompanyTypeGrade}}>
+                        {{#if is_error verifyCompanyTypeGradeError}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        {{/if}}
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="control-label error-msg">{{verifyCompanyTypeGradeError}}</label>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12 col-md-offset-2">
+                        <button type="button" class="btn btn-info" id="btn_add_company_type">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                            {{#if isModifyCompanyType}}
+                                {{langModify}}
+                            {{else}}
+                                {{langAdd}}
+                            {{/if}}
+                        </button>
                     </div>
                 </div>
+
             </form>
         </div>
-        <div class="panel-footer">
-            <button class="btn btn-primary " id="btn_add_company_type">
-                <span class="glyphicon glyphicon-plus-sign"></span>
-                {{#if isModifyCompanyType}}
-                    {{langModify}}
-                {{else}}
-                    {{langAdd}}
-                {{/if}}
-            </button>
-        </div>
+        {{#if is_error validateCompanyTypeError}}
+            <div class="panel-footer">
+                <p class="error-msg" >{{validateCompanyTypeError}}</p>
+            </div>
+        {{/if}}
     </div>
 
 </template>
@@ -59,14 +117,16 @@
         <table class="table table-striped table-bordered">
             <thead>
             <tr class="info">
-                <th>{{langCurrentOrganizeTypes}}</th>
-                <th>{{langOganizeGrade}}</th>
+                <th>{{langGroup}}</th>
+                <th>{{langCurrentCompanyTypes}}</th>
+                <th>{{langCompanyGrade}}</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             {{#each companyTypes}}
                 <tr>
+                    <td>{{getGroupName groupID}}</td>
                     <td>
                         {{title}}
                     </td>

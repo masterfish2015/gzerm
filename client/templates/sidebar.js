@@ -17,8 +17,8 @@ Template.sidebarTemplate.helpers({
     "langBaseDataManagement":function(){
         return Session.get("langBaseDataManagement");
     },
-    "langOrganizeTypeManagement":function(){
-        return Session.get("langOrganizeTypeManagement");
+    "langCompanyTypeManagement":function(){
+        return Session.get("langCompanyTypeManagement");
     },
     "langOrganizeManagement":function(){
         return Session.get("langOrganizeManagement");
