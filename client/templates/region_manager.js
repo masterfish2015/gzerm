@@ -4,6 +4,12 @@ Session.setDefault("modifyRegionCode", '');
 Session.setDefault("modifyRegionTitle", '');
 Session.setDefault("modifyRegionParent", '');
 Session.setDefault("modifyRegionID", '');
+Session.setDefault("modifyRegionGroupID", '');
+Session.setDefault("validateRegionError", '');
+Session.setDefault("validateRegionGroup", '');
+Session.setDefault("verifyRegionCodeError", '');
+Session.setDefault("verifyRegionTitleError", '');
+Session.setDefault("validateRegionParent", '');
 
 Template.regionManagerTemplate.helpers({
 
@@ -19,8 +25,8 @@ Template.regionListTemplate.helpers({
     regions: function () {
         return gRegions.find();
     },
-    getRegionParent: function (p) {
-        var o = gRegions.findOne({code: p});
+    getRegionParent: function (regionCode, groupID) {
+        var o = gRegions.findOne({groupID:groupID, code: regionCode});
         if(o && o.title){
             return o.title;
         }else{
@@ -33,18 +39,23 @@ Template.regionListTemplate.helpers({
 });
 
 Template.addRegionTemplate.helpers({
-    selected:function(v1,v2){
-        if(v1===v2){
-            return true;
-        }else{
-            return false;
-        }
-    },
     //下面的辅助函数是为了控制界面显示
     modifyRegionPanel: function () {
         return Session.get("modifyRegionPanel");
     },
+    groups:function(){
+        return gGroups.find();
+    },
     regions: function () {
+        if(Meteor.get_user_grade()===0){
+            //如果是超级管理员，则根据选择的group来确定可用区域
+            var groupID = Session.get("modifyRegionGroupID");;
+            //console.log(groupID);
+            if(groupID){
+                return gRegions.find({groupID:groupID});
+            }
+            return [];
+        }
         return gRegions.find();
     },
     modifyRegionCode: function () {
@@ -59,22 +70,34 @@ Template.addRegionTemplate.helpers({
     modifyRegionID: function () {
         return Session.get("modifyRegionID");
     },
+    modifyRegionGroupID: function () {
+        return Session.get("modifyRegionGroupID");
+    },
     //错误处理
     verifyRegionCodeError: function () {
         return Session.get("verifyRegionCodeError");
     },
     verifyRegionTitleError: function () {
         return Session.get("verifyRegionTitleError");
+    },
+    validateRegionGroup: function () {
+        return Session.get("validateRegionGroup");
+    },
+    validateRegionParent: function () {
+        return Session.get("validateRegionParent");
     }
 });
 
 function initInputField() {
     Session.set('verifyRegionCodeError', '');
     Session.set('verifyRegionTitleError', '');
+    Session.set('validateRegionGroup', '');
+    Session.set('validateRegionParent', '');
     Session.set('modifyRegionID', '');
     Session.set('modifyRegionParent', '');
     Session.set('modifyRegionTitle', '');
     Session.set('modifyRegionCode', '');
+    Session.set('modifyRegionGroupID', '');
 }
 
 function setInputField(region) {
@@ -84,6 +107,7 @@ function setInputField(region) {
     Session.set('modifyRegionParent', region.parentCode);
     Session.set('modifyRegionTitle', region.title);
     Session.set('modifyRegionCode', region.code);
+    Session.set('modifyRegionGroupID', region.groupID);
 }
 
 Template.regionManagerTemplate.events({
@@ -118,25 +142,36 @@ Template.regionManagerTemplate.events({
 
 Template.addRegionTemplate.events({
 
+    'change  #input_region_group':function(e){
+        var groupID = e.currentTarget.value;
+        //console.log(gCompanies.findOne({_id:companyID}));
+        Session.set('modifyRegionGroupID',groupID);
+    },
+    'change  #input_region_parent':function(e){
+       //
+    },
+
     'click #btn_add_region': function (e) {
         var region = {};
+        var is_ok=true;
 
+        if(Meteor.get_user_grade()===0){
+            is_ok = Meteor.validate_no_empty("input_region_group", "validateRegionGroup");
+        }
+
+        is_ok = Meteor.validate_no_empty("input_region_code", "verifyRegionCodeError");
+        is_ok = Meteor.validate_no_empty("input_region_title", "verifyRegionTitleError");
+        is_ok = Meteor.validate_no_empty("input_region_parent", "validateRegionParent");
+
+        if(is_ok===false)return;
+
+        if(Meteor.get_user_grade()===0){
+            region.groupID = $('#input_region_group').val();
+        }else{
+            region.groupID = Meteor.get_group_id();
+        }
         region.code = $('#input_region_code').val();
-        if (region.code === "") {
-            Session.set('verifyRegionCodeError', Session.get('langErrorCannotEmpty'));
-            return;
-        } else {
-            Session.set('verifyRegionCodeError', '');
-        }
-
         region.title = $('#input_region_title').val();
-        if (region.title === "") {
-            Session.set('verifyRegionTitleError', Session.get('langErrorCannotEmpty'));
-            return;
-        } else {
-            Session.set('verifyRegionTitleError', '');
-        }
-
         region.parentCode = $('#input_region_parent').val();
 
         console.log(region);

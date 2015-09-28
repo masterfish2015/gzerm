@@ -173,19 +173,14 @@ Meteor.methods({
 
     'addNewRegion':function(region){
         //添加区域，注意几点：区域名称、编码 不能重复
-        var ob = Meteor.users.findOne({_id:this.userId}), groupID;
-        if(ob && ob.profile && ob.profile.group){
-            groupID = gGroups.findOne({_id:ob.profile.group})._id;
-        }else{
-            return {error:"langErrorCannotCreate"};
-        }
-        if(gRegions.find({groupID:groupID, code:region.code}).count()>0 ||
-            gRegions.find({groupID:groupID, title:region.title})>0){
+        var ob, groupID;
+
+        if(gRegions.find({groupID:region.groupID, code:region.code}).count()>0 ||
+            gRegions.find({groupID:region.groupID, title:region.title}).count()>0){
             console.log("增加区域错误，名称、编码 不能重复:"+region.title+":"+region.code);
             return {error:"langErrorAlreadyExist"};
         }
         //
-        region.groupID = groupID;
         ob = gRegions.insert(region);
         if(!ob){
             console.log("增加区域错误，无法创建新的数据库项目:"+region.title);
@@ -201,17 +196,9 @@ Meteor.methods({
             console.log("删除区域错误，不存在");
             return {error:"langErrorNotExist"};
         }else{
-            ob = Meteor.users.findOne({_id:this.userId})
-            var  groupID;
-            if(ob && ob.profile && ob.profile.group){
-                groupID = gGroups.findOne({_id:ob.profile.group})._id;
-            }else{
-                console.log("删除区域错误，不存在");
-                return {error:"langErrorNotExist"};
-            }
-            var count = gCompanies.find({groupID:groupID, region:id}).count();
+            var count = gCompanies.find({groupID:ob.groupID, region:id}).count();
             if(count>0){
-                console.log("无法删除，因为在companies数据库中用到这个区域");
+                console.log("无法删除，因为在companies数据库中用到这个区域"+ob.title);
                 return {error:"langErrorUsedInOtherCollection"};
             }
             console.log("删除区域："+ob.title);
@@ -225,17 +212,13 @@ Meteor.methods({
             console.log("区域:"+newRegion.title+"不存在，无法更新.");
             return {error:"langErrorNotExist"};
         }else{
-            ob = Meteor.users.findOne({_id:this.userId})
-            var  groupID;
-            if(ob && ob.profile && ob.profile.group){
-                groupID = gGroups.findOne({_id:ob.profile.group})._id;
-            }else{
-                console.log("区域:"+newRegion.title+"不存在，无法更新.");
-                return {error:"langErrorNotExist"};
+            //检查更新后是否和已有项重复
+            var count = gRegions.find({groupID:ob.groupID, title:ob.title}).count();
+            if(count>0){
+                console.log("更新后和已有项重复,无法更新："+ob.title);
+                return {error:"langErrorAlreadyExist"};
             }
-
             console.log("更新区域类型:"+ob.title);
-            newRegion.groupID = groupID;
             gRegions.update(id, {$set:newRegion});
             return {error:"OK"};
         }

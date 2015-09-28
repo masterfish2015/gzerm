@@ -92,220 +92,221 @@ Template.registerHelper('is_same', function(v1, v2) {
 });
 
 //多语言支持
-
-Template.registerHelper("langSuperAdmin", function() {
-    return Session.get("langSuperAdmin");
-});
-Template.registerHelper("langAdd", function() {
-    return Session.get("langAdd");
-});
-Template.registerHelper("langCancel", function() {
-    return Session.get("langCancel");
-});
-Template.registerHelper("langOK", function() {
-    return Session.get("langOK");
-});
-Template.registerHelper("langModify", function() {
-    return Session.get("langModify");
-});
-Template.registerHelper("langSelect", function() {
-    return Session.get("langSelect");
-});
-Template.registerHelper("langWebTitle", function() {
-    return Session.get("langWebTitle");
-});
-Template.registerHelper("langLogin", function() {
-    return Session.get("langLogin");
-});
-Template.registerHelper("langLoginName", function() {
-    return Session.get("langLoginName");
-});
-Template.registerHelper("langLoginPassword", function() {
-    return Session.get("langLoginPassword");
-});
-Template.registerHelper("langRegistration", function() {
-    return Session.get("langRegistration");
-});
-Template.registerHelper("langRegistrationUserName", function() {
-    return Session.get("langRegistrationUserName");
-});
-Template.registerHelper("langRegistrationGroupName", function() {
-    return Session.get("langRegistrationGroupName");
-});
-Template.registerHelper("langInviteCode", function() {
-    return Session.get("langInviteCode");
-});
-Template.registerHelper("langRegistrationPassword", function() {
-    return Session.get("langRegistrationPassword");
-});
-Template.registerHelper("langRegistrationConfirmPassword", function() {
-    return Session.get("langRegistrationConfirmPassword");
-});
-Template.registerHelper("langLogout", function() {
-    return Session.get("langLogout");
-});
-Template.registerHelper("langChangeLanguage", function() {
-    return Session.get("langChangeLanguage");
-});
-Template.registerHelper("langSystemManagement", function() {
-    return Session.get("langSystemManagement");
-});
-Template.registerHelper("langUserManagement", function() {
-    return Session.get("langUserManagement");
-});
-Template.registerHelper("langBaseDataManagement", function() {
-    return Session.get("langBaseDataManagement");
-});
-Template.registerHelper("langCompanyTypeManagement", function() {
-    return Session.get("langCompanyTypeManagement");
-});
-Template.registerHelper("langOrganizeManagement", function() {
-    return Session.get("langOrganizeManagement");
-});
-Template.registerHelper("langCompanyManagement", function() {
-    return Session.get("langCompanyManagement");
-});
-Template.registerHelper("langBusinessProcessManagement", function() {
-    return Session.get("langBusinessProcessManagement");
-});
-Template.registerHelper("langBusinessReportManagement", function() {
-    return Session.get("langBusinessReportManagement");
-});
-Template.registerHelper("langCurrentCompanyTypes", function() {
-    return Session.get("langCurrentCompanyTypes");
-});
-Template.registerHelper("langAddCompanyType", function() {
-    return Session.get("langAddCompanyType");
-});
-Template.registerHelper("langOrganizeType", function() {
-    return Session.get("langOrganizeType");
-});
-Template.registerHelper("langAddCompany", function() {
-    return Session.get("langAddCompany");
-});
-Template.registerHelper("langCompanyCode", function() {
-    return Session.get("langCompanyCode");
-});
-Template.registerHelper("langCompanyTitle", function() {
-    return Session.get("langCompanyTitle");
-});
-Template.registerHelper("langCompanyType", function() {
-    return Session.get("langCompanyType");
-});
-Template.registerHelper("langCompanyCharger", function() {
-    return Session.get("langCompanyCharger");
-});
-Template.registerHelper("langCompanySupervisor", function() {
-    return Session.get("langCompanySupervisor");
-});
-Template.registerHelper("langCompanyRegion", function() {
-    return Session.get("langCompanyRegion");
-});
-Template.registerHelper("langCompanyComment", function() {
-    return Session.get("langCompanyComment");
-});
-Template.registerHelper("langAddUser", function() {
-    return Session.get("langAddUser");
-});
-Template.registerHelper("langUserCode", function() {
-    return Session.get("langUserCode");
-});
-Template.registerHelper("langUserName", function() {
-    return Session.get("langUserName");
-});
-Template.registerHelper("langUserPassword", function() {
-    return Session.get("langUserPassword");
-});
-Template.registerHelper("langUserRealName", function() {
-    return Session.get("langUserRealName");
-});
-Template.registerHelper("langUserGender", function() {
-    return Session.get("langUserGender");
-});
-Template.registerHelper("langMan", function() {
-    return Session.get("langMan");
-});
-Template.registerHelper("langWomen", function() {
-    return Session.get("langWomen");
-});
-Template.registerHelper("langUserCompany", function() {
-    return Session.get("langUserCompany");
-});
-Template.registerHelper("langUserDepartment", function() {
-    return Session.get("langUserDepartment");
-});
-Template.registerHelper("langUserJob", function() {
-    return Session.get("langUserJob");
-});
-Template.registerHelper("langUserPermission", function() {
-    return Session.get("langUserPermission");
-});
-Template.registerHelper("langCompanyGrade", function() {
-    return Session.get("langCompanyGrade");
-});
-Template.registerHelper("langRegionManagement", function() {
-    return Session.get("langRegionManagement");
-});
-Template.registerHelper("langRegionCode", function() {
-    return Session.get("langRegionCode");
-});
-Template.registerHelper("langRegionTitle", function() {
-    return Session.get("langRegionTitle");
-});
-Template.registerHelper("langRegionParent", function() {
-    return Session.get("langRegionParent");
-});
-Template.registerHelper("langDepartmentManagement", function() {
-    return Session.get("langDepartmentManagement");
-});
-Template.registerHelper("langDepartmentCode", function() {
-    return Session.get("langDepartmentCode");
-});
-Template.registerHelper("langDepartmentTitle", function() {
-    return Session.get("langDepartmentTitle");
-});
-Template.registerHelper("langDepartmentType", function() {
-    return Session.get("langDepartmentType");
-});
-Template.registerHelper("langDepartmentCompanyOwner", function() {
-    return Session.get("langDepartmentCompanyOwner");
-});
-Template.registerHelper("langDepartmentCharger", function() {
-    return Session.get("langDepartmentCharger");
-});
-Template.registerHelper("langDepartmentSupervisor", function() {
-    return Session.get("langDepartmentSupervisor");
-});
-Template.registerHelper("langDepartmentRegion", function() {
-    return Session.get("langDepartmentRegion");
-});
-Template.registerHelper("langDepartmentComment", function() {
-    return Session.get("langDepartmentComment");
-});
-Template.registerHelper("langGroup", function() {
-    return Session.get("langGroup");
-});
-Template.registerHelper("langAreYouSure", function() {
-    return Session.get("langAreYouSure");
-});
-Template.registerHelper("langErrorCompanyTypeEmpty", function() {
-    return Session.get("langErrorCompanyTypeEmpty");
-});
-Template.registerHelper("langErrorAlreadyExist", function() {
-    return Session.get("langErrorAlreadyExist");
-});
-Template.registerHelper("langErrorCannotCreate", function() {
-    return Session.get("langErrorCannotCreate");
-});
-Template.registerHelper("langErrorNotExist", function() {
-    return Session.get("langErrorNotExist");
-});
-Template.registerHelper("langErrorUsedInOtherCollection", function() {
-    return Session.get("langErrorUsedInOtherCollection");
-});
-Template.registerHelper("langErrorCannotEmpty", function() {
-    return Session.get("langErrorCannotEmpty");
-});
-Template.registerHelper("langErrorMustBeSame", function() {
-    return Session.get("langErrorMustBeSame");
-});
+{
+    Template.registerHelper("langSuperAdmin", function() {
+        return Session.get("langSuperAdmin");
+    });
+    Template.registerHelper("langAdd", function() {
+        return Session.get("langAdd");
+    });
+    Template.registerHelper("langCancel", function() {
+        return Session.get("langCancel");
+    });
+    Template.registerHelper("langOK", function() {
+        return Session.get("langOK");
+    });
+    Template.registerHelper("langModify", function() {
+        return Session.get("langModify");
+    });
+    Template.registerHelper("langSelect", function() {
+        return Session.get("langSelect");
+    });
+    Template.registerHelper("langWebTitle", function() {
+        return Session.get("langWebTitle");
+    });
+    Template.registerHelper("langLogin", function() {
+        return Session.get("langLogin");
+    });
+    Template.registerHelper("langLoginName", function() {
+        return Session.get("langLoginName");
+    });
+    Template.registerHelper("langLoginPassword", function() {
+        return Session.get("langLoginPassword");
+    });
+    Template.registerHelper("langRegistration", function() {
+        return Session.get("langRegistration");
+    });
+    Template.registerHelper("langRegistrationUserName", function() {
+        return Session.get("langRegistrationUserName");
+    });
+    Template.registerHelper("langRegistrationGroupName", function() {
+        return Session.get("langRegistrationGroupName");
+    });
+    Template.registerHelper("langInviteCode", function() {
+        return Session.get("langInviteCode");
+    });
+    Template.registerHelper("langRegistrationPassword", function() {
+        return Session.get("langRegistrationPassword");
+    });
+    Template.registerHelper("langRegistrationConfirmPassword", function() {
+        return Session.get("langRegistrationConfirmPassword");
+    });
+    Template.registerHelper("langLogout", function() {
+        return Session.get("langLogout");
+    });
+    Template.registerHelper("langChangeLanguage", function() {
+        return Session.get("langChangeLanguage");
+    });
+    Template.registerHelper("langSystemManagement", function() {
+        return Session.get("langSystemManagement");
+    });
+    Template.registerHelper("langUserManagement", function() {
+        return Session.get("langUserManagement");
+    });
+    Template.registerHelper("langBaseDataManagement", function() {
+        return Session.get("langBaseDataManagement");
+    });
+    Template.registerHelper("langCompanyTypeManagement", function() {
+        return Session.get("langCompanyTypeManagement");
+    });
+    Template.registerHelper("langOrganizeManagement", function() {
+        return Session.get("langOrganizeManagement");
+    });
+    Template.registerHelper("langCompanyManagement", function() {
+        return Session.get("langCompanyManagement");
+    });
+    Template.registerHelper("langBusinessProcessManagement", function() {
+        return Session.get("langBusinessProcessManagement");
+    });
+    Template.registerHelper("langBusinessReportManagement", function() {
+        return Session.get("langBusinessReportManagement");
+    });
+    Template.registerHelper("langCurrentCompanyTypes", function() {
+        return Session.get("langCurrentCompanyTypes");
+    });
+    Template.registerHelper("langAddCompanyType", function() {
+        return Session.get("langAddCompanyType");
+    });
+    Template.registerHelper("langOrganizeType", function() {
+        return Session.get("langOrganizeType");
+    });
+    Template.registerHelper("langAddCompany", function() {
+        return Session.get("langAddCompany");
+    });
+    Template.registerHelper("langCompanyCode", function() {
+        return Session.get("langCompanyCode");
+    });
+    Template.registerHelper("langCompanyTitle", function() {
+        return Session.get("langCompanyTitle");
+    });
+    Template.registerHelper("langCompanyType", function() {
+        return Session.get("langCompanyType");
+    });
+    Template.registerHelper("langCompanyCharger", function() {
+        return Session.get("langCompanyCharger");
+    });
+    Template.registerHelper("langCompanySupervisor", function() {
+        return Session.get("langCompanySupervisor");
+    });
+    Template.registerHelper("langCompanyRegion", function() {
+        return Session.get("langCompanyRegion");
+    });
+    Template.registerHelper("langCompanyComment", function() {
+        return Session.get("langCompanyComment");
+    });
+    Template.registerHelper("langAddUser", function() {
+        return Session.get("langAddUser");
+    });
+    Template.registerHelper("langUserCode", function() {
+        return Session.get("langUserCode");
+    });
+    Template.registerHelper("langUserName", function() {
+        return Session.get("langUserName");
+    });
+    Template.registerHelper("langUserPassword", function() {
+        return Session.get("langUserPassword");
+    });
+    Template.registerHelper("langUserRealName", function() {
+        return Session.get("langUserRealName");
+    });
+    Template.registerHelper("langUserGender", function() {
+        return Session.get("langUserGender");
+    });
+    Template.registerHelper("langMan", function() {
+        return Session.get("langMan");
+    });
+    Template.registerHelper("langWomen", function() {
+        return Session.get("langWomen");
+    });
+    Template.registerHelper("langUserCompany", function() {
+        return Session.get("langUserCompany");
+    });
+    Template.registerHelper("langUserDepartment", function() {
+        return Session.get("langUserDepartment");
+    });
+    Template.registerHelper("langUserJob", function() {
+        return Session.get("langUserJob");
+    });
+    Template.registerHelper("langUserPermission", function() {
+        return Session.get("langUserPermission");
+    });
+    Template.registerHelper("langCompanyGrade", function() {
+        return Session.get("langCompanyGrade");
+    });
+    Template.registerHelper("langRegionManagement", function() {
+        return Session.get("langRegionManagement");
+    });
+    Template.registerHelper("langRegionCode", function() {
+        return Session.get("langRegionCode");
+    });
+    Template.registerHelper("langRegionTitle", function() {
+        return Session.get("langRegionTitle");
+    });
+    Template.registerHelper("langRegionParent", function() {
+        return Session.get("langRegionParent");
+    });
+    Template.registerHelper("langDepartmentManagement", function() {
+        return Session.get("langDepartmentManagement");
+    });
+    Template.registerHelper("langDepartmentCode", function() {
+        return Session.get("langDepartmentCode");
+    });
+    Template.registerHelper("langDepartmentTitle", function() {
+        return Session.get("langDepartmentTitle");
+    });
+    Template.registerHelper("langDepartmentType", function() {
+        return Session.get("langDepartmentType");
+    });
+    Template.registerHelper("langDepartmentCompanyOwner", function() {
+        return Session.get("langDepartmentCompanyOwner");
+    });
+    Template.registerHelper("langDepartmentCharger", function() {
+        return Session.get("langDepartmentCharger");
+    });
+    Template.registerHelper("langDepartmentSupervisor", function() {
+        return Session.get("langDepartmentSupervisor");
+    });
+    Template.registerHelper("langDepartmentRegion", function() {
+        return Session.get("langDepartmentRegion");
+    });
+    Template.registerHelper("langDepartmentComment", function() {
+        return Session.get("langDepartmentComment");
+    });
+    Template.registerHelper("langGroup", function() {
+        return Session.get("langGroup");
+    });
+    Template.registerHelper("langAreYouSure", function() {
+        return Session.get("langAreYouSure");
+    });
+    Template.registerHelper("langErrorCompanyTypeEmpty", function() {
+        return Session.get("langErrorCompanyTypeEmpty");
+    });
+    Template.registerHelper("langErrorAlreadyExist", function() {
+        return Session.get("langErrorAlreadyExist");
+    });
+    Template.registerHelper("langErrorCannotCreate", function() {
+        return Session.get("langErrorCannotCreate");
+    });
+    Template.registerHelper("langErrorNotExist", function() {
+        return Session.get("langErrorNotExist");
+    });
+    Template.registerHelper("langErrorUsedInOtherCollection", function() {
+        return Session.get("langErrorUsedInOtherCollection");
+    });
+    Template.registerHelper("langErrorCannotEmpty", function() {
+        return Session.get("langErrorCannotEmpty");
+    });
+    Template.registerHelper("langErrorMustBeSame", function() {
+        return Session.get("langErrorMustBeSame");
+    });
+}

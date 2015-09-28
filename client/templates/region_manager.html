@@ -28,73 +28,99 @@
             <form class="form-horizontal">
                 {{#if is_super_admin}}
                     <div class="form-group  has-feedback">
-                        <label class="col-md-2 control-label" for="input_company_type_group">
+                        <label class="col-md-2 control-label" for="input_region_group">
                             {{langGroup}}
                         </label>
                         <div class="col-md-6">
-                            <select id="input_company_type_group" name="input_company_type_group"  class="form-control">
+                            <select id="input_region_group" name="input_region_group"  class="form-control">
                                 <option value="">{{langSelect}}</option>
                                 {{#each groups}}
-                                    {{#if is_same _id modifyCompanyTypeGroup}}
+                                    {{#if is_same _id modifyRegionGroupID}}
                                         <option selected="true" value={{_id}} >{{title}}</option>
                                     {{else}}
                                         <option value={{_id}} >{{title}}</option>
                                     {{/if}}
                                 {{/each}}
                             </select>
-                            {{#if is_error validateCompanyTypeGroup}}
+                            {{#if is_error validateRegionGroup}}
                                 <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                             {{/if}}
                         </div>
 
                         <div class="col-md-2">
-                            <label class="control-label error-msg">{{validateCompanyTypeGroup}}</label>
+                            <label class="control-label error-msg">{{validateRegionGroup}}</label>
                         </div>
 
                     </div>
                 {{/if}}
 
                 <div class="form-group  has-feedback">
-                    <label class="col-md-2 control-label" for="input_company_type_title">
-                        {{langCompanyType}}
+                    <label class="col-md-2 control-label" for="input_region_code">
+                        {{langRegionCode}}
                     </label>
                     <div class="col-md-6">
-                        <input type="text" id="input_company_type_title"
-                               name="input_company_type_title" class="form-control" value={{modifyCompanyTypeTitle}}>
-                        {{#if is_error verifyCompanyTypeTitleError}}
+                        <input type="text" id="input_region_code"
+                               name="input_region_code" class="form-control" value={{modifyRegionCode}}>
+                        {{#if is_error verifyRegionCodeError}}
                             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                         {{/if}}
                     </div>
 
                     <div class="col-md-2">
-                        <label class="control-label error-msg">{{verifyCompanyTypeTitleError}}</label>
+                        <label class="control-label error-msg">{{verifyRegionCodeError}}</label>
                     </div>
 
                 </div>
 
                 <div class="form-group  has-feedback">
-                    <label class="col-md-2 control-label" for="input_company_type_grade">
-                        {{langCompanyGrade}}
+                    <label class="col-md-2 control-label" for="input_region_title">
+                        {{langRegionTitle}}
                     </label>
                     <div class="col-md-6">
-                        <input type="text" id="input_company_type_grade"
-                               name="input_company_type_grade" class="form-control" value={{modifyCompanyTypeGrade}}>
-                        {{#if is_error verifyCompanyTypeGradeError}}
+                        <input type="text" id="input_region_title"
+                               name="input_region_title" class="form-control" value={{modifyRegionTitle}}>
+                        {{#if is_error verifyRegionTitleError}}
                             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                         {{/if}}
                     </div>
 
                     <div class="col-md-2">
-                        <label class="control-label error-msg">{{verifyCompanyTypeGradeError}}</label>
+                        <label class="control-label error-msg">{{verifyRegionTitleError}}</label>
+                    </div>
+
+                </div>
+
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_region_parent">
+                        {{langRegionParent}}
+                    </label>
+                    <div class="col-md-6">
+                        <select id="input_region_parent" name="input_region_parent"  class="form-control">
+                            <option value="">{{langSelect}}</option>
+                            {{#each regions}}
+                                {{#if is_same code modifyRegionParent}}
+                                    <option selected="true" value={{code}} >{{title}}</option>
+                                {{else}}
+                                    <option value={{code}} >{{title}}</option>
+                                {{/if}}
+                            {{/each}}
+                        </select>
+                        {{#if is_error validateRegionParent}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        {{/if}}
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="control-label error-msg">{{validateRegionParent}}</label>
                     </div>
 
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-12 col-md-offset-2">
-                        <button type="button" class="btn btn-info" id="btn_add_company_type">
+                        <button type="button" class="btn btn-info" id="btn_add_region">
                             <span class="glyphicon glyphicon-plus-sign"></span>
-                            {{#if isModifyCompanyType}}
+                            {{#if modifyRegionPanel}}
                                 {{langModify}}
                             {{else}}
                                 {{langAdd}}
@@ -105,50 +131,12 @@
 
             </form>
 
-            <form class="form container-fluid">
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label>{{langRegionCode}}</label>
-                        <input type="text" class="form-control" id="input_region_code" value={{modifyRegionCode}}>
-                        <span class="errorMsg">{{verifyRegionCodeError}}</span>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label>{{langRegionTitle}}</label>
-                        <input type="text" class="form-control" id="input_region_title" value={{modifyRegionTitle}}>
-                        <span class="errorMsg">{{verifyRegionTitleError}}</span>
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <label>{{langRegionParent}}</label>
-                        <select class="form-control" id="input_region_parent">
-                            <option value=" ">{{langSelect}}</option>
-                            {{#each regions}}
-                                {{#if selected code modifyRegionParent}}
-                                    <option selected='true' value={{code}}>{{title}}</option>
-                                {{else}}
-                                    <option value={{code}}>{{title}}</option>
-                                {{/if}}
-                            {{/each}}
-                        </select>
-                    </div>
-                </div>
-
-            </form>
         </div>
-        <div class="panel-footer">
-            <button class="btn btn-primary " id="btn_add_region">
-                <span class="glyphicon glyphicon-plus-sign"></span>
-                {{#if modifyRegionPanel}}
-                    {{langModify}}
-                {{else}}
-                    {{langAdd}}
-                {{/if}}
-            </button>
-        </div>
+        {{#if is_error validateRegionError}}
+            <div class="panel-footer">
+                <p class="error-msg" >{{validateRegionError}}</p>
+            </div>
+        {{/if}}
     </div>
 
 </template>
@@ -170,7 +158,7 @@
                     <td>{{getGroupName groupID}}</td>
                     <td>{{code}}</td>
                     <td>{{title}}</td>
-                    <td>{{getRegionParent parentCode}}</td>
+                    <td>{{getRegionParent parentCode groupID}}</td>
                     <td>
                         <button class="btn btn-danger btn-xs regionRemove" value={{_id}}>
                             <span class="glyphicon glyphicon-remove"></span>
