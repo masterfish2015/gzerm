@@ -38,12 +38,13 @@ Template.registerTemplate.events({
     "click #btn_register": function (e) {
         var is_ok=true;
 
-        is_ok = Meteor.validate_no_empty("input_invite_code", "validateRegistrationInviteCode");
-        is_ok = Meteor.validate_no_empty("input_registration_user_name", "validateRegistrationUserName");
-        is_ok = Meteor.validate_no_empty("input_registration_group_name", "validateRegistrationGroupName");
-        is_ok = Meteor.validate_no_empty("input_registration_password", "validateRegistrationPassword");
-        is_ok = Meteor.validate_no_empty("input_registration_confirm_password", "validateRegistrationConfirmPassword");
-        is_ok = Meteor.validate_must_same("input_registration_confirm_password", "input_registration_password", "validateRegistrationConfirmPassword");
+        if(Meteor.validate_no_empty("input_invite_code", "validateRegistrationInviteCode")===false)is_ok=false;
+        if(Meteor.validate_no_empty("input_registration_user_name", "validateRegistrationUserName")===false)is_ok=false;
+        if(Meteor.validate_no_empty("input_registration_group_name", "validateRegistrationGroupName")===false)is_ok=false;
+        if(Meteor.validate_no_empty("input_registration_password", "validateRegistrationPassword")===false)is_ok=false;
+        if(Meteor.validate_no_empty("input_registration_confirm_password", "validateRegistrationConfirmPassword")===false)
+            is_ok=false;
+        if(Meteor.validate_must_same("input_registration_confirm_password", "input_registration_password", "validateRegistrationConfirmPassword")===false)is_ok=false;
 
         if(is_ok===false)return;
 

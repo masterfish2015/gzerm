@@ -213,7 +213,8 @@ Meteor.methods({
             return {error:"langErrorNotExist"};
         }else{
             //检查更新后是否和已有项重复
-            var count = gRegions.find({groupID:ob.groupID, title:ob.title}).count();
+            var count = gRegions.find({groupID:newRegion.groupID, title:newRegion.title,
+                code:newRegion.code, parentCode:newRegion.parentCode}).count();
             if(count>0){
                 console.log("更新后和已有项重复,无法更新："+ob.title);
                 return {error:"langErrorAlreadyExist"};

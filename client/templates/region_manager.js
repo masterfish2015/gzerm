@@ -156,12 +156,16 @@ Template.addRegionTemplate.events({
         var is_ok=true;
 
         if(Meteor.get_user_grade()===0){
-            is_ok = Meteor.validate_no_empty("input_region_group", "validateRegionGroup");
+            if(Meteor.validate_no_empty("input_region_group", "validateRegionGroup")===false)
+                is_ok=false;
         }
 
-        is_ok = Meteor.validate_no_empty("input_region_code", "verifyRegionCodeError");
-        is_ok = Meteor.validate_no_empty("input_region_title", "verifyRegionTitleError");
-        is_ok = Meteor.validate_no_empty("input_region_parent", "validateRegionParent");
+        if(Meteor.validate_no_empty("input_region_code", "verifyRegionCodeError")===false)
+            is_ok=false;
+        if(Meteor.validate_no_empty("input_region_title", "verifyRegionTitleError")===false)
+            is_ok=false;
+        if(Meteor.validate_no_empty("input_region_parent", "validateRegionParent")===false)
+            is_ok=false;
 
         if(is_ok===false)return;
 

@@ -22,8 +22,8 @@ Template.loginTemplate.events({
    "click #btn_login":function(e){
        //登录前先进行数据的检测
        var is_ok = true;
-       is_ok = Meteor.validate_no_empty("input_login_name", "validateLoginName");
-       is_ok = Meteor.validate_no_empty("input_login_password", "validateLoginPassword");
+       if(Meteor.validate_no_empty("input_login_name", "validateLoginName")===false)is_ok=false;
+       if(Meteor.validate_no_empty("input_login_password", "validateLoginPassword")===false)is_ok=false;
 
        if(is_ok===false)return;
 

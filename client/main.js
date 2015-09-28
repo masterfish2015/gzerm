@@ -48,7 +48,7 @@ Meteor.validate_no_empty = function (id, validkey) {
     } else {
         node.parent().removeClass("has-error");
         Session.set(validkey, "");
-        return true;
+        return null
     }
 };
 

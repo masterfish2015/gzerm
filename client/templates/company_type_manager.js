@@ -107,11 +107,14 @@ Template.addCompanyTypeTemplate.events({
         var is_ok=true;
 
         if(Meteor.get_user_grade()===0){
-            is_ok = Meteor.validate_no_empty("input_company_type_group", "validateCompanyTypeGroup");
+            if(Meteor.validate_no_empty("input_company_type_group", "validateCompanyTypeGroup")===false)
+                is_ok=false;
         }
 
-        is_ok = Meteor.validate_no_empty("input_company_type_title", "verifyCompanyTypeTitleError");
-        is_ok = Meteor.validate_no_empty("input_company_type_grade", "verifyCompanyTypeGradeError");
+        if(Meteor.validate_no_empty("input_company_type_title", "verifyCompanyTypeTitleError")===false)
+            is_ok=false;
+        if(Meteor.validate_no_empty("input_company_type_grade", "verifyCompanyTypeGradeError")===false)
+            is_ok=false;
 
         if(is_ok===false)return;
 
