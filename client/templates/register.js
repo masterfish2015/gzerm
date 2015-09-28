@@ -1,25 +1,36 @@
-Session.setDefault('verifyInviteError','');
-Session.setDefault('verifyRegisterGroupNameError','');
-Session.setDefault('verifyRegisterUserNameError','');
-Session.setDefault('verifyRegisterPasswordError','');
-Session.setDefault('verifyRegisterRepeatPasswordError','');
+Session.setDefault('validateRegistrationInviteCode','');
+Session.setDefault('validateRegistrationUserName','');
+Session.setDefault('validateRegistrationGroupName','');
+Session.setDefault('validateRegistrationPassword','');
+Session.setDefault('validateRegistrationConfirmPassword','');
+
+Session.setDefault('validateRegistrationError','');
 
 Template.registerTemplate.helpers({
     //输入验证错误提示
-    verifyInviteError: function () {
-        return Session.get('verifyInviteError');
+    is_error:function(err){
+        if(err==="")
+            return false;
+        else
+            return true;
     },
-    verifyRegisterGroupNameError: function () {
-        return Session.get('verifyRegisterGroupNameError');
+    validateRegistrationInviteCode: function () {
+        return Session.get('validateRegistrationInviteCode');
     },
-    verifyRegisterUserNameError: function () {
-        return Session.get('verifyRegisterUserNameError');
+    validateRegistrationGroupName: function () {
+        return Session.get('validateRegistrationGroupName');
     },
-    verifyRegisterPasswordError: function () {
-        return Session.get('verifyRegisterPasswordError');
+    validateRegistrationUserName: function () {
+        return Session.get('validateRegistrationUserName');
     },
-    verifyRegisterRepeatPasswordError: function () {
-        return Session.get('verifyRegisterRepeatPasswordError');
+    validateRegistrationPassword: function () {
+        return Session.get('validateRegistrationPassword');
+    },
+    validateRegistrationConfirmPassword: function () {
+        return Session.get('validateRegistrationConfirmPassword');
+    },
+    validateRegistrationError: function () {
+        return Session.get('validateRegistrationError');
     },
     //下面的辅助函数是为了界面多语言
     langRegistration: function () {
@@ -39,78 +50,49 @@ Template.registerTemplate.helpers({
     },
     langRegistrationConfirmPassword: function () {
         return Session.get('langRegistrationConfirmPassword');
-    }
+    },
+
 });
 
 Template.registerTemplate.events({
     "click #btn_register": function (e) {
-        var newUser = {};
-        newUser.inviteCode = $("#input_invite_code").val();
-        if(newUser.inviteCode===''){
-            Session.set('verifyInviteError', Session.get("langErrorCannotEmpty"));
-            return;
-        }
-        newUser.userName = $("#input_register_user_name").val();
-        newUser.groupName = $("#input_register_group_name").val();
-        newUser.password = $("#input_register_password").val();
-        var rp = $("#input_register_password_repeat").val();
+        var is_ok=true;
+
+        is_ok = Meteor.validate_no_empty("input_invite_code", "validateRegistrationInviteCode");
+        is_ok = Meteor.validate_no_empty("input_registration_user_name", "validateRegistrationUserName");
+        is_ok = Meteor.validate_no_empty("input_registration_group_name", "validateRegistrationGroupName");
+        is_ok = Meteor.validate_no_empty("input_registration_password", "validateRegistrationPassword");
+        is_ok = Meteor.validate_no_empty("input_registration_confirm_password", "validateRegistrationConfirmPassword");
+        is_ok = Meteor.validate_must_same("input_registration_confirm_password", "input_registration_password", "validateRegistrationConfirmPassword");
+
+        if(is_ok===false)return;
+
+        var reg = {};
+        reg.inviteCode = $('#input_invite_code').val();
+        reg.userName = $('#input_registration_user_name').val();
+        reg.group = $('#input_registration_group_name').val();
+        reg.password = $('#input_registration_password').val();
+        //console.log(reg);
+
+        Meteor.call('registGroupUser', reg, function(e,r){
+            if(r && r.error && r.error==='OK'){
+                //注册成功
+                //清除错误信息
+                Session.set('validateRegistrationError',"");
+                Meteor.loginWithPassword(reg.userName, reg.password, function(e){
+                    if(!e){
+
+                        Router.go('/');
+                    }
+                })
+            }else if(r && r.error){
+                //设置错误信息
+                Session.set('validateRegistrationError',Session.get(r.error));
+            }
+        })
 
     }
 });
 
 Template.registerTemplate.rendered = function(){
-    $('.form-horizontal').bootstrapValidator({
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            input_invite_code: {
-                validators: {
-                    notEmpty: {
-                        message: Session.get('langErrorCannotEmpty')
-                    }
-                }
-            },
-            input_registration_user_name: {
-                validators: {
-                    notEmpty: {
-                        message: Session.get('langErrorCannotEmpty')
-                    }
-                }
-            },
-            input_registration_group_name: {
-                validators: {
-                    notEmpty: {
-                        message: Session.get('langErrorCannotEmpty')
-                    }
-                }
-            },
-            input_registration_password: {
-                validators: {
-                    notEmpty: {
-                        message: Session.get('langErrorCannotEmpty')
-                    }
-                }
-            },
-            input_registration_confirm_password: {
-                validators: {
-                    notEmpty: {
-                        message: Session.get('langErrorCannotEmpty')
-                    }
-                }
-            }
-        }
-    }).on('success.form.bv', function(e) {
-        // Prevent form submission
-        e.preventDefault();
-        var user={};
-        user.inviteCode=$("#input_invite_code").val();
-        user.userName=$("#input_registration_user_name").val();
-        user.groupName=$("#input_registration_group_name").val();
-        user.password=$("#input_registration_password").val();
-        user.confirmPassword=$("#input_registration_confirm_password").val();
-        console.log(user);
-    });
 };

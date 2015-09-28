@@ -12,3 +12,7 @@
 .panel-heading a.collapsed:after {
     content:"\e080";
 }
+
+.error-msg {
+    color:red
+}

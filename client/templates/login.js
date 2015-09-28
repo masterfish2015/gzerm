@@ -1,4 +1,17 @@
 Template.loginTemplate.helpers({
+    //进行错误检测
+    is_error:function(err){
+        if(err==="")
+            return false;
+        else
+            return true;
+    },
+    validateLoginName: function(){
+        return Session.get('validateLoginName');
+    },
+    validateLoginPassword: function(){
+        return Session.get('validateLoginPassword');
+    },
     //下面的辅助函数是为了界面多语言
     langLogin: function () {
         return Session.get('langLogin');
@@ -14,42 +27,32 @@ Template.loginTemplate.helpers({
     }
 });
 
+
 Template.loginTemplate.events({
-   "click #btn_return":function(e){
-       Router.go("/");
+   "click #btn_login":function(e){
+       //注册前先进行数据的检测
+       var is_ok = true;
+       is_ok = Meteor.validate_no_empty("input_login_name", "validateLoginName");
+       is_ok = Meteor.validate_no_empty("input_login_password", "validateLoginPassword");
+
+       if(is_ok===false)return;
+
+       var login={};
+       login.userName = $('#input_login_name').val();
+       login.password = $('#input_login_password').val();
+
+       Meteor.loginWithPassword(login.userName, login.password, function(e){
+           if(!e){
+               Router.go('/');
+           }else{
+               console.log(e);
+               //Session.set('validateLoginError')
+           }
+       })
    }
+
 });
 
 Template.loginTemplate.rendered = function(){
-    $('.form-horizontal').bootstrapValidator({
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            input_login_name: {
-                validators: {
-                    notEmpty: {
-                        message: Session.get('langErrorCannotEmpty')
-                    }
-                }
-            },
-            input_login_password: {
-                validators: {
-                    notEmpty: {
-                        message: Session.get('langErrorCannotEmpty')
-                    }
-                }
-            }
-        }
-    }).on('success.form.bv', function(e) {
-        // Prevent form submission
-        e.preventDefault();
-        var user={};
-        user.id=$("#input_login_name").val();
-        user.pw=$("#input_login_password").val();
 
-        console.log(user);
-    });
 };

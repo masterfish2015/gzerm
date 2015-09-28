@@ -1,7 +1,11 @@
 <template name="homeTmp">
 	<div class="panel panel-default">
 		<div class="panel-body">
-		  Home Page
+		  {{#if currentUser}}
+              欢迎！
+          {{else}}
+              请先登录
+          {{/if}}
 		</div>
 	</div>
 </template>

@@ -1,4 +1,27 @@
 Meteor.methods({
+    'registGroupUser':function(reg){
+        if(reg.inviteCode && reg.inviteCode==="xdfsfasv"){
+            //第一个
+            //查找用户列表中是否有相同的
+            if(Meteor.users.find({username:reg.userName}).count()>0){
+                //已有用户，返回
+                return {error:"langErrorAlreadyExist"};
+            }
+            var id = Accounts.createUser(
+                {username: reg.userName,
+                 password: reg.password,
+                 profile: {
+                     group : gGroups.findOne({title:'中国天御集团公司'})._id
+                 }
+                });
+            if(!id){
+                return {error:"langErrorCannotCreate"};
+            }else{
+                return {error:"OK", id:id};
+            }
+        }
+        //查找邀请码是否正确并
+    },
     'addNewUser': function (username) {
 
     },

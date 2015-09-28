@@ -7,7 +7,6 @@
 underscore
 iron:router
 accounts-password
-aldeed:autoform
 aldeed:collection2
 flemay:less-autoprefixer
 grigio:babel
@@ -27,4 +26,3 @@ spacebars
 check
 less
 mizzao:bootstrap-3
-rgoomar:bootstrap-validator

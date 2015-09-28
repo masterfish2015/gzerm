@@ -22,3 +22,31 @@ Meteor.setDefaultLanguage=function(lang){
         Session.set(k, lang[k]);
     }
 };
+
+Meteor.validate_no_empty=function (id, validkey){
+    var node=$("#"+id);
+    if(node.val()===""){
+        node.parent().addClass("has-error");
+        Session.set(validkey, Session.get("langErrorCannotEmpty"));
+        return false;
+    }else{
+        node.parent().removeClass("has-error");
+        Session.set(validkey,"");
+        return true;
+    }
+};
+
+Meteor.validate_must_same=function (id1, id2, validkey){
+    var node1=$("#"+id1),
+        node2=$("#"+id2);
+    if(node1.val()==="" || node2.val()==="" || node1.val()!==node2.val()){
+        node1.parent().addClass("has-error");
+        Session.set(validkey, Session.get("langErrorMustBeSame"));
+        return false;
+    }else{
+        node1.parent().removeClass("has-error");
+        Session.set(validkey,"");
+        return true;
+    }
+};
+

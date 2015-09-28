@@ -14,8 +14,11 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/register">{{langRegistration}}</a></li>
-                    <li><a href="/logout">{{langLogout}}</a></li>
-                    <li><a href="/login">{{langLogin}}</a></li>
+                    {{#if currentUser}}
+                        <li><a href="#" id="btn_logout">{{currentUser.username}}:{{langLogout}}</a></li>
+                    {{else}}
+                        <li><a href="/login">{{langLogin}}</a></li>
+                    {{/if}}
                     <li>
                         <form class="navbar-form navbar-right" >
                             <select  name="change-language" id="language_chooser" class="form-control">

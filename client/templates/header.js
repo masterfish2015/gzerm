@@ -37,6 +37,10 @@ Template.headerTemplate.events({
         var langIndex=e.currentTarget.value;
         //console.log(css);
         Meteor.setDefaultLanguage(lang[langIndex]);
+    },
+    "click #btn_logout":function(){
+        Meteor.logout();
+        Router.go('/');
     }
 });
 

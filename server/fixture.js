@@ -2,14 +2,21 @@
 //本文件主要是给数据库加入一些初始化数据
 //邀请码
 if(gInviteCodes.find().count()===0){
-    var i;
-    for(i=0;i<10;i++)
-        gInviteCodes.insert({title:i, used:false});
+    gInviteCodes.insert({title:"xdfsfasv", used:false});
+    gInviteCodes.insert({title:"fgndndgf", used:false});
+    gInviteCodes.insert({title:"dfdfvdfb", used:false});
+    gInviteCodes.insert({title:"aaacdvre", used:false});
+    gInviteCodes.insert({title:"nghndere", used:false});
+    gInviteCodes.insert({title:"vermjrfg", used:false});
+    gInviteCodes.insert({title:"vdfbrtsh", used:false});
+    gInviteCodes.insert({title:"bgbngdds", used:false});
+    gInviteCodes.insert({title:"tyjyukfc", used:false});
+    gInviteCodes.insert({title:"vcxdssgz", used:false});
 }
 
 if(gGroups.find().count()===0){
     gGroups.insert({
-        inviteCode: gInviteCodes.findOne({title:0})._id,
+        inviteCode: gInviteCodes.findOne({title:"xdfsfasv"})._id,
         title:'中国天御集团公司'
     });
 }
