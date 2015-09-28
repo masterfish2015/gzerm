@@ -20,14 +20,6 @@ Template.departmentManagerTemplate.helpers({
     },
     "isModifyDepartment": function () {
         return Session.get("isModifyDepartment");
-    },
-    //下面的辅助函数是为了界面多语言
-    "langDepartmentManagement": function () {
-        return Session.get('langDepartmentManagement');
-    },
-
-    "langAdd": function () {
-        return Session.get('langAdd');
     }
 });
 
@@ -108,48 +100,7 @@ Template.addDepartmentTemplate.helpers({
     },
     "verifyDepartmentTitleError":function(){
         return Session.get("verifyDepartmentTitleError");
-    },
-    //下面的辅助函数是为了界面多语言
-    "isModifyDepartment": function () {
-        return Session.get("isModifyDepartment");
-    },
-    "langAdd": function () {
-        return Session.get('langAdd');
-    },
-    "langCancel": function () {
-        return Session.get('langCancel');
-    },
-    "langModify": function () {
-        return Session.get("langModify");
-    },
-    "langDepartmentCode": function () {
-        return Session.get('langDepartmentCode');
-    },
-    "langDepartmentTitle": function () {
-        return Session.get('langDepartmentTitle');
-    },
-    "langDepartmentType": function () {
-        return Session.get('langDepartmentType');
-    },
-    "langDepartmentCompanyOwner": function () {
-        return Session.get('langDepartmentCompanyOwner');
-    },
-    "langDepartmentCharger": function () {
-        return Session.get('langDepartmentCharger');
-    },
-    "langDepartmentSupervisor": function () {
-        return Session.get('langDepartmentSupervisor');
-    },
-    "langDepartmentRegion": function () {
-        return Session.get('langDepartmentRegion');
-    },
-    "langDepartmentComment": function () {
-        return Session.get('langDepartmentComment');
-    },
-    "langSelect": function () {
-        return Session.get('langSelect');
     }
-
 });
 
 Template.departmentListTemplate.helpers({
@@ -191,33 +142,7 @@ Template.departmentListTemplate.helpers({
         }else{
             return o.title || "";
         }
-    },
-    //下面的辅助函数是为了界面多语言
-    langDepartmentCode: function () {
-        return Session.get('langDepartmentCode');
-    },
-    langDepartmentTitle: function () {
-        return Session.get('langDepartmentTitle');
-    },
-    langDepartmentType: function () {
-        return Session.get('langDepartmentType');
-    },
-    langDepartmentCompanyOwner: function () {
-        return Session.get('langDepartmentCompanyOwner');
-    },
-    langDepartmentCharger: function () {
-        return Session.get('langDepartmentCharger');
-    },
-    langDepartmentSupervisor: function () {
-        return Session.get('langDepartmentSupervisor');
-    },
-    langDepartmentRegion: function () {
-        return Session.get('langDepartmentRegion');
-    },
-    langDepartmentComment: function () {
-        return Session.get('langDepartmentComment');
     }
-
 });
 
 Template.departmentManagerTemplate.events({

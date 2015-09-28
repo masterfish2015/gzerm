@@ -11,13 +11,6 @@ Template.userManagerTemplate.helpers({
     },
     isPermitedToshowUsers: function () {
         return true;
-    },
-    //下面是关于界面上的语言的帮助函数
-    langUserManagement: function () {
-        return Session.get("langUserManagement");
-    },
-    langAdd: function () {
-        return Session.get("langAdd");
     }
 });
 
@@ -46,46 +39,6 @@ Template.userAddTemplate.helpers({
     },
     permissions:function(){
         return gPermissions.find();
-    },
-    //下面是关于界面上的语言的帮助函数
-    "langAdd": function () {
-        return Session.get("langAdd");
-    },
-    "langSelect": function () {
-        return Session.get("langSelect");
-    },
-    "langModify": function () {
-        return Session.get("langModify");
-    },
-    langUserName: function () {
-        return Session.get("langUserName");
-    },
-    langUserPassword: function () {
-        return Session.get("langUserPassword");
-    },
-    langUserRealName: function () {
-        return Session.get("langUserRealName");
-    },
-    langUserGender: function () {
-        return Session.get("langUserGender");
-    },
-    langMan: function () {
-        return Session.get("langMan");
-    },
-    langWomen: function () {
-        return Session.get("langWomen");
-    },
-    langUserCompany: function () {
-        return Session.get("langUserCompany");
-    },
-    langUserDepartment: function () {
-        return Session.get("langUserDepartment");
-    },
-    langUserJob: function () {
-        return Session.get("langUserJob");
-    },
-    langUserPermission: function () {
-        return Session.get("langUserPermission");
     }
 });
 
@@ -111,35 +64,6 @@ Template.userListTemplate.helpers({
     users: function () {
 
         return gEmployees.find();
-    },
-
-    //下面是关于界面上的语言的帮助函数
-    langUserManagement: function () {
-        return Session.get("langUserManagement");
-    },
-    langAddUser: function () {
-        return Session.get("langAddUser");
-    },
-    langUserCode: function () {
-        return Session.get("langUserCode");
-    },
-    langUserName: function () {
-        return Session.get("langUserName");
-    },
-    langUserRealName: function () {
-        return Session.get("langUserRealName");
-    },
-    langUserGender: function () {
-        return Session.get("langUserGender");
-    },
-    langUserCompany: function () {
-        return Session.get("langUserCompany");
-    },
-    langUserDepartment: function () {
-        return Session.get("langUserDepartment");
-    },
-    langUserJob: function () {
-        return Session.get("langUserJob");
     }
 });
 

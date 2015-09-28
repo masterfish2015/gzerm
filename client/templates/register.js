@@ -31,27 +31,7 @@ Template.registerTemplate.helpers({
     },
     validateRegistrationError: function () {
         return Session.get('validateRegistrationError');
-    },
-    //下面的辅助函数是为了界面多语言
-    langRegistration: function () {
-        return Session.get('langRegistration');
-    },
-    langRegistrationUserName: function () {
-        return Session.get('langRegistrationUserName');
-    },
-    langRegistrationGroupName: function () {
-        return Session.get('langRegistrationGroupName');
-    },
-    langInviteCode: function () {
-        return Session.get('langInviteCode');
-    },
-    langRegistrationPassword: function () {
-        return Session.get('langRegistrationPassword');
-    },
-    langRegistrationConfirmPassword: function () {
-        return Session.get('langRegistrationConfirmPassword');
-    },
-
+    }
 });
 
 Template.registerTemplate.events({

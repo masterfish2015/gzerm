@@ -14,19 +14,6 @@ Template.loginTemplate.helpers({
     },
     validateLoginError:function(){
         return Session.get('validateLoginError')  ;
-    },
-    //下面的辅助函数是为了界面多语言
-    langLogin: function () {
-        return Session.get('langLogin');
-    },
-    langLoginName: function () {
-        return Session.get('langLoginName');
-    },
-    langLoginPassword: function () {
-        return Session.get('langLoginPassword');
-    },
-    langAdd: function () {
-        return Session.get('langAdd');
     }
 });
 

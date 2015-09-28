@@ -15,22 +15,6 @@ Template.headerTemplate.helpers({
     //错误处理
     errorMessage:function(){
         return Session.get("errorMessage");
-    },
-    //下面的辅助函数是为了界面多语言
-    langWebTitle:function(){
-       return Session.get("langWebTitle");
-    },
-    langLogin :function(){
-       return Session.get("langLogin");
-    },
-    langLogout :function(){
-        return Session.get("langLogout");
-    },
-    langRegistration :function(){
-        return Session.get("langRegistration");
-    },
-    langChangeLanguage :function(){
-        return Session.get("langChangeLanguage");
     }
 });
 

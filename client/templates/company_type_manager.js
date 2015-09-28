@@ -13,16 +13,6 @@ Template.companyTypeMangagerTemplate.helpers({
     showAddCompanyTypePanel: function () {
         var ob = Session.get("showAddCompanyTypePanel");
         return ob;
-    },
-    //下面的辅助函数是为了界面多语言
-    langCompanyTypeManagement: function () {
-        return Session.get("langCompanyTypeManagement");
-    },
-    langAddOrganizeType: function () {
-        return Session.get("langAddOrganizeType");
-    },
-    langAdd: function () {
-        return Session.get("langAdd");
     }
 });
 
@@ -32,45 +22,16 @@ Template.companyTypeListTemplate.helpers({
     },
     getGroupName: function (groupID) {
         return gGroups.findOne({_id: groupID}).title;
-    },
-    //下面的辅助函数是为了界面多语言
-    langCurrentCompanyTypes: function () {
-        return Session.get("langCurrentCompanyTypes");
-    },
-    langCompanyGrade: function () {
-        return Session.get("langCompanyGrade");
-    },
-    langGroup: function () {
-        return Session.get('langGroup');
     }
 });
 
 Template.addCompanyTypeTemplate.helpers({
-    is_super_admin: function () {
-        var grade = Meteor.get_user_grade();
-        if (grade!==-1 && grade === 0) {
-            return true;
-        } else {
-            return false;
-        }
-    },
+
     groups: function () {
         return gGroups.find();
     },
     //下面的辅助函数是为了输入验证
-    is_error: function (err) {
-        if (err === "")
-            return false;
-        else
-            return true;
-    },
-    is_same:function(v1,v2){
-        if(v1===v2){
-            return true;
-        }else{
-            return false;
-        }
-    },
+
     validateCompanyTypeGroup: function () {
         return Session.get("validateCompanyTypeGroup");
     },
@@ -94,31 +55,6 @@ Template.addCompanyTypeTemplate.helpers({
     },
     modifyCompanyTypeGroup: function () {
         return Session.get("modifyCompanyTypeGroup");
-    },
-    //下面的辅助函数是为了界面多语言
-    langAddCompanyType: function () {
-        return Session.get("langAddCompanyType");
-    },
-    langCompanyType: function () {
-        return Session.get("langCompanyType");
-    },
-    langCompanyGrade: function () {
-        return Session.get("langCompanyGrade");
-    },
-    langAdd: function () {
-        return Session.get("langAdd");
-    },
-    langCancel: function () {
-        return Session.get("langCancel");
-    },
-    langModify: function () {
-        return Session.get("langModify");
-    },
-    langGroup: function () {
-        return Session.get("langGroup");
-    },
-    langSelect: function () {
-        return Session.get("langSelect");
     }
 });
 

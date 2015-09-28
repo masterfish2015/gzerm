@@ -10,14 +10,6 @@ Template.regionManagerTemplate.helpers({
     //下面的辅助函数是为了控制界面显示
     showAddRegionPanel: function () {
         return Session.get("showAddRegionPanel");
-    },
-
-    //下面的辅助函数是为了界面多语言
-    langRegionManagement: function () {
-        return Session.get("langRegionManagement");
-    },
-    langAdd: function () {
-        return Session.get("langAdd");
     }
 });
 
@@ -37,19 +29,6 @@ Template.regionListTemplate.helpers({
     },
     getGroupName:function(groupID){
         return gGroups.findOne({_id:groupID}).title;
-    },
-    //下面的辅助函数是为了界面多语言
-    langRegionCode: function () {
-        return Session.get("langRegionCode");
-    },
-    langRegionTitle: function () {
-        return Session.get("langRegionTitle");
-    },
-    langRegionParent: function () {
-        return Session.get("langRegionParent");
-    },
-    langGroup:function(){
-        return Session.get('langGroup');
     }
 });
 
@@ -86,26 +65,6 @@ Template.addRegionTemplate.helpers({
     },
     verifyRegionTitleError: function () {
         return Session.get("verifyRegionTitleError");
-    },
-
-    //下面的辅助函数是为了界面多语言
-    langAdd: function () {
-        return Session.get("langAdd");
-    },
-    langSelect: function () {
-        return Session.get("langSelect");
-    },
-    langModify: function () {
-        return Session.get("langModify");
-    },
-    langRegionCode: function () {
-        return Session.get("langRegionCode");
-    },
-    langRegionTitle: function () {
-        return Session.get("langRegionTitle");
-    },
-    langRegionParent: function () {
-        return Session.get("langRegionParent");
     }
 });
 

@@ -19,16 +19,6 @@ Template.companyManagerTemplate.helpers({
     },
     "isModifyCompany": function () {
         return Session.get("isModifyCompany");
-    },
-    //下面的辅助函数是为了界面多语言
-    "langCompanyManagement": function () {
-        return Session.get('langCompanyManagement');
-    },
-    "langAddCompany": function () {
-        return Session.get('langAddCompany');
-    },
-    "langAdd": function () {
-        return Session.get('langAdd');
     }
 });
 
@@ -110,44 +100,7 @@ Template.addCompanyTemplate.helpers({
     //下面的辅助函数是为了界面多语言
     "isModifyCompany": function () {
         return Session.get("isModifyCompany");
-    },
-    "langAddCompany": function () {
-        return Session.get('langAddCompany');
-    },
-    "langAdd": function () {
-        return Session.get('langAdd');
-    },
-    "langCancel": function () {
-        return Session.get('langCancel');
-    },
-    "langModify": function () {
-        return Session.get("langModify");
-    },
-    "langCompanyCode": function () {
-        return Session.get('langCompanyCode');
-    },
-    "langCompanyTitle": function () {
-        return Session.get('langCompanyTitle');
-    },
-    "langCompanyType": function () {
-        return Session.get('langCompanyType');
-    },
-    "langCompanyCharger": function () {
-        return Session.get('langCompanyCharger');
-    },
-    "langCompanySupervisor": function () {
-        return Session.get('langCompanySupervisor');
-    },
-    "langCompanyRegion": function () {
-        return Session.get('langCompanyRegion');
-    },
-    "langCompanyComment": function () {
-        return Session.get('langCompanyComment');
-    },
-    "langSelect": function () {
-        return Session.get('langSelect');
     }
-
 });
 
 Template.companyListTemplate.helpers({
@@ -186,30 +139,7 @@ Template.companyListTemplate.helpers({
         }else{
             return o.title || "";
         }
-    },
-    //下面的辅助函数是为了界面多语言
-    "langCompanyCode": function () {
-        return Session.get('langCompanyCode');
-    },
-    "langCompanyTitle": function () {
-        return Session.get('langCompanyTitle');
-    },
-    "langCompanyType": function () {
-        return Session.get('langCompanyType');
-    },
-    "langCompanyCharger": function () {
-        return Session.get('langCompanyCharger');
-    },
-    "langCompanySupervisor": function () {
-        return Session.get('langCompanySupervisor');
-    },
-    "langCompanyRegion": function () {
-        return Session.get('langCompanyRegion');
-    },
-    "langCompanyComment": function () {
-        return Session.get('langCompanyComment');
     }
-
 });
 
 Template.companyManagerTemplate.events({

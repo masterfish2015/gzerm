@@ -239,5 +239,5 @@ Meteor.methods({
             gRegions.update(id, {$set:newRegion});
             return {error:"OK"};
         }
-    },
+    }
 });
