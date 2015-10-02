@@ -131,7 +131,9 @@ Meteor.methods({
 
     'addNewCompany':function(company){
         //添加公司，注意几点：公司名称、编码 不能重复
-        if(gCompanies.find({code:company.code}).count()>0 || gCompanies.find({title:company.title})>0){
+
+        if(gCompanies.find({groupID:company.groupID, code:company.code}).count()>0 ||
+           gCompanies.find({groupID:company.groupID, title:company.title})>0){
             console.log("增加公司错误，公司名称、编码 不能重复:"+company.title+":"+company.code);
             return {error:"langErrorAlreadyExist"};
         }
@@ -164,8 +166,14 @@ Meteor.methods({
             console.log("更新公司错误:"+newCompany.title);
             return {error:"langErrorNotExist"};
         }else{
+            ob = gCompanies.findOne({groupID:newCompany.groupID, code:newCompany.code})||
+                gCompanies.findOne({groupID:newCompany.groupID, title:newCompany.title});
+            if(ob && ob._id!==id){
+                console.log("修改公司信息错误，公司名称、编码和另一个重复:"+newCompany.title+":"+newCompany.code);
+                return {error:"langErrorAlreadyExist"};
+            }
 
-            console.log("更新公司类型:"+ob.title);
+            console.log("更新公司类型:"+newCompany.title);
             gCompanies.update(id, {$set:newCompany});
             return {error:"OK"};
         }

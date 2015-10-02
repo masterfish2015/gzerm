@@ -175,29 +175,29 @@ Template.departmentManagerTemplate.events({
 });
 
 function initInputField(){
-    Session.set("modifyCompanyID","");
-    Session.set('modifyCompanySupervisor'," ");
-    Session.set('modifyCompanyBoss'," ");
-    Session.set('modifyCompanyRegion'," ");
-    Session.set('modifyCompanyType'," ");
-    Session.set('modifyCompanyTitle',"");
-    Session.set('modifyCompanyCode',"");
-    Session.set('modifyCompanyComment',"");
+    //Session.set("modifyCompanyID","");
+    //Session.set('modifyCompanySupervisor'," ");
+    //Session.set('modifyCompanyBoss'," ");
+    //Session.set('modifyCompanyRegion'," ");
+    //Session.set('modifyCompanyType'," ");
+    //Session.set('modifyCompanyTitle',"");
+    //Session.set('modifyCompanyCode',"");
+    //Session.set('modifyCompanyComment',"");
 }
 
 function setInputField(company){
-    Session.set('modifyCompanyCode',company.code);
-    Session.set('modifyCompanyTitle',company.title);
-    Session.set('modifyCompanyComment',company.comments);
-    Session.set('modifyCompanyType',company.companyType);
-    Session.set('modifyCompanyRegion',company.region);
-    Session.set('modifyCompanyBoss',company.boss);
-    Session.set('modifyCompanySupervisor',company.supervisor);
+    //Session.set('modifyCompanyCode',company.code);
+    //Session.set('modifyCompanyTitle',company.title);
+    //Session.set('modifyCompanyComment',company.comments);
+    //Session.set('modifyCompanyType',company.companyType);
+    //Session.set('modifyCompanyRegion',company.region);
+    //Session.set('modifyCompanyBoss',company.boss);
+    //Session.set('modifyCompanySupervisor',company.supervisor);
 
 }
 
 Template.addDepartmentTemplate.events({
-    "click #btn_add_company":function(e){
+    "click #btn_add_department":function(e){
         //获取相关数据
         var cp={};
 
@@ -262,28 +262,5 @@ Template.addDepartmentTemplate.events({
 });
 
 Template.departmentListTemplate.events({
-    "click .companyRemove": function (e) {
-        var id = e.currentTarget.value;
-        var rt = confirm(Session.get("langAreYouSure"));//询问是否确认删除
-        if (rt === true) {
-            //console.log(p);
-            Meteor.call("removeCompany", id, function (e, r) {
-                if (r.error !== "OK") {
-                    alert(Session.get(r.error));
-                } else {
-                    //Session.set("errorMessage", "");
-                    initInputField();
-                }
-            });
-        }
-    },
-    "click .companyEdit": function (e) {
-        var id = e.currentTarget.value;
-        Session.set("modifyCompanyID",id);
-        Session.set("isModifyCompany",true);
-        Session.set("showAddCompanyPanel", true);
-        var company = gCompanies.findOne({_id:id});
-        //console.log(company);
-        setInputField(company);
-    }
+
 });

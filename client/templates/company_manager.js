@@ -9,56 +9,63 @@ Session.setDefault("modifyCompanyRegion", " ");
 Session.setDefault("modifyCompanyCode", "");
 Session.setDefault("modifyCompanyTitle", "");
 Session.setDefault("modifyCompanyComment", "");
+Session.setDefault("modifyCompanyGroup", "");
 
-Session.setDefault("verifyCompanyTypeError","");
-Session.setDefault("verifyCompanyTitleError","");
+Session.setDefault("validateCompanyGroup","");
+Session.setDefault("validateCompanyCode","");
+Session.setDefault("validateCompanyType","");
+Session.setDefault("validateCompanyTitle","");
+Session.setDefault("validateCompanySupervisor","");
+Session.setDefault("validateCompanyRegion","");
+Session.setDefault("validateCompanyBoss","");
+Session.setDefault("validateAddCompany","");
 
 Template.companyManagerTemplate.helpers({
-    "showAddCompanyPanel": function () {
+    showAddCompanyPanel: function () {
         return Session.get("showAddCompanyPanel");
     },
-    "isModifyCompany": function () {
+    isModifyCompany: function () {
         return Session.get("isModifyCompany");
     }
 });
 
 Template.addCompanyTemplate.helpers({
-    "selected":function(v1,v2){
-        if(v1===v2){
-            return true;
-        }else{
-            return false;
-        }
+
+    modifyCompanyGroup:function(){
+        return Session.get('modifyCompanyGroup');
     },
-    "modifyCompanyCode":function(){
+    modifyCompanyCode:function(){
         return Session.get('modifyCompanyCode');
     },
-    "modifyCompanyTitle":function(){
+    modifyCompanyTitle:function(){
         return Session.get('modifyCompanyTitle');
     },
-    "modifyCompanyType":function(){
+    modifyCompanyType:function(){
         return Session.get('modifyCompanyType');
     },
-    "modifyCompanyRegion":function(){
+    modifyCompanyRegion:function(){
         return Session.get('modifyCompanyRegion');
     },
-    "modifyCompanyBoss":function(){
+    modifyCompanyBoss:function(){
         return Session.get('modifyCompanyBoss');
     },
-    "modifyCompanySupervisor":function(){
+    modifyCompanySupervisor:function(){
         return Session.get('modifyCompanySupervisor');
     },
-    "modifyCompanyComment":function(){
+    modifyCompanyComment:function(){
         return Session.get('modifyCompanyComment');
     },
     //下面是为了下拉选择栏提供选择项
-    "companyTypeOptions": function () {
+    groups:function(){
+        return gGroups.find();
+    },
+    companyTypeOptions: function () {
         return gCompanyType.find();
     },
-    "bossOptions": function () {
+    bossOptions: function () {
         return gEmployees.find();
     },
-    "supervisorOptions": function () {
+    supervisorOptions: function () {
         //获得机构列表，注意自己和比自己还低的机构都不列入
         var list ;
         if(Session.get("isModifyCompany")===true){
@@ -87,27 +94,100 @@ Template.addCompanyTemplate.helpers({
             return gCompanies.find();
         }
     },
-    "regionOptions": function () {
+    regionOptions: function () {
         return gRegions.find();
     },
     //错误处理
-    "verifyCompanyCodeError":function(){
-        return Session.get("verifyCompanyCodeError");
+    validateCompanyGroup:function(){
+        return Session.get("validateCompanyGroup");
     },
-    "verifyCompanyTitleError":function(){
-        return Session.get("verifyCompanyTitleError");
+    validateCompanyCode:function(){
+        return Session.get("validateCompanyCode");
     },
-    //下面的辅助函数是为了界面多语言
-    "isModifyCompany": function () {
+    validateCompanyType:function(){
+        return Session.get("validateCompanyType");
+    },
+    validateCompanyTitle:function(){
+        return Session.get("validateCompanyTitle");
+    },
+    validateCompanySupervisor:function(){
+        return Session.get("validateCompanySupervisor");
+    },
+    validateCompanyRegion:function(){
+        return Session.get("validateCompanyRegion");
+    },
+    validateCompanyBoss:function(){
+        return Session.get("validateCompanyBoss");
+    },
+    validateAddCompany:function(){
+        return Session.get("validateAddCompany");
+    },
+    //
+    isModifyCompany: function () {
         return Session.get("isModifyCompany");
+    },
+    validateCompany:function(){
+        var company={};
+        var changed=false;
+
+        if(Meteor.get_user_grade()===0){
+            company.groupID=$('#input_company_group').val();
+            if(Session.get('modifyCompanyGroup')!==company.groupID){
+                console.log(company.groupID);
+                changed=true;
+            }
+        }
+        company.code = $('#input_company_code').val();
+        if(Session.get('modifyCompanyCode')!==company.code){
+            console.log(company.code);
+            changed=true;
+        }
+
+        company.title = $('#input_company_title').val();
+        if(Session.get('modifyCompanyTitle')!==company.title){
+            console.log(company.title);
+            changed=true;
+        }
+
+        company.type = $('#input_company_type').val();
+        if(Session.get('modifyCompanyType')!==company.type){
+            console.log(company.type);
+            changed=true;
+        }
+
+        company.supervisor = $('#input_company_supervisor').val();
+        if(Session.get('modifyCompanySupervisor')!==company.supervisor){
+            console.log(company.supervisor);
+            changed=true;
+        }
+
+        company.region = $('#input_company_region').val();
+        if(Session.get('modifyCompanyRegion')!==company.region){
+            console.log(company.region);
+            changed=true;
+        }
+
+        company.boss = $('#input_company_charger').val();
+        if(Session.get('modifyCompanyBoss')!==company.boss){
+            console.log(company.boss);
+            changed=true;
+        }
+
+        company.comment = $('#input_company_comment').val();
+        if(Session.get('modifyCompanyComment')!==company.comment){
+            console.log(company.comment);
+            changed=true;
+        }
+
+        return changed;
     }
 });
 
 Template.companyListTemplate.helpers({
-    "companies": function () {
+    companies: function () {
         return gCompanies.find();
     },
-    "getCompanyType": function (companyTypeID) {
+    getCompanyType: function (companyTypeID) {
         var o =gCompanyType.findOne({_id: companyTypeID});
         if(!o){
             return "";
@@ -115,7 +195,7 @@ Template.companyListTemplate.helpers({
             return o.title || "";
         }
     },
-    "getBoss": function (bossID) {
+    getBoss: function (bossID) {
         var o =gEmployees.findOne({_id: bossID});
         if(!o){
             return "";
@@ -123,7 +203,7 @@ Template.companyListTemplate.helpers({
             return o.realname || "";
         }
     },
-    "getSupervisor": function (supervisorID) {
+    getSupervisor: function (supervisorID) {
 
         var o =gCompanies.findOne({_id: supervisorID});
         if(!o){
@@ -132,7 +212,7 @@ Template.companyListTemplate.helpers({
             return o.title || "";
         }
     },
-    "getRegion": function (regionID) {
+    getRegion: function (regionID) {
         var o =gRegions.findOne({_id: regionID});
         if(!o){
             return "";
@@ -174,6 +254,7 @@ Template.companyManagerTemplate.events({
 });
 
 function initInputField(){
+    Session.set("modifyCompanyGroup","");
     Session.set("modifyCompanyID","");
     Session.set('modifyCompanySupervisor'," ");
     Session.set('modifyCompanyBoss'," ");
@@ -185,6 +266,7 @@ function initInputField(){
 }
 
 function setInputField(company){
+    Session.set('modifyCompanyGroup',company.groupID);
     Session.set('modifyCompanyCode',company.code);
     Session.set('modifyCompanyTitle',company.title);
     Session.set('modifyCompanyComment',company.comments);
@@ -196,48 +278,65 @@ function setInputField(company){
 }
 
 Template.addCompanyTemplate.events({
+    //
+    //增加公司事件
     "click #btn_add_company":function(e){
+        e.preventDefault();
         //获取相关数据
         var cp={};
+        var is_ok=true;
+        console.log('start adding company');
+
+        if(Meteor.get_user_grade()===0){//super admin
+            if(Meteor.validate_no_empty("input_company_group","validateCompanyGroup")===false){
+                is_ok = false;
+            }
+            cp.groupID=$("#input_company_group").val();
+        }else{
+            cp.groupID=Meteor.get_group_id();
+        }
+        if(Meteor.validate_no_empty("input_company_code","validateCompanyCode")===false){
+            is_ok = false;
+        }
+        if(Meteor.validate_no_empty("input_company_title","validateCompanyTitle")===false){
+            is_ok = false;
+        }
+        if(Meteor.validate_no_empty("input_company_type","validateCompanyType")===false){
+            is_ok = false;
+        }
+        if(Meteor.validate_no_empty("input_company_region","validateCompanyRegion")===false){
+            is_ok = false;
+        }
+        //if(Meteor.validate_no_empty("input_company_supervisor","validateCompanySupervisor")===false){
+        //    is_ok = false;
+        //}
+        //if(Meteor.validate_no_empty("input_company_charger","validateCompanyBoss")===false){
+        //    is_ok = false;
+        //}
+
 
         cp.code = $('#input_company_code').val();
-        if(cp.code===""){
-            //编码不能为空
-            Session.set("verifyCompanyCodeError",Session.get("langErrorCannotEmpty"));
-            return ;
-        }else{
-            Session.set("verifyCompanyCodeError","");
-        }
-
         cp.title = $('#input_company_title').val();
-        if(cp.title===""){
-            //名称不能为空
-            Session.set("verifyCompanyTitleError",Session.get("langErrorCannotEmpty"));
-            return;
-        }else{
-            Session.set("verifyCompanyTitleError","");
-        }
-
         cp.companyType = $('#input_company_type').val();
-
         cp.region = $('#input_company_region').val();
-
         cp.boss = $('#input_company_charger').val();
-
         cp.supervisor = $('#input_company_supervisor').val();
-
         cp.comments = $('#input_company_comment').val();
 
-        //console.log(cp);
+        console.log(cp);
+        if(is_ok===false)
+            return;
+
+
         if(Session.get('isModifyCompany')===false){
             //create
             Meteor.call("addNewCompany",cp,function(error, result){
                 if(result.error!=="OK"){
                     //console.log("无法增加新的公司"+result.error);
-                    alert(Session.get(result.error));
+                    Session.set("validateAddCompany",(Session.get(result.error)));
                 }else{
                     initInputField();
-
+                    Session.set("validateAddCompany","");
                 }
 
 
@@ -248,9 +347,10 @@ Template.addCompanyTemplate.events({
                 if(!error){
                     if(result.error && result.error!=="OK"){
                         //console.log("无法修改该公司数据"+result.error);
-                        alert(Session.get(result.error));
+                        Session.set("validateAddCompany",(Session.get(result.error)));
                     }else{
                         //initInputField();
+                        Session.set("validateAddCompany","");
                     }
                 }
             });

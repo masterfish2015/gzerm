@@ -25,102 +25,221 @@
 <template name="addCompanyTemplate">
     <div class="panel panel-default">
         <div class="panel-body">
-            <form class="form container-fluid">
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label>{{langCompanyCode}}</label>
-                        <input type="text" class="form-control" id="input_company_code"
-                               placeholder={{langCompanyCode}} value={{modifyCompanyCode}} >
-                        <span class="errorMsg">{{verifyCompanyCodeError}}</span>
+            <form class="form-horizontal">
+                {{#if is_super_admin}}
+                    <div class="form-group  has-feedback">
+                        <label class="col-md-2 control-label" for="input_company_group">
+                            {{langGroup}}
+                        </label>
+                        <div class="col-md-6">
+                            <select id="input_company_group" name="input_company_group"  class="form-control">
+                                <option value="">{{langSelect}}</option>
+                                {{#each groups}}
+                                    {{#if is_same _id modifyCompanyGroup}}
+                                        <option selected="true" value={{_id}} >{{title}}</option>
+                                    {{else}}
+                                        <option value={{_id}} >{{title}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                            {{#if is_error validateCompanyGroup}}
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            {{/if}}
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="control-label error-msg">{{validateCompanyGroup}}</label>
+                        </div>
+
+                    </div>
+                {{/if}}
+
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_company_code">
+                        {{langCompanyCode}}
+                    </label>
+                    <div class="col-md-6">
+                        <input type="text" id="input_company_code"
+                               name="input_company_code" class="form-control" value={{modifyCompanyCode}}>
+                        {{#if is_error validateCompanyCode}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        {{/if}}
                     </div>
 
-                    <div class="col-sm-6">
-                        <label>{{langCompanyTitle}}</label>
-                        <input type="text" class="form-control" id="input_company_title"
-                               placeholder={{langCompanyTitle}} value={{modifyCompanyTitle}}>
-                        <span class="errorMsg">{{verifyCompanyTitleError}}</span>
+                    <div class="col-md-2">
+                        <label class="control-label error-msg">{{validateCompanyCode}}</label>
                     </div>
+
                 </div>
 
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label>{{langCompanyType}}</label>
-                        <select class="form-control" id="input_company_type" >
-                            <option value=" ">{{langSelect}}</option>
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_company_title">
+                        {{langCompanyTitle}}
+                    </label>
+                    <div class="col-md-6">
+                        <input type="text" id="input_company_title"
+                               name="input_company_title" class="form-control" value={{modifyCompanyTitle}}>
+                        {{#if is_error validateCompanyTitle}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        {{/if}}
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="control-label error-msg">{{validateCompanyTitle}}</label>
+                    </div>
+
+                </div>
+
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_company_type">
+                        {{langCompanyType}}
+                    </label>
+                    <div class="col-md-6">
+                        <select id="input_company_type" name="input_company_type"  class="form-control">
+                            <option value="">{{langSelect}}</option>
                             {{#each companyTypeOptions}}
-                                {{#if selected _id modifyCompanyType}}
-                                    <option value={{_id}} selected="true" >{{title}}</option>
+                                {{#if is_same _id modifyCompanyType}}
+                                    <option selected="true" value={{_id}} >{{title}}</option>
                                 {{else}}
                                     <option value={{_id}} >{{title}}</option>
                                 {{/if}}
                             {{/each}}
                         </select>
+                        {{#if is_error validateCompanyType}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        {{/if}}
                     </div>
 
-                    <div class="col-sm-6">
-                        <label>{{langCompanyRegion}}</label>
-                        <select  class="form-control" id="input_company_region" >
-                            <option value=" ">{{langSelect}}</option>
-                            {{#each regionOptions}}
-                                {{#if selected _id modifyCompanyRegion}}
-                                    <option value={{_id}} selected="true" >{{title}}</option>
-                                {{else}}
-                                    <option value={{_id}} >{{title}}</option>
-                                {{/if}}
-                            {{/each}}
-                        </select>
+                    <div class="col-md-2">
+                        <label class="control-label error-msg">{{validateCompanyType}}</label>
                     </div>
+
                 </div>
 
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label>{{langCompanyCharger}}</label>
-                        <select  class="form-control" id="input_company_charger">
-                            <option value=" ">{{langSelect}}</option>
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_company_supervisor">
+                        {{langCompanySupervisor}}
+                    </label>
+                    <div class="col-md-6">
+                        <select id="input_company_supervisor" name="input_company_supervisor"  class="form-control">
+                            <option value="">{{langSelect}}</option>
+                            {{#each supervisorOptions}}
+                                {{#if is_same _id modifyCompanySupervisor}}
+                                    <option selected="true" value={{_id}} >{{title}}</option>
+                                {{else}}
+                                    <option value={{_id}} >{{title}}</option>
+                                {{/if}}
+                            {{/each}}
+                        </select>
+                        {{#if is_error validateCompanySupervisor}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        {{/if}}
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="control-label error-msg">{{validateCompanySupervisor}}</label>
+                    </div>
+
+                </div>
+
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_company_region">
+                        {{langCompanyRegion}}
+                    </label>
+                    <div class="col-md-6">
+                        <select id="input_company_region" name="input_company_region"  class="form-control">
+                            <option value="">{{langSelect}}</option>
+                            {{#each regionOptions}}
+                                {{#if is_same _id modifyCompanyRegion}}
+                                    <option selected="true" value={{_id}} >{{title}}</option>
+                                {{else}}
+                                    <option value={{_id}} >{{title}}</option>
+                                {{/if}}
+                            {{/each}}
+                        </select>
+                        {{#if is_error validateCompanyRegion}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        {{/if}}
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="control-label error-msg">{{validateCompanyRegion}}</label>
+                    </div>
+
+                </div>
+
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_company_charger">
+                        {{langCompanyCharger}}
+                    </label>
+                    <div class="col-md-6">
+                        <select id="input_company_charger" name="input_company_charger"  class="form-control">
+                            <option value="">{{langSelect}}</option>
                             {{#each bossOptions}}
-                                {{#if selected _id modifyCompanyBoss}}
-                                    <option value={{_id}} selected="true" >{{realname}}</option>
+                                {{#if is_same _id modifyCompanyBoss}}
+                                    <option selected="true" value={{_id}} >{{realname}}</option>
                                 {{else}}
                                     <option value={{_id}} >{{realname}}</option>
                                 {{/if}}
                             {{/each}}
                         </select>
+                        {{#if is_error validateCompanyBoss}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        {{/if}}
                     </div>
 
-                    <div class="col-sm-6">
-                        <label>{{langCompanySupervisor}}</label>
-                        <select  class="form-control" id="input_company_supervisor" >
-                            <option value=" ">{{langSelect}}</option>
-                            {{#each supervisorOptions}}
-                                {{#if selected _id modifyCompanySupervisor}}
-                                    <option value={{_id}} selected="true" >{{title}}</option>
-                                {{else}}
-                                    <option value={{_id}} >{{title}}</option>
-                                {{/if}}
-                            {{/each}}
-                        </select>
+                    <div class="col-md-2">
+                        <label class="control-label error-msg">{{validateCompanyBoss}}</label>
                     </div>
+
+                </div>
+
+                <div class="form-group ">
+                    <label class="col-md-2 control-label" for="input_company_comment">
+                        {{langCompanyComment}}
+                    </label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" id="input_company_comment"
+                                  row="3" value={{modifyCompanyComment}} >
+                            {{modifyCompanyComment}}
+                        </textarea>
+                    </div>
+
                 </div>
 
                 <div class="form-group">
-                    <div class="col-sm-12">
-                        <label>{{langCompanyComment}}</label>
-                        <textarea id="input_company_comment" class="form-control" row="3" >{{modifyCompanyComment}}</textarea>
+                    <div class="col-md-12 col-md-offset-2">
+                        {{#if validateCompany}}
+                            <button class="btn btn-primary " id="btn_add_company">
+                                <span class="glyphicon glyphicon-plus-sign"></span>
+                                {{#if isModifyCompany}}
+                                    {{langModify}}
+                                {{else}}
+                                    {{langAdd}}
+                                {{/if}}
+                            </button>
+                        {{else}}
+                            <button class="btn btn-primary " disabled="disabled" id="btn_add_company">
+                                <span class="glyphicon glyphicon-plus-sign"></span>
+                                {{#if isModifyCompany}}
+                                    {{langModify}}
+                                {{else}}
+                                    {{langAdd}}
+                                {{/if}}
+                            </button>
+                        {{/if}}
                     </div>
                 </div>
 
             </form>
+
         </div>
-        <div class="panel-footer">
-            <button class="btn btn-primary " id="btn_add_company">
-                <span class="glyphicon glyphicon-plus-sign"></span>
-                {{#if isModifyCompany}}
-                    {{langModify}}
-                {{else}}
-                    {{langAdd}}
-                {{/if}}
-            </button>
-        </div>
+        {{#if is_error validateAddCompany}}
+            <div class="panel-footer">
+                <p class="error-msg" >{{validateAddCompany}}</p>
+            </div>
+        {{/if}}
+
     </div>
 
 </template>
