@@ -9,3 +9,9 @@ Template.sidebarTemplate.helpers({
     }
 });
 
+Template.sidebarTemplate.events({
+	'click .panel-heading':function(e){
+		$('.panel').removeClass('panel-info');
+		$(e.currentTarget).parents('.panel').addClass('panel-info');
+	}
+});

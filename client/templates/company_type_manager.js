@@ -66,12 +66,22 @@ function initInputField(){
     Session.set("verifyCompanyTypeTitleError", "");
     Session.set("verifyCompanyTypeGradeError", "");
     Session.set("validateCompanyTypeGroup", "");
+
+    // Get bootstrapValidator instance
+    var bootstrapValidator = $('#add_company_type_form').data('bootstrapValidator');
+    if(bootstrapValidator)
+        bootstrapValidator.resetForm(true);
 }
 
 function setInputField(companyType){
     Session.set("modifyCompanyTypeTitle", companyType.title);
+    $('#input_company_type_title').val(companyType.title || '');
+
     Session.set("modifyCompanyTypeGrade", companyType.grade);
+    $('#input_company_type_grade').val(companyType.grade || '');
+
     Session.set("modifyCompanyTypeGroup", companyType.groupID);
+    $('#input_company_type_group').val(companyType.groupID || '');
 }
 
 Template.companyTypeMangagerTemplate.events({
@@ -103,55 +113,8 @@ Template.companyTypeMangagerTemplate.events({
 
 Template.addCompanyTypeTemplate.events({
     "click #btn_add_company_type": function (e, v) {
-        var ct = {};
-        var is_ok=true;
-
-        if(Meteor.get_user_grade()===0){
-            if(Meteor.validate_no_empty("input_company_type_group", "validateCompanyTypeGroup")===false)
-                is_ok=false;
-        }
-
-        if(Meteor.validate_no_empty("input_company_type_title", "verifyCompanyTypeTitleError")===false)
-            is_ok=false;
-        if(Meteor.validate_no_empty("input_company_type_grade", "verifyCompanyTypeGradeError")===false)
-            is_ok=false;
-
-        if(is_ok===false)return;
-
-        if(Meteor.get_user_grade()===0){
-            ct.groupID = $('#input_company_type_group').val();
-        }else{
-            ct.groupID = Meteor.get_group_id();
-        }
-        ct.title = $('#input_company_type_title').val();
-        ct.grade = $('#input_company_type_grade').val();
-
-        //console.log(ct);
-        //return;
-
-        //检查是创建新的还是修改旧的
-        if (Session.get("isModifyCompanyType") === true) {
-            //修改
-            var id = Session.get("oldCompanyTypeID");
-            Meteor.call("updateCompanyType", id, ct, function (e, r) {
-                if (r.error !== "OK") {
-                    Session.set("validateCompanyTypeError", Session.get(r.error));
-                    //alert(Session.get(result.error));
-                }else{
-                    Session.set("validateCompanyTypeError","");
-                }
-            });
-        } else {
-            //创建
-            Meteor.call("addNewCompanyType", ct, function (e, r) {
-                if (r.error !== "OK") {
-                    Session.set("validateCompanyTypeError", Session.get(r.error));
-                    //alert(Session.get(result.error));
-                } else {
-                    Session.set("validateCompanyTypeError","");
-                }
-            });
-        }
+        e.preventDefault();
+        $('#add_company_type_form').bootstrapValidator('validate');
     }
 });
 
@@ -178,7 +141,8 @@ Template.companyTypeListTemplate.events({
         //console.log(id);
         Session.set("oldCompanyTypeID", id);
         var o = gCompanyType.findOne({_id: id});
-        //console.log(o);
+        console.log(o);
+        initInputField();
         setInputField(o);
 
         Session.set("verifyCompanyTypeTitleError", "");
@@ -186,3 +150,79 @@ Template.companyTypeListTemplate.events({
         Session.set("validateCompanyTypeGroup", "");
     }
 });
+
+Template.addCompanyTypeTemplate.rendered = function(){
+    $('#add_company_type_form').bootstrapValidator({
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            input_company_type_group: {
+                validators: {
+                    notEmpty: {
+                        message: Session.get('langErrorCannotEmpty')
+                    }
+                }
+            },
+            input_company_type_title: {
+                validators: {
+                    notEmpty: {
+                        message: Session.get('langErrorCannotEmpty')
+                    }
+                }
+            },
+            input_company_type_grade: {
+                validators: {
+                    notEmpty: {
+                        message: Session.get('langErrorCannotEmpty')
+                    }
+                }
+            }
+        }
+    }).on('success.form.bv', function(e) {
+            
+            // If you want to prevent the default handler (bootstrapValidator._onSuccess(e))
+            // e.preventDefault();
+
+            var ct ={}; //company type data
+            if(Meteor.get_user_grade()===0){
+                //admin 
+                ct.groupID = $('#input_company_type_group').val();
+            }
+            ct.title = $('#input_company_type_title').val();
+            ct.grade = $('#input_company_type_grade').val();
+
+            console.log(ct);
+            //检查是创建新的还是修改旧的
+            if (Session.get("isModifyCompanyType") === true) {
+                //修改
+                var id = Session.get("oldCompanyTypeID");
+                Meteor.call("updateCompanyType", id, ct, function (e, r) {
+                    if (r.error !== "OK") {
+                        Session.set("validateCompanyTypeError", Session.get(r.error));
+                        //alert(Session.get(result.error));
+                    }else{
+                        Session.set("validateCompanyTypeError","");
+                        var bootstrapValidator = $('#add_company_type_form').data('bootstrapValidator');
+                        if(bootstrapValidator)
+                            bootstrapValidator.resetForm(false);
+                    }
+                });
+            } else {
+                //创建
+                Meteor.call("addNewCompanyType", ct, function (e, r) {
+                    if (r.error !== "OK") {
+                        Session.set("validateCompanyTypeError", Session.get(r.error));
+                        //alert(Session.get(result.error));
+                    } else {
+                        Session.set("validateCompanyTypeError","");
+                        var bootstrapValidator = $('#add_company_type_form').data('bootstrapValidator');
+                        if(bootstrapValidator)
+                            bootstrapValidator.resetForm(true);
+                    }
+                });
+            }
+        });
+};

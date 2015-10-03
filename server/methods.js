@@ -119,7 +119,7 @@ Meteor.methods({
         }else{
             //如果新类型的名称和集团号和已有的一样，则不能更新
             var ob1 = gCompanyType.findOne({groupID:newCompanyType.groupID, title:newCompanyType.title});
-            if(ob1){
+            if(ob1 && ob1._id!==id){
                 console.log('更新后的类型已经存在，不能更新：'+newCompanyType.title);
                 return {error:"langErrorAlreadyExist"};
             }
@@ -163,7 +163,7 @@ Meteor.methods({
     'updateCompany':function(id, newCompany){
         var ob = gCompanies.findOne({_id:id});
         if(!ob){
-            console.log("更新公司错误:"+newCompany.title);
+            console.log("更新公司错误:"+newCompany.title+',id='+id);
             return {error:"langErrorNotExist"};
         }else{
             ob = gCompanies.findOne({groupID:newCompany.groupID, code:newCompany.code})||

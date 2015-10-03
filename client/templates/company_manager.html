@@ -25,7 +25,7 @@
 <template name="addCompanyTemplate">
     <div class="panel panel-default">
         <div class="panel-body">
-            <form class="form-horizontal">
+            <form class="form-horizontal" id="add_company_form">
                 {{#if is_super_admin}}
                     <div class="form-group  has-feedback">
                         <label class="col-md-2 control-label" for="input_company_group">
@@ -42,15 +42,7 @@
                                     {{/if}}
                                 {{/each}}
                             </select>
-                            {{#if is_error validateCompanyGroup}}
-                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                            {{/if}}
                         </div>
-
-                        <div class="col-md-2">
-                            <label class="control-label error-msg">{{validateCompanyGroup}}</label>
-                        </div>
-
                     </div>
                 {{/if}}
 
@@ -61,15 +53,7 @@
                     <div class="col-md-6">
                         <input type="text" id="input_company_code"
                                name="input_company_code" class="form-control" value={{modifyCompanyCode}}>
-                        {{#if is_error validateCompanyCode}}
-                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                        {{/if}}
                     </div>
-
-                    <div class="col-md-2">
-                        <label class="control-label error-msg">{{validateCompanyCode}}</label>
-                    </div>
-
                 </div>
 
                 <div class="form-group  has-feedback">
@@ -79,15 +63,7 @@
                     <div class="col-md-6">
                         <input type="text" id="input_company_title"
                                name="input_company_title" class="form-control" value={{modifyCompanyTitle}}>
-                        {{#if is_error validateCompanyTitle}}
-                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                        {{/if}}
                     </div>
-
-                    <div class="col-md-2">
-                        <label class="control-label error-msg">{{validateCompanyTitle}}</label>
-                    </div>
-
                 </div>
 
                 <div class="form-group  has-feedback">
@@ -105,15 +81,7 @@
                                 {{/if}}
                             {{/each}}
                         </select>
-                        {{#if is_error validateCompanyType}}
-                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                        {{/if}}
                     </div>
-
-                    <div class="col-md-2">
-                        <label class="control-label error-msg">{{validateCompanyType}}</label>
-                    </div>
-
                 </div>
 
                 <div class="form-group  has-feedback">
@@ -131,15 +99,7 @@
                                 {{/if}}
                             {{/each}}
                         </select>
-                        {{#if is_error validateCompanySupervisor}}
-                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                        {{/if}}
                     </div>
-
-                    <div class="col-md-2">
-                        <label class="control-label error-msg">{{validateCompanySupervisor}}</label>
-                    </div>
-
                 </div>
 
                 <div class="form-group  has-feedback">
@@ -157,23 +117,15 @@
                                 {{/if}}
                             {{/each}}
                         </select>
-                        {{#if is_error validateCompanyRegion}}
-                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                        {{/if}}
                     </div>
-
-                    <div class="col-md-2">
-                        <label class="control-label error-msg">{{validateCompanyRegion}}</label>
-                    </div>
-
                 </div>
 
                 <div class="form-group  has-feedback">
-                    <label class="col-md-2 control-label" for="input_company_charger">
+                    <label class="col-md-2 control-label" for="input_company_boss">
                         {{langCompanyCharger}}
                     </label>
                     <div class="col-md-6">
-                        <select id="input_company_charger" name="input_company_charger"  class="form-control">
+                        <select id="input_company_boss" name="input_company_boss"  class="form-control">
                             <option value="">{{langSelect}}</option>
                             {{#each bossOptions}}
                                 {{#if is_same _id modifyCompanyBoss}}
@@ -183,15 +135,7 @@
                                 {{/if}}
                             {{/each}}
                         </select>
-                        {{#if is_error validateCompanyBoss}}
-                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                        {{/if}}
                     </div>
-
-                    <div class="col-md-2">
-                        <label class="control-label error-msg">{{validateCompanyBoss}}</label>
-                    </div>
-
                 </div>
 
                 <div class="form-group ">
@@ -199,18 +143,13 @@
                         {{langCompanyComment}}
                     </label>
                     <div class="col-md-6">
-                        <textarea class="form-control" id="input_company_comment"
-                                  row="3" value={{modifyCompanyComment}} >
-                            {{modifyCompanyComment}}
-                        </textarea>
+                        <input type="text" class="form-control" id="input_company_comment"  value={{modifyCompanyComment}} >
                     </div>
-
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-12 col-md-offset-2">
-                        {{#if validateCompany}}
-                            <button class="btn btn-primary " id="btn_add_company">
+                            <button class="btn btn-primary  " id="btn_add_company" >
                                 <span class="glyphicon glyphicon-plus-sign"></span>
                                 {{#if isModifyCompany}}
                                     {{langModify}}
@@ -218,16 +157,6 @@
                                     {{langAdd}}
                                 {{/if}}
                             </button>
-                        {{else}}
-                            <button class="btn btn-primary " disabled="disabled" id="btn_add_company">
-                                <span class="glyphicon glyphicon-plus-sign"></span>
-                                {{#if isModifyCompany}}
-                                    {{langModify}}
-                                {{else}}
-                                    {{langAdd}}
-                                {{/if}}
-                            </button>
-                        {{/if}}
                     </div>
                 </div>
 
