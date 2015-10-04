@@ -15,7 +15,7 @@ Template.sidebarTemplate.events({
 		$(e.currentTarget).parents('.panel').addClass('panel-info');
 	},
       'click .list-group-item': function(e){
-             $('.list-group-item').removeClass('list-group-item-info');
-             $(e.currentTarget).addClass('list-group-item-info');
+             $('.list-group-item').removeClass('list-group-item-success');
+             $(e.currentTarget).addClass('list-group-item-success');
       } //list-group-item-info 
 });

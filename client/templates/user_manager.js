@@ -15,9 +15,10 @@ Template.userManagerTemplate.helpers({
 });
 
 Template.userAddTemplate.helpers({
-    "verifyInputNameError":function(){return Session.get('verifyInputNameError');},
-    "verifyInputPasswordError":function(){return Session.get('verifyInputPasswordError');},
     //数据库内容
+    groups:function(){
+        return gGroups.find();
+    },
     companies:function(){
         return gCompanies.find();
     },

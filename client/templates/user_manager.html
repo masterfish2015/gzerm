@@ -26,40 +26,78 @@
 <template name="userAddTemplate">
     <div class="panel panel-default">
         <div class="panel-body">
-            <form class="form container-fluid">
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label>{{langUserName}}</label>
-                        <input type="text" class="form-control" id="input_user_name">
-                        <span class="errorMsg">{{verifyInputNameError}}</span>
+            <form class="form-horizontal" id="add_user_form">
+                {{#if is_super_admin}}
+                    <div class="form-group  has-feedback">
+                        <label class="col-md-2 control-label" for="input_user_group">
+                            {{langGroup}}
+                        </label>
+                        <div class="col-md-10">
+                            <select id="input_user_group" name="input_user_group"  class="form-control">
+                                <option value="">{{langSelect}}</option>
+                                {{#each groups}}
+                                    {{#if is_same _id modifyUserGroupID}}
+                                        <option selected="true" value={{_id}} >{{title}}</option>
+                                    {{else}}
+                                        <option value={{_id}} >{{title}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                {{/if}}
+
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_user_name">
+                        {{langUserName}}
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" id="input_user_name"
+                               name="input_user_name" class="form-control" value={{modifyUserName}}>
                     </div>
 
-                    <div class="col-sm-6">
-                        <label>{{langUserPassword}}</label>
-                        <input type="password" class="form-control" id="input_user_password">
-                        <span class="errorMsg">{{verifyInputPasswordError}}</span>
+                    <label class="col-md-2 control-label" for="input_user_realname">
+                        {{langUserRealName}}
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" id="input_user_realname"
+                               name="input_user_realname" class="form-control" value={{modifyUserRealName}}>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label>{{langUserRealName}}</label>
-                        <input type="text" class="form-control" id="input_user_realname">
-                        <span class="errorMsg">{{verifyInputRealnameError}}</span>
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_user_name">
+                        {{langUserPassword}}
+                    </label>
+                    <div class="col-md-4">
+                        <input type="password" id="input_user_name"
+                               name="input_user_name" class="form-control" value={{modifyUserPassword}}>
                     </div>
 
-                    <div class="col-sm-6">
-                        <label>{{langUserGender}}</label>
+                    <label class="col-md-2 control-label" for="input_user_confirm_password">
+                        {{langUserConfirmPassword}}
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" id="input_user_confirm_password"
+                               name="input_user_confirm_password" class="form-control" value={{modifyUserConfirmPassword}}>
+                    </div>
+                </div>
+
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_user_gender">
+                        {{langUserGender}}
+                    </label>
+                    <div class="col-md-4">
                         <select class="form-control" id="input_user_gender">
-                            <option value={{langMan}}>{{langMan}}</option>
-                            <option value={{langWomen}}>{{langWomen}}</option>
+                                <option value={{langMan}}>{{langMan}}</option>
+                                <option value={{langWomen}}>{{langWomen}}</option>
                         </select>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label>{{langUserCompany}}</label>
+                    <label class="col-md-2 control-label" for="input_user_company">
+                        {{langUserCompany}}
+                    </label>
+                    <div class="col-md-4">
                         <select id="input_user_company" class="form-control">
                             <option value="">{{langSelect}}</option>
                             {{#each companies}}
@@ -67,9 +105,14 @@
                             {{/each}}
                         </select>
                     </div>
+                    
+                </div>
 
-                    <div class="col-sm-6">
-                        <label>{{langUserDepartment}}</label>
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_user_department">
+                        {{langUserDepartment}}
+                    </label>
+                    <div class="col-md-4">
                         <select class="form-control" id="input_user_department">
                             <option value="">{{langSelect}}</option>
                             {{#each departments}}
@@ -77,11 +120,11 @@
                             {{/each}}
                         </select>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label>{{langUserJob}}</label>
+                    <label class="col-md-2 control-label" for="input_user_job">
+                        {{langUserJob}}
+                    </label>
+                    <div class="col-md-4">
                         <select id="input_user_job" class="form-control">
                             <option value="">{{langSelect}}</option>
                             {{#each jobs}}
@@ -89,9 +132,13 @@
                             {{/each}}
                         </select>
                     </div>
+                </div>
 
-                    <div class="col-sm-6">
-                        <label>{{langUserPermission}}</label>
+                <div class="form-group  has-feedback">
+                    <label class="col-md-2 control-label" for="input_user_permission">
+                        {{langUserPermission}}
+                    </label>
+                    <div class="col-md-4">
                         <select class="form-control" id="input_user_permission">
                             <option value="">{{langSelect}}</option>
                             {{#each permissions}}
@@ -100,18 +147,27 @@
                         </select>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <div class="col-md-12 col-md-offset-2">
+                        <button class="btn btn-primary " id="btn_save">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                            {{#if isModifyCompany}}
+                                {{langModify}}
+                            {{else}}
+                                {{langAdd}}
+                            {{/if}}
+                        </button>
+                    </div>
+                </div>
+
             </form>
         </div>
-        <div class="panel-footer">
-            <button class="btn btn-primary " id="btn_save">
-                <span class="glyphicon glyphicon-plus-sign"></span>
-                {{#if isModifyCompany}}
-                    {{langModify}}
-                {{else}}
-                    {{langAdd}}
-                {{/if}}
-            </button>
-        </div>
+        {{#if is_error validateUserError}}
+            <div class="panel-footer">
+                <p class="error-msg" >{{validateUserError}}</p>
+            </div>
+        {{/if}}
     </div>
 </template>
 

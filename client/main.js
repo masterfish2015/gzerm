@@ -216,6 +216,9 @@ Template.registerHelper('is_same', function(v1, v2) {
     Template.registerHelper("langUserPassword", function() {
         return Session.get("langUserPassword");
     });
+     Template.registerHelper("langUserConfirmPassword", function() {
+        return Session.get("langUserConfirmPassword");
+    });
     Template.registerHelper("langUserRealName", function() {
         return Session.get("langUserRealName");
     });
