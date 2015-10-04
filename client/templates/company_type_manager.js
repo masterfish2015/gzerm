@@ -190,6 +190,8 @@ Template.addCompanyTypeTemplate.rendered = function(){
             if(Meteor.get_user_grade()===0){
                 //admin 
                 ct.groupID = $('#input_company_type_group').val();
+            }else{
+                ct.groupID = Meteor.get_group_id();
             }
             ct.title = $('#input_company_type_title').val();
             ct.grade = $('#input_company_type_grade').val();

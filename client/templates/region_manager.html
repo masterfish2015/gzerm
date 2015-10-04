@@ -25,13 +25,13 @@
 <template name="addRegionTemplate">
     <div class="panel panel-default">
         <div class="panel-body">
-            <form class="form-horizontal">
+            <form class="form-horizontal" id="add_region_form">
                 {{#if is_super_admin}}
                     <div class="form-group  has-feedback">
                         <label class="col-md-2 control-label" for="input_region_group">
                             {{langGroup}}
                         </label>
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <select id="input_region_group" name="input_region_group"  class="form-control">
                                 <option value="">{{langSelect}}</option>
                                 {{#each groups}}
@@ -42,15 +42,7 @@
                                     {{/if}}
                                 {{/each}}
                             </select>
-                            {{#if is_error validateRegionGroup}}
-                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                            {{/if}}
                         </div>
-
-                        <div class="col-md-2">
-                            <label class="control-label error-msg">{{validateRegionGroup}}</label>
-                        </div>
-
                     </div>
                 {{/if}}
 
@@ -58,43 +50,25 @@
                     <label class="col-md-2 control-label" for="input_region_code">
                         {{langRegionCode}}
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <input type="text" id="input_region_code"
                                name="input_region_code" class="form-control" value={{modifyRegionCode}}>
-                        {{#if is_error verifyRegionCodeError}}
-                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                        {{/if}}
                     </div>
 
-                    <div class="col-md-2">
-                        <label class="control-label error-msg">{{verifyRegionCodeError}}</label>
-                    </div>
-
-                </div>
-
-                <div class="form-group  has-feedback">
                     <label class="col-md-2 control-label" for="input_region_title">
                         {{langRegionTitle}}
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <input type="text" id="input_region_title"
                                name="input_region_title" class="form-control" value={{modifyRegionTitle}}>
-                        {{#if is_error verifyRegionTitleError}}
-                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                        {{/if}}
                     </div>
-
-                    <div class="col-md-2">
-                        <label class="control-label error-msg">{{verifyRegionTitleError}}</label>
-                    </div>
-
                 </div>
 
                 <div class="form-group  has-feedback">
                     <label class="col-md-2 control-label" for="input_region_parent">
                         {{langRegionParent}}
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                         <select id="input_region_parent" name="input_region_parent"  class="form-control">
                             <option value="">{{langSelect}}</option>
                             {{#each regions}}
@@ -105,15 +79,7 @@
                                 {{/if}}
                             {{/each}}
                         </select>
-                        {{#if is_error validateRegionParent}}
-                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                        {{/if}}
                     </div>
-
-                    <div class="col-md-2">
-                        <label class="control-label error-msg">{{validateRegionParent}}</label>
-                    </div>
-
                 </div>
 
                 <div class="form-group">

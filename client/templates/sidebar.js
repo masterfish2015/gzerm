@@ -10,8 +10,12 @@ Template.sidebarTemplate.helpers({
 });
 
 Template.sidebarTemplate.events({
-	'click .panel-heading':function(e){
+	'click .panel-heading': function(e){
 		$('.panel').removeClass('panel-info');
 		$(e.currentTarget).parents('.panel').addClass('panel-info');
-	}
+	},
+      'click .list-group-item': function(e){
+             $('.list-group-item').removeClass('list-group-item-info');
+             $(e.currentTarget).addClass('list-group-item-info');
+      } //list-group-item-info 
 });

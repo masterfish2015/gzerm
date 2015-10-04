@@ -31,7 +31,7 @@
                         <label class="col-md-2 control-label" for="input_company_group">
                             {{langGroup}}
                         </label>
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <select id="input_company_group" name="input_company_group"  class="form-control">
                                 <option value="">{{langSelect}}</option>
                                 {{#each groups}}
@@ -50,17 +50,15 @@
                     <label class="col-md-2 control-label" for="input_company_code">
                         {{langCompanyCode}}
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <input type="text" id="input_company_code"
                                name="input_company_code" class="form-control" value={{modifyCompanyCode}}>
                     </div>
-                </div>
 
-                <div class="form-group  has-feedback">
                     <label class="col-md-2 control-label" for="input_company_title">
                         {{langCompanyTitle}}
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <input type="text" id="input_company_title"
                                name="input_company_title" class="form-control" value={{modifyCompanyTitle}}>
                     </div>
@@ -70,7 +68,7 @@
                     <label class="col-md-2 control-label" for="input_company_type">
                         {{langCompanyType}}
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <select id="input_company_type" name="input_company_type"  class="form-control">
                             <option value="">{{langSelect}}</option>
                             {{#each companyTypeOptions}}
@@ -82,13 +80,11 @@
                             {{/each}}
                         </select>
                     </div>
-                </div>
 
-                <div class="form-group  has-feedback">
-                    <label class="col-md-2 control-label" for="input_company_supervisor">
+                     <label class="col-md-2 control-label" for="input_company_supervisor">
                         {{langCompanySupervisor}}
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <select id="input_company_supervisor" name="input_company_supervisor"  class="form-control">
                             <option value="">{{langSelect}}</option>
                             {{#each supervisorOptions}}
@@ -106,7 +102,7 @@
                     <label class="col-md-2 control-label" for="input_company_region">
                         {{langCompanyRegion}}
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <select id="input_company_region" name="input_company_region"  class="form-control">
                             <option value="">{{langSelect}}</option>
                             {{#each regionOptions}}
@@ -118,13 +114,11 @@
                             {{/each}}
                         </select>
                     </div>
-                </div>
 
-                <div class="form-group  has-feedback">
                     <label class="col-md-2 control-label" for="input_company_boss">
                         {{langCompanyCharger}}
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <select id="input_company_boss" name="input_company_boss"  class="form-control">
                             <option value="">{{langSelect}}</option>
                             {{#each bossOptions}}
@@ -142,7 +136,7 @@
                     <label class="col-md-2 control-label" for="input_company_comment">
                         {{langCompanyComment}}
                     </label>
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                         <input type="text" class="form-control" id="input_company_comment"  value={{modifyCompanyComment}} >
                     </div>
                 </div>

@@ -12,7 +12,6 @@ Session.setDefault("verifyRegionTitleError", '');
 Session.setDefault("validateRegionParent", '');
 
 Template.regionManagerTemplate.helpers({
-
     //下面的辅助函数是为了控制界面显示
     showAddRegionPanel: function () {
         return Session.get("showAddRegionPanel");
@@ -98,16 +97,28 @@ function initInputField() {
     Session.set('modifyRegionTitle', '');
     Session.set('modifyRegionCode', '');
     Session.set('modifyRegionGroupID', '');
+    var bootstrapValidator = $('#add_region_form').data('bootstrapValidator');
+    if(bootstrapValidator)
+        bootstrapValidator.resetForm(true);
 }
 
 function setInputField(region) {
     Session.set('verifyRegionCodeError', '');
     Session.set('verifyRegionTitleError', '');
-    Session.set('modifyRegionID', region._id);
+
+    Session.set('modifyRegionID', region._id);    
+
     Session.set('modifyRegionParent', region.parentCode);
+    $('#input_region_parent').val( region.parentCode||'' );
+
     Session.set('modifyRegionTitle', region.title);
+    $('#input_region_title').val( region.title||'' );
+
     Session.set('modifyRegionCode', region.code);
+    $('#input_region_code').val( region.code||'' );
+    
     Session.set('modifyRegionGroupID', region.groupID);
+    $('#input_region_group').val( region.groupID||'' );
 }
 
 Template.regionManagerTemplate.events({
@@ -152,55 +163,10 @@ Template.addRegionTemplate.events({
     },
 
     'click #btn_add_region': function (e) {
-        var region = {};
-        var is_ok=true;
+        e.preventDefault();
+        $('#add_region_form').bootstrapValidator('validate');
 
-        if(Meteor.get_user_grade()===0){
-            if(Meteor.validate_no_empty("input_region_group", "validateRegionGroup")===false)
-                is_ok=false;
-        }
-
-        if(Meteor.validate_no_empty("input_region_code", "verifyRegionCodeError")===false)
-            is_ok=false;
-        if(Meteor.validate_no_empty("input_region_title", "verifyRegionTitleError")===false)
-            is_ok=false;
-        if(Meteor.validate_no_empty("input_region_parent", "validateRegionParent")===false)
-            is_ok=false;
-
-        if(is_ok===false)return;
-
-        if(Meteor.get_user_grade()===0){
-            region.groupID = $('#input_region_group').val();
-        }else{
-            region.groupID = Meteor.get_group_id();
-        }
-        region.code = $('#input_region_code').val();
-        region.title = $('#input_region_title').val();
-        region.parentCode = $('#input_region_parent').val();
-
-        console.log(region);
-
-        if (Session.get('modifyRegionPanel') === false) {
-            //create
-            Meteor.call("addNewRegion", region, function (error, result) {
-                if (result && result.error && result.error !== "OK") {
-                    alert(Session.get(result.error));
-                } else {
-                    initInputField();
-                }
-            });
-        } else {
-            //modify
-            Meteor.call("updateRegion", Session.get("modifyRegionID"), region, function (error, result) {
-                if (!error) {
-                    if (result && result.error && result.error !== "OK") {
-                        alert(Session.get(result.error));
-                    } else {
-                        //initInputField();
-                    }
-                }
-            });
-        }
+        // console.log(region);
     }
 });
 
@@ -222,9 +188,67 @@ Template.regionListTemplate.events({
         var id = e.currentTarget.value;
 
         var region = gRegions.findOne({_id: id});
-        console.log(region);
+        //console.log(region);
+        initInputField();
         setInputField(region);
         Session.set("modifyRegionPanel",true);
         Session.set("showAddRegionPanel", true);
     }
 });
+
+Template.addRegionTemplate.rendered = function(){
+    $('#add_region_form').bootstrapValidator({
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            input_region_group: {
+                validators: {
+                    notEmpty: {
+                        message: Session.get('langErrorCannotEmpty')
+                    }
+                }
+            },
+            input_region_code: {
+                validators: {
+                    notEmpty: {
+                        message: Session.get('langErrorCannotEmpty')
+                    }
+                }
+            },
+            input_region_title: {
+                validators: {
+                    notEmpty: {
+                        message: Session.get('langErrorCannotEmpty')
+                    }
+                }
+            },
+            input_region_parent: {
+                validators: {
+                    notEmpty: {
+                        message: Session.get('langErrorCannotEmpty')
+                    }
+                }
+            }
+        }
+    }).on('success.form.bv', function(e) {
+            
+            // If you want to prevent the default handler (bootstrapValidator._onSuccess(e))
+            // e.preventDefault();
+
+            var r ={}; // region data
+            if(Meteor.get_user_grade()===0){
+                //admin 
+                r.groupID = $('#input_region_group').val();
+            }else{
+                r.groupID = Meteor.get_group_id();
+            }
+            r.title = $('#input_region_title').val();
+            r.code = $('#input_region_code').val();
+            r.parentCode = $('#input_region_parent').val();
+
+            // console.log(r);            
+        });
+};
